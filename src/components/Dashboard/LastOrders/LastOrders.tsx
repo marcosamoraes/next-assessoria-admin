@@ -39,7 +39,7 @@ const LastOrders: React.FC<any> = () => {
       <h1 className="pl-3 pb-5">Últimos pedidos</h1>
       <div className="flex flex-col gap-3">
         {orders.map((order) => {
-          return <LastOrder order={order} />
+          return <LastOrder key={order.id} order={order} />
         })}
       </div>
     </div>
