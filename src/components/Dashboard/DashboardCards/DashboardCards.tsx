@@ -6,7 +6,7 @@ import DashboardCard from './DashboardCard/DashboardCard'
 const DashboardCards: React.FC<any> = () => {
   return (
     <>
-      <select name="filter-dashboard-cards" id="" className="mb-5">
+      <select name="filter-dashboard-cards" id="" className="mb-5 bg-zinc-100 border-0 py-0">
         <option value="today" selected>
           Hoje
         </option>
@@ -15,7 +15,7 @@ const DashboardCards: React.FC<any> = () => {
         <option value="last-month">Mês passado</option>
         <option value="total">Total</option>
       </select>
-      <div className="flex flex-wrap gap-5 w-full">
+      <div className="flex flex-wrap gap-5 w-full mb-10">
         <DashboardCard icon={BsCoin} title="faturamento" value="R$325.300,00" />
         <DashboardCard icon={AiOutlineShoppingCart} title="pedidos" value="217" />
         <DashboardCard icon={AiOutlineUser} title="usuários" value="412" />
