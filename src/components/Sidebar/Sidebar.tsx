@@ -17,27 +17,33 @@ export default function Sidebar() {
           <AiOutlineHome size={24} />
           Dashboard
         </Link>
-        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard">
+        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard/produtos">
           <BsBoxSeam size={24} />
           Produtos
         </Link>
-        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard">
+        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard/pedidos">
           <AiOutlineShoppingCart size={24} />
           Pedidos
         </Link>
-        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard">
+        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard/clientes">
           <AiOutlineUser size={24} />
           Clientes
         </Link>
-        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard">
+        <Link
+          className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md"
+          href="/dashboard/categorias"
+        >
           <BiCategory size={24} />
           Categorias
         </Link>
-        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard">
+        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard/cupons">
           <FaTicketAlt size={24} />
           Cupons
         </Link>
-        <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard">
+        <Link
+          className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md"
+          href="/dashboard/configuracoes"
+        >
           <FiSettings size={24} />
           Configurações
         </Link>
