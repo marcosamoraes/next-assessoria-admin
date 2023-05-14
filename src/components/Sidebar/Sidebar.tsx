@@ -10,7 +10,7 @@ export default function Sidebar() {
   return (
     <aside className="h-full z-10 w-2/12 border-r-2 py-10 px-5 bg-zinc-800 text-white rounded-r-3xl flex flex-col flex-wrap items-start shadow-lg">
       <div className="w-full flex mb-10">
-        <Image src="/logo-white.png" alt="logo" width={300} height={300} />
+        <Image src="/logo-white.png" priority={true} alt="logo" width={300} height={300} />
       </div>
       <nav className="flex gap-2 flex-col w-full">
         <Link className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md" href="/dashboard">
