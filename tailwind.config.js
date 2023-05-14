@@ -9,6 +9,10 @@ module.exports = {
     extend: {
       colors: {
         primary: '#dcba73',
+        success: '#4caf50',
+        danger: '#f44336',
+        warning: '#ff9800',
+        info: '#2196f3',
       }
     },
   },
