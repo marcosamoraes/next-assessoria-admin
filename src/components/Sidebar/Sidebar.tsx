@@ -8,7 +8,7 @@ import { FiSettings } from 'react-icons/fi'
 
 export default function Sidebar() {
   return (
-    <aside className="h-full z-10 w-2/12 border-r-2 py-10 px-5 bg-zinc-800 text-white rounded-r-3xl flex flex-col flex-wrap items-start shadow-lg">
+    <aside className="h-full z-10 md:w-2/12 w-full -left-full md:left-0 absolute md:relative border-r-2 py-10 px-5 bg-zinc-800 text-white rounded-r-3xl flex flex-col flex-wrap items-start shadow-lg">
       <div className="w-full flex mb-10">
         <Image src="/logo-white.png" priority={true} alt="logo" width={300} height={300} />
       </div>

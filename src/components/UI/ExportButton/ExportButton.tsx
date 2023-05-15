@@ -16,8 +16,8 @@ export default function ExportButton({ apiRoute }: ExportButtonProps) {
       justify-evenly duration-300 bg-transparent hover:bg-gray-600 hover:text-white transition-all`}
       onClick={handleClick}
     >
-      <BsFiletypeCsv className="mr-2" />
-      Exportar
+      <BsFiletypeCsv className="md:mr-2" />
+      <span className="hidden md:block">Exportar</span>
     </button>
   )
 }
