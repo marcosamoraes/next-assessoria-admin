@@ -1,8 +1,9 @@
 'use client'
 
+import { IProduct } from '@/interfaces/IProduct'
 import { ChangeEvent, useState } from 'react'
 
-export default function ProductImage() {
+export default function ProductImage({ product }: { product: IProduct | null }) {
   const [tempFile, setTempFile] = useState<string | null>(null)
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {

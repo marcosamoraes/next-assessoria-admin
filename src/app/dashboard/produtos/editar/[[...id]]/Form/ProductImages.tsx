@@ -1,8 +1,9 @@
 'use client'
 
+import { IProduct } from '@/interfaces/IProduct'
 import { ChangeEvent, useRef, useState } from 'react'
 
-export default function ProductImages() {
+export default function ProductImages({ product }: { product: IProduct | null }) {
   const [tempFiles, setTempFiles] = useState<string[] | null>(null)
 
   const inputRef = useRef<HTMLInputElement>(null)

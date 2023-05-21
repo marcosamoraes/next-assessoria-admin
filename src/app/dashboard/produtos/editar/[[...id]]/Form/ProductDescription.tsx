@@ -1,4 +1,6 @@
-export default function ProductDescription() {
+import { IProduct } from '@/interfaces/IProduct'
+
+export default function ProductDescription({ product }: { product: IProduct | null }) {
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Descrição</h3>

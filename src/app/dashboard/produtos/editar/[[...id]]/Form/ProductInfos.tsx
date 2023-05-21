@@ -1,4 +1,6 @@
-export default function ProductInfos() {
+import { IProduct } from '@/interfaces/IProduct'
+
+export default function ProductInfos({ product }: { product: IProduct | null }) {
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Informações</h3>
@@ -31,7 +33,7 @@ export default function ProductInfos() {
           </label>
           <select name="client_type" id="client_type" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Física</option>
-            <option value="2">Jurídica</option>
+            <option value="0">Jurídica</option>
           </select>
         </div>
         <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
@@ -40,7 +42,7 @@ export default function ProductInfos() {
           </label>
           <select name="pre_sale" id="pre_sale" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Sim</option>
-            <option value="2">Não</option>
+            <option value="0">Não</option>
           </select>
         </div>
         <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
@@ -49,7 +51,7 @@ export default function ProductInfos() {
           </label>
           <select name="featured" id="featured" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Sim</option>
-            <option value="2">Não</option>
+            <option value="0">Não</option>
           </select>
         </div>
       </div>

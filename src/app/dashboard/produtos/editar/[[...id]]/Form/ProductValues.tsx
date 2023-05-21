@@ -1,9 +1,10 @@
 'use client'
 
 import Mask from '@/helpers/Mask'
+import { IProduct } from '@/interfaces/IProduct'
 import { ChangeEvent, useState } from 'react'
 
-export default function ProductValues() {
+export default function ProductValues({ product }: { product: IProduct | null }) {
   const [values, setValues] = useState<any>([])
   const handleInputChanges = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name

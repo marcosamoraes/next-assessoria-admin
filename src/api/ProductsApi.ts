@@ -34,3 +34,11 @@ export const getProducts = () => {
 
   return data
 }
+
+export const getProduct = (id: number) => {
+  if (id) {
+    console.log(`fetching product: ${id}`)
+  }
+
+  return null
+}
