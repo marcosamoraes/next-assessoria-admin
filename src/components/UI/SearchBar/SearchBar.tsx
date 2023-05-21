@@ -1,11 +1,10 @@
 type SearchBarProps = {
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   inputName?: string
 }
 
-export default function SearchBar({ onSubmit, inputName = 'search' }: SearchBarProps) {
+export default function SearchBar({ inputName = 'search' }: SearchBarProps) {
   return (
-    <form onSubmit={onSubmit} className="relative w-max">
+    <form className="relative w-max">
       <input
         type="search"
         name={inputName}

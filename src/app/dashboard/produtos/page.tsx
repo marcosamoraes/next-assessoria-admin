@@ -17,12 +17,11 @@ export default async function Products() {
 
   const columns = useProductColumns()
 
-  const onSubmit = () => {}
   return (
     <>
       <h1 className="w-full text-4xl text-gray-500 font-light mb-7">Produtos</h1>
       <div className="flex justify-between">
-        <SearchBar onSubmit={onSubmit} />
+        <SearchBar />
         <OptionsBar storeLink="/dashboard/produtos/editar" exportLink="products/export" />
       </div>
       <div>

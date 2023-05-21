@@ -6,10 +6,8 @@ import DashboardCard from './DashboardCard/DashboardCard'
 const DashboardCards: React.FC<any> = () => {
   return (
     <>
-      <select name="filter-dashboard-cards" id="" className="mb-5 bg-zinc-100 border-0 py-0">
-        <option value="today" selected>
-          Hoje
-        </option>
+      <select name="filter-dashboard-cards" id="" defaultValue="today" className="mb-5 bg-zinc-100 border-0 py-0">
+        <option value="today">Hoje</option>
         <option value="weekly">Essa semana</option>
         <option value="monthly">Esse mês</option>
         <option value="last-month">Mês passado</option>

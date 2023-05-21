@@ -21,7 +21,7 @@ export default function ProductInfos({ product }: { product: IProduct | null }) 
           <label htmlFor="category" className="text-gray-500 text-sm mb-2">
             Categoria
           </label>
-          <select name="category" id="category" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
+          <select name="category" id="category" defaultValue="1" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Categoria 1</option>
             <option value="2">Categoria 2</option>
             <option value="3">Categoria 3</option>
@@ -31,7 +31,7 @@ export default function ProductInfos({ product }: { product: IProduct | null }) 
           <label htmlFor="client_type" className="text-gray-500 text-sm mb-2">
             Tipo de cliente
           </label>
-          <select name="client_type" id="client_type" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
+          <select name="client_type" id="client_type" defaultValue="1" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Física</option>
             <option value="0">Jurídica</option>
           </select>
@@ -40,7 +40,7 @@ export default function ProductInfos({ product }: { product: IProduct | null }) 
           <label htmlFor="pre_sale" className="text-gray-500 text-sm mb-2">
             Pré Venda
           </label>
-          <select name="pre_sale" id="pre_sale" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
+          <select name="pre_sale" id="pre_sale" defaultValue="1" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Sim</option>
             <option value="0">Não</option>
           </select>
@@ -49,7 +49,7 @@ export default function ProductInfos({ product }: { product: IProduct | null }) 
           <label htmlFor="featured" className="text-gray-500 text-sm mb-2">
             Destaque
           </label>
-          <select name="featured" id="featured" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
+          <select name="featured" id="featured" defaultValue="1" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Sim</option>
             <option value="0">Não</option>
           </select>

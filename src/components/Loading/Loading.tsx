@@ -4,7 +4,7 @@ import { LoadingContext } from '@/providers/LoadingProvider'
 import { useContext } from 'react'
 
 export default function Loading() {
-  let { isLoading } = useContext(LoadingContext)
+  const { isLoading } = useContext(LoadingContext)
 
   return (
     <div

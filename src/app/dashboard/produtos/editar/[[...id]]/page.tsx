@@ -12,6 +12,11 @@ import ProductImage from './Form/ProductImage'
 import ProductImages from './Form/ProductImages'
 import ProductInfos from './Form/ProductInfos'
 import ProductValues from './Form/ProductValues'
+import { NextPageContext } from 'next'
+
+ProductsCreate.getInitialProps = async (ctx: NextPageContext) => {
+  console.log(ctx)
+}
 
 export default async function ProductsCreate({ params }: any) {
   const [product, setProduct] = useState<IProduct | null>(null)
@@ -21,7 +26,7 @@ export default async function ProductsCreate({ params }: any) {
   useEffect(() => {
     const data = getProduct(id)
     setProduct(data)
-  }, [])
+  }, [id])
 
   return (
     <>
