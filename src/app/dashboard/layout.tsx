@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="h-screen flex">
       <Sidebar />
       <div className="flex flex-col w-full md:w-10/12">
-        <main className="relative h-screen box-border w-full py-2 md:py-10 px-4 md:px-14">{children}</main>
+        <main className="relative h-screen box-border overflow-auto w-full py-2 md:py-10 px-4 md:px-14">{children}</main>
         <Footer />
       </div>
     </div>

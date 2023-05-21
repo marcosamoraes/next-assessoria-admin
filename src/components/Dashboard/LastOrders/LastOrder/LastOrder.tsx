@@ -1,4 +1,4 @@
-import { formatter } from '@/helpers/utils'
+import { formatter } from '@/helpers/Utils'
 import { IOrder } from '@/interfaces/IOrder'
 
 type LastOrderProps = {
