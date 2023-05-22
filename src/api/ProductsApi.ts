@@ -37,7 +37,7 @@ export const getProducts = () => {
 
 export const getProduct = (id: number) => {
   if (id) {
-    console.log(`fetching product: ${id}`)
+    return null
   }
 
   return null
