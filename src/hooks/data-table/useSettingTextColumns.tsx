@@ -1,4 +1,3 @@
-import TableDeleteButton from '@/components/UI/TableDeleteButton/TableDeleteButton'
 import TableEditButton from '@/components/UI/TableEditButton/TableEditButton'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
