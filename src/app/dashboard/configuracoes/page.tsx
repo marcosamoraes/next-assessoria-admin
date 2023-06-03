@@ -1,8 +1,15 @@
 'use client'
-import { useState } from 'react'
+import { getSettingTexts } from '@/api/SettingTextApi'
+import useSettingTextColumns from '@/hooks/data-table/useSettingTextColumns'
+import { ISettingText } from '@/interfaces/ISettingText'
+import { useEffect, useState } from 'react'
+import DataTable from 'react-data-table-component'
 
 export default function Settings() {
   const [selectedTab, setSelectedTab] = useState<string>('text')
+  const [settingTexts, setSettingTexts] = useState<ISettingText[] | any>([])
+
+  const settingTextColumns = useSettingTextColumns()
 
   const tabs = [
     {
@@ -21,6 +28,11 @@ export default function Settings() {
       component: 'SettingFreight'
     }
   ]
+
+  useEffect(() => {
+    const data = getSettingTexts()
+    setSettingTexts(data)
+  }, [])
 
   return (
     <>
@@ -45,7 +57,17 @@ export default function Settings() {
           {tabs.map((tab) => {
             if (tab.id === selectedTab) {
               const Component = require(`./Tabs/${tab.component}/${tab.component}`).default
-              return <Component key={tab.id} />
+              if (tab.id === 'text') {
+                return (
+                  <Component key={tab.id} settingTexts={settingTexts} settingTextColumns={settingTextColumns}>
+                    <DataTable columns={settingTextColumns} data={settingTexts} className="mt-7 bg-none" pagination responsive />
+                  </Component>
+                )
+              } else if (tab.id === 'tax') {
+                return <Component key={tab.id} />
+              } else {
+                return <Component key={tab.id} />
+              }
             }
           })}
         </div>

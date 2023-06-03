@@ -2,7 +2,7 @@
 import { getCategories } from '@/api/CategoriesApi'
 import OptionsBar from '@/components/UI/OptionsBar/OptionsBar'
 import SearchBar from '@/components/UI/SearchBar/SearchBar'
-import useCategoryColumns from '@/hooks/data-table/useCategoriesColumns'
+import useCategoryColumns from '@/hooks/data-table/useCategoryColumns'
 import { ICategory } from '@/interfaces/ICategory'
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'

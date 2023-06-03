@@ -2,7 +2,7 @@
 import { getProducts } from '@/api/ProductsApi'
 import OptionsBar from '@/components/UI/OptionsBar/OptionsBar'
 import SearchBar from '@/components/UI/SearchBar/SearchBar'
-import useProductColumns from '@/hooks/data-table/useProductsColumns'
+import useProductColumns from '@/hooks/data-table/useProductColumns'
 import { IProduct } from '@/interfaces/IProduct'
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'

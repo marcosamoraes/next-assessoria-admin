@@ -2,7 +2,7 @@
 import { getCoupons } from '@/api/CouponsApi'
 import OptionsBar from '@/components/UI/OptionsBar/OptionsBar'
 import SearchBar from '@/components/UI/SearchBar/SearchBar'
-import useCouponColumns from '@/hooks/data-table/useCouponsColumns'
+import useCouponColumns from '@/hooks/data-table/useCouponColumns'
 import { ICoupon } from '@/interfaces/ICoupon'
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
