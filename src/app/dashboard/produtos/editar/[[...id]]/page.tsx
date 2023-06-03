@@ -1,7 +1,6 @@
 'use client'
 
 import { getProduct } from '@/api/ProductsApi'
-import DangerButton from '@/components/UI/DangerButton/DangerButton'
 import PrimaryButton from '@/components/UI/PrimaryButton/PrimaryButton'
 import { IProduct } from '@/interfaces/IProduct'
 import Link from 'next/link'
@@ -12,6 +11,7 @@ import ProductImage from './Form/ProductImage'
 import ProductImages from './Form/ProductImages'
 import ProductInfos from './Form/ProductInfos'
 import ProductValues from './Form/ProductValues'
+import BackButton from '@/components/UI/BackButton/BackButton'
 
 export default async function ProductsCreate({ params }: any) {
   const [product, setProduct] = useState<IProduct | null>(null)
@@ -30,7 +30,7 @@ export default async function ProductsCreate({ params }: any) {
           <h1 className="text-4xl text-gray-500 font-light mb-10">{product ? 'Editar' : 'Novo'} Produto</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/produtos">
-              <DangerButton icon={IoMdArrowBack}>Voltar</DangerButton>
+              <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
             </Link>
             <PrimaryButton text="Salvar" />
           </div>

@@ -1,12 +1,12 @@
 'use client'
 
 import { getProduct } from '@/api/ProductsApi'
-import DangerButton from '@/components/UI/DangerButton/DangerButton'
 import PrimaryButton from '@/components/UI/PrimaryButton/PrimaryButton'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { IoMdArrowBack } from 'react-icons/io'
 import { ICategory } from '@/interfaces/ICategory'
+import BackButton from '@/components/UI/BackButton/BackButton'
 
 export default async function CategoriesCreate({ params }: any) {
   const [category, setCategory] = useState<ICategory | null>(null)
@@ -25,7 +25,7 @@ export default async function CategoriesCreate({ params }: any) {
           <h1 className="text-4xl text-gray-500 font-light mb-10">{category ? 'Editar' : 'Nova'} Categoria</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/categorias">
-              <DangerButton icon={IoMdArrowBack}>Voltar</DangerButton>
+              <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
             </Link>
             <PrimaryButton text="Salvar" />
           </div>
