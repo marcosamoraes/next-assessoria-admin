@@ -12,15 +12,20 @@ import ProductImages from './Form/ProductImages'
 import ProductInfos from './Form/ProductInfos'
 import ProductValues from './Form/ProductValues'
 import BackButton from '@/components/UI/BackButton/BackButton'
+import { IState } from '@/interfaces/IState'
+import { getStates } from '@/api/StatesApi'
 
 export default async function ProductsCreate({ params }: any) {
   const [product, setProduct] = useState<IProduct | null>(null)
+  const [states, setStates] = useState<IState | any>([])
 
   const { id } = params
 
   useEffect(() => {
-    const data = getProduct(id)
-    setProduct(data)
+    const productData = getProduct(id)
+    setProduct(productData)
+    const statesData = getStates()
+    setStates(statesData)
   }, [id])
 
   return (
@@ -47,7 +52,7 @@ export default async function ProductsCreate({ params }: any) {
         </div>
 
         <div className="w-full px-2 -md-2">
-          <ProductValues product={product} />
+          <ProductValues product={product} states={states} />
         </div>
       </form>
     </>

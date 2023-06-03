@@ -1,13 +1,19 @@
 'use client'
 import { getSettingTexts } from '@/api/SettingTextApi'
+import { getStates } from '@/api/StatesApi'
+import { getTaxes } from '@/api/TaxesApi'
 import useSettingTextColumns from '@/hooks/data-table/useSettingTextColumns'
 import { ISettingText } from '@/interfaces/ISettingText'
+import { IState } from '@/interfaces/IState'
+import { ITax } from '@/interfaces/ITax'
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 
 export default function Settings() {
   const [selectedTab, setSelectedTab] = useState<string>('text')
   const [settingTexts, setSettingTexts] = useState<ISettingText[] | any>([])
+  const [taxes, setTaxes] = useState<ITax[]>([])
+  const [states, setStates] = useState<IState[]>([])
 
   const settingTextColumns = useSettingTextColumns()
 
@@ -30,8 +36,12 @@ export default function Settings() {
   ]
 
   useEffect(() => {
-    const data = getSettingTexts()
-    setSettingTexts(data)
+    const textsData = getSettingTexts()
+    setSettingTexts(textsData)
+    const taxesData = getTaxes()
+    setTaxes(taxesData)
+    const statesData = getStates()
+    setStates(statesData)
   }, [])
 
   return (
@@ -64,7 +74,7 @@ export default function Settings() {
                   </Component>
                 )
               } else if (tab.id === 'tax') {
-                return <Component key={tab.id} />
+                return <Component key={tab.id} taxes={taxes} states={states} />
               } else {
                 return <Component key={tab.id} />
               }

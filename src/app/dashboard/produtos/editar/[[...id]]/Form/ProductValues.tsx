@@ -2,9 +2,15 @@
 
 import Mask from '@/helpers/Mask'
 import { IProduct } from '@/interfaces/IProduct'
+import { IState } from '@/interfaces/IState'
 import { ChangeEvent, useState } from 'react'
 
-export default function ProductValues({ product }: { product: IProduct | null }) {
+type ProductValuesProps = {
+  product: IProduct | null
+  states: IState[]
+}
+
+export default function ProductValues({ product, states }: ProductValuesProps) {
   const [values, setValues] = useState<any>([])
   const handleInputChanges = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name
@@ -36,11 +42,11 @@ export default function ProductValues({ product }: { product: IProduct | null })
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Valores</h3>
       <div className="bg-white px-5 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
-        {['São Paulo', 'Minas Gerais', 'Rio de Janeiro', 'Espírito Santo'].map((state) => (
-          <div key={state} className="flex flex-col w-full gap-2 items-center">
+        {states.map((state) => (
+          <div key={state.id} className="flex flex-col w-full gap-2 items-center">
             <div className="w-full pl-2">
               <label htmlFor={`value[${state}][1]`} className="text-gray-500 text-sm">
-                {state}
+                {state.name}
               </label>
             </div>
             <div className="w-full flex flex-row">

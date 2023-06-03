@@ -1,62 +1,53 @@
-export default function SettingTax() {
+import { IState } from '@/interfaces/IState'
+import { ITax } from '@/interfaces/ITax'
 
+type SettingTaxProps = {
+  taxes: ITax[]
+  states: IState[]
+}
+export default function SettingTax({ taxes, states }: SettingTaxProps) {
   return (
-    <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="name" className="text-gray-500 text-sm mb-2">
-                  Nome
-        </label>
-        <input type="text" name="name" id="name" placeholder="Nome" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+    <>
+      <div>
+        <div className="bg-white px-5 py-7 rounded-xl flex flex-wrap">
+          {states.map((state) => (
+            <div key={state.id} className="flex flex-col w-full md:w-3/12 gap-2 items-center">
+              <div className="w-full pl-2">
+                <label htmlFor={`value[${state}][1]`} className="text-gray-500 text-sm">
+                  {state.name} - {state.uf}
+                </label>
+              </div>
+              <div className="w-full flex flex-row">
+                <div className="md:px-2 w-full md:w-6/12">
+                  <input
+                    type="text"
+                    placeholder="Impostos"
+                    className="border border-gray-300 w-full rounded-lg box px-3 py-2"
+                    defaultValue={taxes.filter(tax => tax.state === state.uf)[0].tax}
+                  />
+                </div>
+                <div className="md:px-2 w-full md:w-6/12">
+                  <input
+                    type="text"
+                    placeholder="Valor (%)"
+                    className="border border-gray-300 w-full rounded-lg box px-3 py-2"
+                    defaultValue={taxes.filter(tax => tax.state === state.uf)[0].value}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="code" className="text-gray-500 text-sm mb-2">
-                  Código
-        </label>
-        <input type="text" name="code" id="code" placeholder="Código" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+      <div className="flex justify-end mt-5">
+        <button
+          className={`rounded-xl h-10 px-3 border-2 border-primary font-bold 
+          text-lg text-primary relative overflow-hidden inline-flex items-center 
+          justify-evenly duration-300 hover:bg-primary hover:text-white transition-all`}
+        >
+          <span className="hidden md:block">Salvar</span>
+        </button>
       </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="type" className="text-gray-500 text-sm mb-2">
-                  Tipo
-        </label>
-        <select name="type" id="type" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
-          <option value="percentage">Porcentagem</option>
-          <option value="amount">Valor</option>
-        </select>
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="category" className="text-gray-500 text-sm mb-2">
-                  Categoria
-        </label>
-        <select name="category" id="category" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
-          <option value="1">Categoria 1</option>
-          <option value="2">Categoria 2</option>
-          <option value="3">Categoria 3</option>
-        </select>
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="value" className="text-gray-500 text-sm mb-2">
-                  Valor
-        </label>
-        <input type="text" name="value" id="value" placeholder="Valor" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="minValue" className="text-gray-500 text-sm mb-2">
-                  Valor Mínimo
-        </label>
-        <input type="text" name="minValue" id="minValue" placeholder="Valor Mínimo" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="quantity" className="text-gray-500 text-sm mb-2">
-                  Quantidade
-        </label>
-        <input type="text" name="quantity" id="quantity" placeholder="Quantidade" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="expire_at" className="text-gray-500 text-sm mb-2">
-                  Expira em
-        </label>
-        <input type="text" name="expire_at" id="expire_at" placeholder="Expira em" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-      </div>
-    </div>
+    </>
   )
 }
