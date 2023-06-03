@@ -4,7 +4,7 @@ type SearchBarProps = {
 
 export default function SearchBar({ inputName = 'search' }: SearchBarProps) {
   return (
-    <form className="relative w-max">
+    <form className="relative w-max flex items-center">
       <input
         type="search"
         name={inputName}

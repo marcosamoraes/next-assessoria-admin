@@ -21,7 +21,22 @@ export default async function Products() {
     <>
       <h1 className="w-full text-4xl text-gray-500 font-light mb-7">Produtos</h1>
       <div className="flex justify-between">
-        <SearchBar />
+        <div className="flex flex-row gap-3">
+          <SearchBar />
+          <select name="category" id="category" className="border border-gray-300 rounded-lg py-2">
+            <option>Categoria</option>
+            <option value="1">Categoria 1</option>
+            <option value="2">Categoria 2</option>
+            <option value="3">Categoria 3</option>
+          </select>
+          <select name="clientType" id="clientType" className="border border-gray-300 rounded-lg py-2">
+            <option>Tipo de cliente</option>
+            <option value="1">Física</option>
+            <option value="2">Jurídica</option>
+            <option value="3">Categoria 3</option>
+          </select>
+        </div>
+
         <OptionsBar storeLink="/dashboard/produtos/editar" exportLink="products/export" />
       </div>
       <div>

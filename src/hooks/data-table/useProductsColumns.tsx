@@ -65,6 +65,7 @@ const useProductColumns = () => {
       {
         id: 'status',
         name: 'Status',
+        width: '100px',
         selector: (row: any) => row.status,
         sortable: true,
         cell: (row: any) => (
