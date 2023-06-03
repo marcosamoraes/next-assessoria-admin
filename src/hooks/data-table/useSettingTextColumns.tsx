@@ -44,7 +44,7 @@ const useSettingTextColumns = () => {
         sortable: false,
         cell: (row: any) => (
           <div className="flex gap-2">
-            <Link href={`/dashboard/cupons/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/cupons/editar/${row.id}`}>
+            <Link href={`/dashboard/configuracoes/textos/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/configuracoes/textos/editar/${row.id}`}>
               <TableEditButton />
             </Link>
           </div>
