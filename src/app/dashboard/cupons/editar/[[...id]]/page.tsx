@@ -24,7 +24,7 @@ export default async function CouponsCreate({ params }: any) {
         <div className="w-full px-2 -md-2 flex justify-between">
           <h1 className="text-4xl text-gray-500 font-light mb-10">{coupon ? 'Editar' : 'Novo'} Cupom</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
-            <Link href="/dashboard/categorias">
+            <Link href="/dashboard/cupons">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
             </Link>
             <PrimaryButton text="Salvar" />
