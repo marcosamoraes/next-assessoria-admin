@@ -1,3 +1,6 @@
+import TableDeleteButton from '@/components/UI/TableDeleteButton/TableDeleteButton'
+import TableEditButton from '@/components/UI/TableEditButton/TableEditButton'
+import ToggleButton from '@/components/UI/ToggleButton/ToggleButton'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -65,9 +68,7 @@ const useProductColumns = () => {
         selector: (row: any) => row.status,
         sortable: true,
         cell: (row: any) => (
-          <div className="flex items-center">
-            <p className={`${row.status ? 'text-success' : 'text-danger'}`}>{row.status ? 'Ativo' : 'Inativo'}</p>
-          </div>
+          <ToggleButton name="active" defaultChecked={row.active ? true : false} />
         ),
       },
       {
@@ -77,10 +78,10 @@ const useProductColumns = () => {
         sortable: false,
         cell: (row: any) => (
           <div className="flex gap-2">
-            <Link href={`/dashboard/produtos/editar/${row.id}?${searchParams.toString()}`}>
-              <button className="bg-warning px-3 py-1 rounded-xl hover:bg-warning/70 text-black inline-flex items-center">Editar</button>
+            <Link href={`/dashboard/produtos/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/produtos/editar/${row.id}`}>
+              <TableEditButton />
             </Link>
-            <button className="bg-danger px-3 py-1 rounded-xl hover:bg-danger/70 text-white inline-flex items-center">Excluir</button>
+            <TableDeleteButton />
           </div>
         ),
         style: {

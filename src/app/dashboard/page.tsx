@@ -7,7 +7,7 @@ export default function Dashboard() {
     <>
       <h1 className="w-full text-4xl text-gray-500 font-light mb-10">Bem vindo!</h1>
       <DashboardCards />
-      <div className="w-full flex flex-row gap-5">
+      <div className="w-full flex flex-col md:flex-row gap-5">
         <LastOrders />
         <Activities />
       </div>

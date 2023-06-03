@@ -12,7 +12,7 @@ export default function OptionsBar({ storeLink, exportLink }: OptionsBarProps) {
   return (
     <div className="flex gap-3">
       {storeLink ? (
-        <Link href={storeLink}>
+        <Link href={storeLink} as={storeLink}>
           <PrimaryButton icon={FaPlus} text="Cadastrar" />
         </Link>
       ) : (
