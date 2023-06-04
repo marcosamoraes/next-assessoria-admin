@@ -8,6 +8,9 @@ import BackButton from '@/components/UI/BackButton/BackButton'
 import { IUser } from '@/interfaces/IUser'
 import { getUser } from '@/api/UsersApi'
 import ClientInfos from './Form/ClientInfos'
+import ClientAddress from './Form/ClientAddress'
+import ClientDocumentRg from './Form/ClientDocumentRg'
+import ClientDocumentCr from './Form/ClientDocumentCr'
 
 export default async function ClientsCreate({ params }: any) {
   const [user, setUser] = useState<IUser | null>(null)
@@ -32,8 +35,14 @@ export default async function ClientsCreate({ params }: any) {
           </div>
         </div>
 
-        <div className="w-full md:w-8/12 px-2 -md-2">
+        <div className="w-full md:w-9/12 px-2 -md-2">
           <ClientInfos user={user} />
+          <ClientAddress user={user} />
+        </div>
+
+        <div className="w-full md:w-3/12 px-2 -md-2">
+          <ClientDocumentRg user={user} />
+          <ClientDocumentCr user={user} />
         </div>
       </form>
     </>

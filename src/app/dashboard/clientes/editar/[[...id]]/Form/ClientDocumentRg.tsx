@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
-
-import { IProduct } from '@/interfaces/IProduct'
+import { IUser } from '@/interfaces/IUser'
 import { ChangeEvent, useState } from 'react'
 
-export default function ProductImage({ product }: { product: IProduct | null }) {
+export default function ClientDocumentRg({ user }: { user: IUser | null }) {
   const [tempFile, setTempFile] = useState<string | null>(null)
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +16,7 @@ export default function ProductImage({ product }: { product: IProduct | null }) 
 
   return (
     <div className="mb-4">
-      <h3 className="w-full text-md font-light text-primary mb-2">Imagem principal</h3>
+      <h3 className="w-full text-md font-light text-primary mb-2">Documento RG</h3>
       <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
         <div className="flex flex-col w-full">
           <div className="border border-dashed border-gray-500 relative hover:border-gray-700 text-gray-500 hover:text-gray-700">
@@ -38,7 +36,7 @@ export default function ProductImage({ product }: { product: IProduct | null }) 
                   <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                 </svg>
                 <h4>
-                  Arraste a foto aqui
+                  Arraste o arquivo aqui
                   <br />
                   ou
                 </h4>
