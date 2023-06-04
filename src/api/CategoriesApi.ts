@@ -2,17 +2,27 @@ export const getCategories = () => {
   const data = [
     {
       id: 1,
-      name: 'Pistola',
+      name: 'Pistolas',
       active: true,
     },
     {
       id: 2,
-      name: 'Carregador',
+      name: 'Carregadores',
       active: true,
     },
     {
       id: 3,
-      name: 'Riffle',
+      name: 'Lanternas',
+      active: true,
+    },
+    {
+      id: 4,
+      name: 'Red Dot',
+      active: true,
+    },
+    {
+      id: 5,
+      name: 'Munições',
       active: true,
     },
   ]

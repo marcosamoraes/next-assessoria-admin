@@ -1,8 +1,12 @@
 'use client'
+import { getCategories } from '@/api/CategoriesApi'
+import { getFreight } from '@/api/FreightApi'
 import { getSettingTexts } from '@/api/SettingTextApi'
 import { getStates } from '@/api/StatesApi'
 import { getTaxes } from '@/api/TaxesApi'
 import useSettingTextColumns from '@/hooks/data-table/useSettingTextColumns'
+import { ICategory } from '@/interfaces/ICategory'
+import { IFreight } from '@/interfaces/IFreight'
 import { ISettingText } from '@/interfaces/ISettingText'
 import { IState } from '@/interfaces/IState'
 import { ITax } from '@/interfaces/ITax'
@@ -12,8 +16,11 @@ import DataTable from 'react-data-table-component'
 export default function Settings() {
   const [selectedTab, setSelectedTab] = useState<string>('text')
   const [settingTexts, setSettingTexts] = useState<ISettingText[] | any>([])
+  const [selectedCategory, setSelectedCategory] = useState<number>(1)
   const [taxes, setTaxes] = useState<ITax[]>([])
   const [states, setStates] = useState<IState[]>([])
+  const [freight, setFreight] = useState<IFreight[]|null>([])
+  const [categories, setCategories] = useState<ICategory[]>([])
 
   const settingTextColumns = useSettingTextColumns()
 
@@ -42,6 +49,10 @@ export default function Settings() {
     setTaxes(taxesData)
     const statesData = getStates()
     setStates(statesData)
+    const categoriesData = getCategories()
+    setCategories(categoriesData)
+    const freightData = getFreight()
+    setFreight(freightData)
   }, [])
 
   return (
@@ -76,7 +87,16 @@ export default function Settings() {
               } else if (tab.id === 'tax') {
                 return <Component key={tab.id} taxes={taxes} states={states} />
               } else {
-                return <Component key={tab.id} />
+                return (
+                  <Component
+                    key={tab.id}
+                    states={states}
+                    categories={categories}
+                    freight={freight}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                  />
+                )
               }
             }
           })}

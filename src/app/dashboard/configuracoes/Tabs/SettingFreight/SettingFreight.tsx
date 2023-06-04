@@ -1,62 +1,87 @@
-export default function SettingFreight() {
+import { ICategory } from '@/interfaces/ICategory'
+import { IFreight } from '@/interfaces/IFreight'
+import { IState } from '@/interfaces/IState'
+
+type SettingFreightProps = {
+  states: IState[]
+  categories: ICategory[]
+  freight: IFreight[]
+  selectedCategory: number
+  setSelectedCategory: (tab: number) => void
+}
+
+export default function SettingFreight({ states, categories, freight, selectedCategory, setSelectedCategory }: SettingFreightProps) {
 
   return (
-    <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="name" className="text-gray-500 text-sm mb-2">
-                  Nome
-        </label>
-        <input type="text" name="name" id="name" placeholder="Nome" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+    <>
+      <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
+        <ul className="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex w-full">
+          {categories.map((category) => (
+            <li key={category.id} className="w-full">
+              <a
+                href="#"
+                className={`inline-block w-full p-4 ${selectedCategory === category.id ? 'bg-gray-100 active' : 'bg-white hover:text-gray-700 hover:bg-gray-50 '} focus:outline-none`}
+                onClick={() => setSelectedCategory(category.id)}
+              >
+                {category.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {states.map((state) => (
+          <div key={state.id} className="flex flex-col w-full md:w-6/12 gap-2 items-center md:px-2 md:-mx-2">
+            <div className="w-full pl-2">
+              <label htmlFor={`value[${state}][1]`} className="text-gray-500 text-sm">
+                {state.name} - {state.uf}
+              </label>
+            </div>
+            <div className="w-full flex flex-row">
+              <div className="md:px-2 w-full md:w-3/12">
+                <input
+                  type="text"
+                  placeholder="1 Item"
+                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
+                  defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].oneItem : 0}
+                />
+              </div>
+              <div className="md:px-2 w-full md:w-3/12">
+                <input
+                  type="text"
+                  placeholder="2 Itens"
+                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
+                  defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].twoItems : 0}
+                />
+              </div>
+              <div className="md:px-2 w-full md:w-3/12">
+                <input
+                  type="text"
+                  placeholder="3 Itens"
+                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
+                  defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].threeItems : 0}
+                />
+              </div>
+              <div className="md:px-2 w-full md:w-3/12">
+                <input
+                  type="text"
+                  placeholder="4 Itens"
+                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
+                  defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].fourItems : 0}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="code" className="text-gray-500 text-sm mb-2">
-                  Código
-        </label>
-        <input type="text" name="code" id="code" placeholder="Código" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+      <div className="flex justify-end mt-5">
+        <button
+          className={`rounded-xl h-10 px-3 border-2 border-primary font-bold 
+          text-lg text-primary relative overflow-hidden inline-flex items-center 
+          justify-evenly duration-300 hover:bg-primary hover:text-white transition-all`}
+        >
+          <span className="hidden md:block">Salvar</span>
+        </button>
       </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="type" className="text-gray-500 text-sm mb-2">
-                  Tipo
-        </label>
-        <select name="type" id="type" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
-          <option value="percentage">Porcentagem</option>
-          <option value="amount">Valor</option>
-        </select>
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="category" className="text-gray-500 text-sm mb-2">
-                  Categoria
-        </label>
-        <select name="category" id="category" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
-          <option value="1">Categoria 1</option>
-          <option value="2">Categoria 2</option>
-          <option value="3">Categoria 3</option>
-        </select>
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="value" className="text-gray-500 text-sm mb-2">
-                  Valor
-        </label>
-        <input type="text" name="value" id="value" placeholder="Valor" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="minValue" className="text-gray-500 text-sm mb-2">
-                  Valor Mínimo
-        </label>
-        <input type="text" name="minValue" id="minValue" placeholder="Valor Mínimo" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="quantity" className="text-gray-500 text-sm mb-2">
-                  Quantidade
-        </label>
-        <input type="text" name="quantity" id="quantity" placeholder="Quantidade" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-      </div>
-      <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-        <label htmlFor="expire_at" className="text-gray-500 text-sm mb-2">
-                  Expira em
-        </label>
-        <input type="text" name="expire_at" id="expire_at" placeholder="Expira em" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-      </div>
-    </div>
+    </>
   )
 }
