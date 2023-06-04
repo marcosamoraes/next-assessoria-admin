@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-const useProductColumns = () => {
+const useProductColumns = (onDelete: () => void) => {
   const searchParams = useSearchParams()
 
   return useMemo(
@@ -82,7 +82,7 @@ const useProductColumns = () => {
             <Link href={`/dashboard/produtos/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/produtos/editar/${row.id}`}>
               <TableEditButton />
             </Link>
-            <TableDeleteButton />
+            <TableDeleteButton onClick={onDelete} />
           </div>
         ),
         style: {
@@ -90,7 +90,7 @@ const useProductColumns = () => {
         },
       },
     ],
-    [searchParams],
+    [searchParams, onDelete],
   )
 }
 

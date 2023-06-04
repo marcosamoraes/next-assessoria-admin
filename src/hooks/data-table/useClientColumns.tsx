@@ -1,59 +1,54 @@
 import TableDeleteButton from '@/components/UI/TableDeleteButton/TableDeleteButton'
 import TableEditButton from '@/components/UI/TableEditButton/TableEditButton'
 import ToggleButton from '@/components/UI/ToggleButton/ToggleButton'
+import t from '@/translations'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-const useCouponColumns = (onDelete: () => void) => {
+const useClientColumns = (onDelete: () => void) => {
   const searchParams = useSearchParams()
 
   return useMemo(
     () => [
       {
-        id: 'name',
+        id: 'firstname',
         name: 'Nome',
-        selector: (row: any) => row.name,
+        selector: (row: any) => row.firstname,
         sortable: true,
-        format: (row: any) => <p title={row.name}>{row.name}</p>,
+        format: (row: any) => <p title={row.firstname + ' ' + row.lastname}>{row.firstname + ' ' + row.lastname}</p>,
       },
       {
-        id: 'code',
-        name: 'Código',
-        selector: (row: any) => row.code,
+        id: 'email',
+        name: 'E-mail',
+        selector: (row: any) => row.email,
         sortable: true,
-        format: (row: any) => <p title={row.code}>{row.code}</p>,
+        format: (row: any) => <p title={row.email}>{row.email}</p>,
       },
       {
-        id: 'value',
-        name: 'Valor',
-        selector: (row: any) => row.value,
+        id: 'document',
+        name: 'Documento',
+        selector: (row: any) => row.userInformations.document,
         sortable: true,
-        format: (row: any) => {
-          if (row.type === 'percentage') {
-            return <p title={row.value}>{row.value}%</p>
-          } else {
-            return <p title={row.value}>R${row.value.toFixed(2).replace('.', ',')}</p>
-          }
-        },
+        format: (row: any) => <p title={row.userInformations.document}>{row.userInformations.document}</p>,
       },
       {
-        id: 'quantity',
-        name: 'Quantidade',
-        selector: (row: any) => row.quantity,
+        id: 'state',
+        name: 'Documento',
+        selector: (row: any) => row.userAddress.state,
         sortable: true,
-        format: (row: any) => <p title={row.quantity}>{row.quantity}</p>,
+        format: (row: any) => <p title={row.userAddress.state}>{row.userAddress.state}</p>,
       },
       {
-        id: 'expireAt',
-        name: 'Expira em',
-        selector: (row: any) => row.expireAt,
+        id: 'status',
+        name: 'Status',
+        selector: (row: any) => row.userInformations.status,
         sortable: true,
-        format: (row: any) => <p title={row.expireAt}>{row.expireAt}</p>,
+        format: (row: any) => <p title={row.userInformations.status}>{t(row.userInformations.status)}</p>,
       },
       {
         id: 'active',
-        name: 'Status',
+        name: 'Ativo',
         width: '100px',
         selector: (row: any) => row.active,
         sortable: true,
@@ -68,7 +63,7 @@ const useCouponColumns = (onDelete: () => void) => {
         sortable: false,
         cell: (row: any) => (
           <div className="flex gap-2">
-            <Link href={`/dashboard/cupons/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/cupons/editar/${row.id}`}>
+            <Link href={`/dashboard/clientes/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/clientes/editar/${row.id}`}>
               <TableEditButton />
             </Link>
             <TableDeleteButton onClick={onDelete} />
@@ -83,4 +78,4 @@ const useCouponColumns = (onDelete: () => void) => {
   )
 }
 
-export default useCouponColumns
+export default useClientColumns

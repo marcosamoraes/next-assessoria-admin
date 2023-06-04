@@ -6,6 +6,8 @@ import useCouponColumns from '@/hooks/data-table/useCouponColumns'
 import { ICoupon } from '@/interfaces/ICoupon'
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default async function Coupons() {
   const [coupons, setCoupons] = useState<ICoupon[] | any>([])
@@ -15,7 +17,30 @@ export default async function Coupons() {
     setCoupons(data)
   }, [])
 
-  const columns = useCouponColumns()
+  const MySwal = withReactContent(Swal)
+
+  const onDelete = () => {
+    MySwal.fire({
+      title: 'Você tem certeza?',
+      text: 'Você não poderá reverter isso!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, delete!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deletado!',
+          'O cupom foi deletado.',
+          'success'
+        )
+      }
+    })
+  }
+
+  const columns = useCouponColumns(onDelete)
 
   return (
     <>

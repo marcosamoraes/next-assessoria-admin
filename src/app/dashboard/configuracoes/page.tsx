@@ -1,7 +1,7 @@
 'use client'
 import { getCategories } from '@/api/CategoriesApi'
 import { getFreight } from '@/api/FreightApi'
-import { getSettingTexts } from '@/api/SettingTextApi'
+import { getSettingTexts } from '@/api/SettingTextsApi'
 import { getStates } from '@/api/StatesApi'
 import { getTaxes } from '@/api/TaxesApi'
 import useSettingTextColumns from '@/hooks/data-table/useSettingTextColumns'

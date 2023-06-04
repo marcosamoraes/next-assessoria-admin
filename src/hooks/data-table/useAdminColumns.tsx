@@ -5,23 +5,37 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-const useCategoryColumns = (onDelete: () => void) => {
+const useAdminColumns = (onDelete: () => void) => {
   const searchParams = useSearchParams()
 
   return useMemo(
     () => [
       {
-        id: 'name',
+        id: 'firstname',
         name: 'Nome',
-        selector: (row: any) => row.name,
+        selector: (row: any) => row.firstname,
         sortable: true,
-        format: (row: any) => <p title={row.name}>{row.name}</p>,
+        format: (row: any) => <p title={row.firstname + ' ' + row.lastname}>{row.firstname + ' ' + row.lastname}</p>,
       },
       {
-        id: 'active',
+        id: 'email',
+        name: 'E-mail',
+        selector: (row: any) => row.email,
+        sortable: true,
+        format: (row: any) => <p title={row.email}>{row.email}</p>,
+      },
+      {
+        id: 'role',
+        name: 'Função',
+        selector: (row: any) => row.role,
+        sortable: true,
+        format: (row: any) => <p title={row.role}>{row.role}</p>,
+      },
+      {
+        id: 'status',
         name: 'Status',
         width: '100px',
-        selector: (row: any) => row.active,
+        selector: (row: any) => row.status,
         sortable: true,
         cell: (row: any) => (
           <ToggleButton name="active" defaultChecked={row.active ? true : false} />
@@ -34,7 +48,7 @@ const useCategoryColumns = (onDelete: () => void) => {
         sortable: false,
         cell: (row: any) => (
           <div className="flex gap-2">
-            <Link href={`/dashboard/categorias/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/categorias/editar/${row.id}`}>
+            <Link href={`/dashboard/admins/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/admins/editar/${row.id}`}>
               <TableEditButton />
             </Link>
             <TableDeleteButton onClick={onDelete} />
@@ -49,4 +63,4 @@ const useCategoryColumns = (onDelete: () => void) => {
   )
 }
 
-export default useCategoryColumns
+export default useAdminColumns
