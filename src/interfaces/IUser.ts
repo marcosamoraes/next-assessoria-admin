@@ -9,10 +9,10 @@ export interface IUser {
   lastname: string
   email: string
   whatsapp?: string
-  role: UserRoleEnum
+  role?: UserRoleEnum
   active: boolean
 
-  userInformation: IUserInformation
-  userAddress: IUserAddress
-  userDocuments: IUserDocument[]
+  userInformation?: IUserInformation
+  userAddress?: IUserAddress
+  userDocuments?: IUserDocument[]
 }

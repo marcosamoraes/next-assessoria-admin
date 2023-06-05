@@ -18,8 +18,8 @@ export interface IOrder {
   createdAt: string
   updatedAt: string
 
-  coupon: ICoupon
-  user: IUser
-  orderStatus: IOrderStatus[]
-  orderProducts: IOrderProduct[]
+  coupon?: ICoupon
+  user?: IUser
+  orderStatus?: IOrderStatus[]
+  orderProducts?: IOrderProduct[]
 }

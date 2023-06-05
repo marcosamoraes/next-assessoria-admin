@@ -28,19 +28,19 @@ export default function ProductInfos({ product }: { product: IProduct | null }) 
           </select>
         </div>
         <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
-          <label htmlFor="client_type" className="text-gray-500 text-sm mb-2">
+          <label htmlFor="clientType" className="text-gray-500 text-sm mb-2">
             Tipo de cliente
           </label>
-          <select name="client_type" id="client_type" defaultValue="1" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
+          <select name="clientType" id="clientType" defaultValue="1" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Física</option>
             <option value="0">Jurídica</option>
           </select>
         </div>
         <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
-          <label htmlFor="pre_sale" className="text-gray-500 text-sm mb-2">
+          <label htmlFor="preSale" className="text-gray-500 text-sm mb-2">
             Pré Venda
           </label>
-          <select name="pre_sale" id="pre_sale" defaultValue="1" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
+          <select name="preSale" id="preSale" defaultValue="1" className="border border-gray-300 rounded-lg px-3 py-2 mb-5">
             <option value="1">Sim</option>
             <option value="0">Não</option>
           </select>

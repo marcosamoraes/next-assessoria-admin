@@ -19,9 +19,9 @@ const useOrderColumns = () => {
       {
         id: 'client',
         name: 'Cliente',
-        selector: (row: any) => row.user.name,
+        selector: (row: any) => row.user.firstname,
         sortable: true,
-        format: (row: any) => <p title={row.user.name}>{row.user.name}</p>,
+        format: (row: any) => <p title={row.user.firstname + ' ' + row.user.lastname}>{row.user.name + ' ' + row.user.lastname}</p>,
       },
       {
         id: 'email',

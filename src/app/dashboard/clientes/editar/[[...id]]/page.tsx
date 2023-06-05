@@ -28,7 +28,7 @@ export default async function ClientsCreate({ params }: any) {
         <div className="w-full px-2 -md-2 flex justify-between">
           <h1 className="text-4xl text-gray-500 font-light mb-10">{user ? 'Editar' : 'Novo'} Cliente</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
-            <Link href="/dashboard/users">
+            <Link href="/dashboard/clientes">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
             </Link>
             <PrimaryButton text="Salvar" />

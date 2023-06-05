@@ -8,5 +8,5 @@ export interface IOrderStatus {
   date: string
   createdAt: string
 
-  order: IOrder
+  order?: IOrder
 }

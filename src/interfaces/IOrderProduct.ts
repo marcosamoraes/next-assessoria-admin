@@ -9,6 +9,6 @@ export interface IOrderProduct {
   createdAt: string
   updatedAt: string
 
-  product: IProduct
-  order: IOrder
+  product?: IProduct
+  order?: IOrder
 }

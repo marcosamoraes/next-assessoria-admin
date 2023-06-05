@@ -3,10 +3,10 @@ export interface IProduct {
   title: string
   code: string
   category: string
-  client_type: string
-  pre_sale: boolean
+  clientType: string
+  preSale?: boolean
   featured: boolean
   image: string
-  images: string[]
-  description: string
+  images?: string[]
+  description?: string
 }

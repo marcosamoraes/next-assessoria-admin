@@ -9,6 +9,6 @@ export interface ICoupon {
   minValue?: number
   code?: string
   quantity: number
-  expireAt: Date
+  expireAt: string
   active: boolean
 }
