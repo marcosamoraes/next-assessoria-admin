@@ -8,6 +8,7 @@ export const getOrders = () => {
   const data = [
     {
       id: 1,
+      code: 'PP-0001',
       status: OrderStatusEnum.CREATED,
       paymentMethod: 'creditCard',
       subtotal: 100,
@@ -34,7 +35,17 @@ export const getOrders = () => {
         cpf: '000.000.000-00',
         phone: '(00) 00000-0000',
         createdAt: moment().format('L'),
-        updatedAt: moment().format('L')
+        updatedAt: moment().format('L'),
+        userAddress: {
+          id: 1,
+          zipcode: '00000-000',
+          street: 'Rua Teste',
+          number: '123',
+          complement: 'Casa',
+          neighborhood: 'Teste',
+          city: 'São Paulo',
+          state: 'SP',
+        },
       },
       orderStatus: [
         {
@@ -68,6 +79,7 @@ export const getOrders = () => {
     },
     {
       id: 2,
+      code: 'PP-0002',
       status: OrderStatusEnum.PAID,
       paymentMethod: 'ticket',
       subtotal: 500,
@@ -94,7 +106,17 @@ export const getOrders = () => {
         cpf: '000.000.000-00',
         phone: '(00) 00000-0000',
         createdAt: moment().format('L'),
-        updatedAt: moment().format('L')
+        updatedAt: moment().format('L'),
+        userAddress: {
+          id: 2,
+          zipcode: '00000-000',
+          street: 'Rua Teste',
+          number: '123',
+          complement: 'Casa',
+          neighborhood: 'Teste',
+          city: 'São Paulo',
+          state: 'SP',
+        },
       },
       orderStatus: [
         {

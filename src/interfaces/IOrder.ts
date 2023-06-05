@@ -6,6 +6,7 @@ import { IOrderStatus } from './IOrderStatus'
 
 export interface IOrder {
   id: number
+  code: string
   status: OrderStatusEnum
   paymentMethod: string
   subtotal: number
