@@ -1,7 +1,5 @@
 import OrderStatusEnum from '@/enums/OrderStatusEnum'
 import t from '@/translations'
-import { AiOutlineLoading3Quarters } from 'react-icons/ai'
-import { FaCheck } from 'react-icons/fa'
 
 export default function Stepper ({ selectedStep = OrderStatusEnum.CREATED }: { selectedStep?: OrderStatusEnum }) {
   let steps: Array<any> = Object.values(OrderStatusEnum)

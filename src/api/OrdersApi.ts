@@ -221,7 +221,18 @@ export const getOrder = (id: number) => {
           state: 'SP',
         },
         userInformation: {
-          status: UserInformationStatusEnum.WAITING_EVALUATION,
+          id: 1,
+          document: '000.000.000-00',
+          birthdate: '07/09/1997',
+          naturalness: 'São Paulo',
+          gender: 'Masculino',
+          civilStatus: 'Solteiro',
+          occupation: 'Desenvolvedor',
+          rg: '00.000.000-0',
+          rgIssuer: 'SSP-SP',
+          rgState: 'SP',
+          rgIssueDate: '07/09/2010',
+          status: UserInformationStatusEnum.APPROVED
         }
       },
       orderStatus: [
