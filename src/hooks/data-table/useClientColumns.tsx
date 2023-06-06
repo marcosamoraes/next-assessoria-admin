@@ -34,7 +34,7 @@ const useClientColumns = (onDelete: () => void) => {
       },
       {
         id: 'state',
-        name: 'Documento',
+        name: 'Estado',
         selector: (row: any) => row.userAddress.state,
         sortable: true,
         format: (row: any) => <p title={row.userAddress.state}>{row.userAddress.state}</p>,

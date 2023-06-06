@@ -1,6 +1,7 @@
 import ClientTypeEnum from '@/enums/ClientTypeEnum'
 import CouponTypeEnum from '@/enums/CouponTypeEnum'
 import OrderStatusEnum from '@/enums/OrderStatusEnum'
+import UserInformationStatusEnum from '@/enums/UserInformationStatusEnum'
 import moment from 'moment'
 import 'moment/locale/pt-br'
 
@@ -32,9 +33,10 @@ export const getOrders = () => {
       },
       user: {
         id: 1,
-        name: 'John Doe',
+        firstname: 'John',
+        lastname: 'Doe',
         email: 'john@teste.com',
-        cpf: '000.000.000-00',
+        document: '000.000.000-00',
         phone: '(00) 00000-0000',
         createdAt: moment().format('L'),
         updatedAt: moment().format('L'),
@@ -83,7 +85,7 @@ export const getOrders = () => {
       id: 2,
       code: 'PP-0002',
       status: OrderStatusEnum.PAID,
-      paymentMethod: 'ticket',
+      paymentMethod: 'bankSlip',
       subtotal: 500,
       discount: 150,
       deliveryFee: 100,
@@ -103,9 +105,10 @@ export const getOrders = () => {
       },
       user: {
         id: 1,
-        name: 'Bruno Almeida',
+        firstname: 'Bruno',
+        lastname: 'Almeida',
         email: 'bruno@teste.com',
-        cpf: '000.000.000-00',
+        document: '000.000.000-00',
         phone: '(00) 00000-0000',
         createdAt: moment().format('L'),
         updatedAt: moment().format('L'),
@@ -176,11 +179,12 @@ export const getOrder = (id: number) => {
     return {
       id: 1,
       code: 'PP-0001',
-      status: OrderStatusEnum.CREATED,
+      status: OrderStatusEnum.EVALUATION_DOCUMENTS,
       paymentMethod: 'creditCard',
       subtotal: 100,
       discount: 10,
       deliveryFee: 10,
+      installments: 1,
       total: 100,
       date: moment().format('L'),
       canceledReason: '',
@@ -202,6 +206,9 @@ export const getOrder = (id: number) => {
         lastname: 'Doe',
         email: 'john@teste.com',
         whatsapp: '(00) 00000-0000',
+        document: '000.000.000-00',
+        createdAt: moment().format('L'),
+        updatedAt: moment().format('L'),
         active: true,
         userAddress: {
           id: 1,
@@ -213,12 +220,22 @@ export const getOrder = (id: number) => {
           city: 'São Paulo',
           state: 'SP',
         },
+        userInformation: {
+          status: UserInformationStatusEnum.WAITING_EVALUATION,
+        }
       },
       orderStatus: [
         {
           id: 1,
           status: OrderStatusEnum.CREATED,
           description: 'Pedido criado',
+          date: moment().format('L'),
+          createdAt: moment().format('L')
+        },
+        {
+          id: 2,
+          status: OrderStatusEnum.PENDING_PAYMENT,
+          description: 'Aguardando pagamento',
           date: moment().format('L'),
           createdAt: moment().format('L')
         }

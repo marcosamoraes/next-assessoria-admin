@@ -16,6 +16,10 @@ export default function t(value: string) {
     delivered: 'Entregue',
     finished: 'Finalizado',
     canceled: 'Cancelado',
+
+    // OrderPaymentMethodEnum
+    creditCard: 'Cartão de Crédito',
+    bankSlip: 'Boleto Bancário',
   }
 
   return config[value]

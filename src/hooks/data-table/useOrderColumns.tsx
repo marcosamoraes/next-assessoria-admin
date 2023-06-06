@@ -21,7 +21,7 @@ const useOrderColumns = () => {
         name: 'Cliente',
         selector: (row: any) => row.user.firstname,
         sortable: true,
-        format: (row: any) => <p title={row.user.firstname + ' ' + row.user.lastname}>{row.user.name + ' ' + row.user.lastname}</p>,
+        format: (row: any) => <p title={row.user.firstname + ' ' + row.user.lastname}>{row.user.firstname + ' ' + row.user.lastname}</p>,
       },
       {
         id: 'email',

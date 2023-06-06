@@ -8,6 +8,10 @@ import BackButton from '@/components/UI/BackButton/BackButton'
 import { IOrder } from '@/interfaces/IOrder'
 import { getOrder } from '@/api/OrdersApi'
 import OrderInfos from './Form/OrderInfos'
+import OrderPaymentInfos from './Form/OrderPaymentInfos'
+import OrderStatus from './Form/OrderStatus'
+import OrderProducts from './Form/OrderProducts'
+import OrderHistory from './Form/OrderHistory'
 
 export default async function OrdersShow({ params }: any) {
   const [order, setOrder] = useState<IOrder | null>(null)
@@ -32,11 +36,18 @@ export default async function OrdersShow({ params }: any) {
           </div>
         </div>
 
-        <div className="w-full md:w-9/12 px-2 -md-2">
-          <OrderInfos order={order} />
+        <div className="w-full px-2 -md-2">
+          <OrderStatus order={order} />
         </div>
 
-        <div className="w-full md:w-3/12 px-2 -md-2">
+        <div className="w-full md:w-7/12 px-2 -md-2">
+          <OrderInfos order={order} />
+          <OrderHistory order={order} />
+        </div>
+
+        <div className="w-full md:w-5/12 px-2 -md-2">
+          <OrderProducts order={order} />
+          <OrderPaymentInfos order={order} />
         </div>
       </form>
     </>

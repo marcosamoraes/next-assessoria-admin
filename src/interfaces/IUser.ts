@@ -9,8 +9,11 @@ export interface IUser {
   lastname: string
   email: string
   whatsapp?: string
+  document?: string
   role?: UserRoleEnum
   active: boolean
+  createdAt?: string
+  updatedAt?: string
 
   userInformation?: IUserInformation
   userAddress?: IUserAddress

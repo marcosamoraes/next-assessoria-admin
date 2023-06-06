@@ -12,6 +12,7 @@ export interface IOrder {
   subtotal: number
   discount: number
   deliveryFee: number
+  installments: number
   total: number
   date: string
   canceledReason: string

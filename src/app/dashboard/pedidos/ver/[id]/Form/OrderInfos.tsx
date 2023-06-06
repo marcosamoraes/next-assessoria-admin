@@ -1,33 +1,63 @@
 import { IOrder } from '@/interfaces/IOrder'
+import t from '@/translations'
+import Link from 'next/link'
 
 export default function OrderInfos({ order }: { order: IOrder | null }) {
+  if (!order) {
+    return <>Loading</>
+  }
+
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Informações</h3>
       <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-          <label htmlFor="firstname" className="text-gray-500 text-sm mb-2">
-            Nome
+          <label className="text-gray-500 text-sm mb-2">
+            Cliente
           </label>
-          <input type="text" name="firstname" id="firstname" placeholder="Nome" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+          <Link href={`/dashboard/clientes/editar/${order?.user?.id}`}><p className="text-blue-500">{order?.user?.firstname + ' ' + order?.user?.lastname}</p></Link>
         </div>
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-          <label htmlFor="lastname" className="text-gray-500 text-sm mb-2">
-            Sobrenome
-          </label>
-          <input type="text" name="lastname" id="lastname" placeholder="Sobrenome" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
-        </div>
-        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-          <label htmlFor="document" className="text-gray-500 text-sm mb-2">
+          <label className="text-gray-500 text-sm mb-2">
             Documento (CPF/CNPJ)
           </label>
-          <input type="text" name="document" id="document" placeholder="Documento (CPF/CNPJ)" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+          <p>{order?.user?.document}</p>
         </div>
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-          <label htmlFor="whatsapp" className="text-gray-500 text-sm mb-2">
+          <label className="text-gray-500 text-sm mb-2">
+            E-mail
+          </label>
+          <p>{order?.user?.email}</p>
+        </div>
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
+          <label className="text-gray-500 text-sm mb-2">
             Whatsapp
           </label>
-          <input type="text" name="whatsapp" id="whatsapp" placeholder="Whatsapp" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+          <p>{order?.user?.whatsapp}</p>
+        </div>
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
+          <label className="text-gray-500 text-sm mb-2">
+            Estado
+          </label>
+          <p>{order?.user?.userAddress?.state}</p>
+        </div>
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
+          <label className="text-gray-500 text-sm mb-2">
+            Status do Pedido
+          </label>
+          <p>{order?.status ? t(order?.status) : ''}</p>
+        </div>
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
+          <label className="text-gray-500 text-sm mb-2">
+            Data de criação
+          </label>
+          <p>{order?.createdAt}</p>
+        </div>
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
+          <label className="text-gray-500 text-sm mb-2">
+            Última atualização
+          </label>
+          <p>{order?.updatedAt}</p>
         </div>
       </div>
     </div>
