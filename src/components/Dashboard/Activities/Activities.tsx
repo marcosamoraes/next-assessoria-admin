@@ -35,7 +35,7 @@ const Activities: React.FC<any> = () => {
   ]
 
   return (
-    <div className="w-full md:w-1/2">
+    <div className="w-full xl:w-1/2">
       <h1 className="pl-3 pb-5">Atividades</h1>
       <div className="flex flex-col gap-3">
         {activities.map((activity) => {
