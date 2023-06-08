@@ -2,6 +2,7 @@ import Footer from '@/components/Footer/Footer'
 import Sidebar from '@/components/Sidebar/Sidebar'
 import './../globals.css'
 import NavbarMobile from '@/components/NavbarMobile/NavbarMobile'
+import SidebarProvider from '@/contexts/SidebarProvider'
 
 export const metadata = {
   title: 'Next Assessoria',
@@ -10,7 +11,7 @@ export const metadata = {
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <SidebarProvider>
       <NavbarMobile />
       <div className="h-screen flex">
         <Sidebar />
@@ -19,6 +20,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <Footer />
         </div>
       </div>
-    </>
+    </SidebarProvider>
   )
 }

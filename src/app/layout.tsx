@@ -1,8 +1,8 @@
 import LoadingComponent from '@/components/Loading/Loading'
-import LoadingProvider from '@/providers/LoadingProvider'
 import { Suspense } from 'react'
 import './globals.css'
 import Loading from './loading'
+import LoadingProvider from '@/contexts/LoadingProvider'
 
 export const metadata = {
   title: 'Next Assessoria',

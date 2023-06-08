@@ -1,6 +1,6 @@
 'use client'
 
-import { LoadingContext } from '@/providers/LoadingProvider'
+import { LoadingContext } from '@/contexts/LoadingProvider'
 import { useContext } from 'react'
 
 export default function Loading() {
