@@ -44,9 +44,14 @@ export default async function Products() {
 
   return (
     <>
-      <h1 className="w-full text-4xl text-gray-500 font-light mb-7">Produtos</h1>
+      <div className="flex justify-between mb-7">
+        <h1 className="w-full text-4xl text-gray-500 font-light">
+          Produtos
+        </h1>
+        <OptionsBar storeLink="/dashboard/produtos/editar" exportLink="products/export" />
+      </div>
       <div className="flex justify-between">
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-col xl:flex-row gap-3">
           <SearchBar />
           <select name="category" id="category" className="border border-gray-300 rounded-lg py-2">
             <option>Categoria</option>
@@ -62,7 +67,7 @@ export default async function Products() {
           </select>
         </div>
 
-        <OptionsBar storeLink="/dashboard/produtos/editar" exportLink="products/export" />
+        <OptionsBar storeLink="/dashboard/produtos/editar" exportLink="products/export" hidden />
       </div>
       <div>
         <DataTable columns={columns} data={products} className="mt-7 bg-none" pagination responsive />

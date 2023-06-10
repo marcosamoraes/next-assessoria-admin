@@ -6,11 +6,12 @@ import PrimaryButton from '../PrimaryButton/PrimaryButton'
 type OptionsBarProps = {
   storeLink?: string
   exportLink?: string
+  hidden?: boolean
 }
 
-export default function OptionsBar({ storeLink, exportLink }: OptionsBarProps) {
+export default function OptionsBar({ storeLink, exportLink, hidden = false }: OptionsBarProps) {
   return (
-    <div className="flex gap-3">
+    <div className={`flex gap-1 lg:gap-3 ${hidden ? 'hidden' : ''}`}>
       {storeLink ? (
         <Link href={storeLink} as={storeLink}>
           <PrimaryButton icon={FaPlus} text="Cadastrar" />

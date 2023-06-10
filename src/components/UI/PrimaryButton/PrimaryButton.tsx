@@ -12,8 +12,8 @@ export default function PrimaryButton({ icon: Icon, text }: PrimaryButtonProps) 
       text-lg text-primary relative overflow-hidden inline-flex items-center 
       justify-evenly duration-300 hover:bg-primary hover:text-white transition-all`}
     >
-      {Icon ? <Icon className={text ? 'md:mr-2' : ''} /> : ''}
-      <span className="hidden md:block">{text ?? ''}</span>
+      {Icon ? <Icon className={text ? 'lg:mr-2' : ''} /> : ''}
+      <span className={`${Icon ? 'hidden' : '' } lg:block`}>{text ?? ''}</span>
     </button>
   )
 }

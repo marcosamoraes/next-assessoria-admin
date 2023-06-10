@@ -8,7 +8,7 @@ export default function SearchBar({ inputName = 'search' }: SearchBarProps) {
       <input
         type="search"
         name={inputName}
-        className="peer cursor-pointer relative z-10 h-10 w-12 rounded-xl border bg-transparent pl-12 outline-none focus:w-full focus:cursor-text focus:border-gray-300 focus:pl-16 focus:pr-4"
+        className="peer cursor-pointer relative z-10 h-10 w-12 rounded-xl border bg-transparent pl-12 outline-none focus:w-[180px] md:focus:w-[200px] xl:focus:w-full focus:cursor-text focus:border-gray-300 focus:pl-16 focus:pr-4"
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
