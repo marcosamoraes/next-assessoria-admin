@@ -13,7 +13,7 @@ export default function OrderProducts({ order }: { order: IOrder | null }) {
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Produtos</h3>
-      <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
+      <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
 
         <div className="relative overflow-x-auto w-full">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

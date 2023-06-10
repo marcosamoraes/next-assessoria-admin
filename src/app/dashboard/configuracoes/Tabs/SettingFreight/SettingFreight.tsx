@@ -14,8 +14,8 @@ export default function SettingFreight({ states, categories, freight, selectedCa
 
   return (
     <>
-      <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
-        <ul className="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex w-full">
+      <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
+        <ul className="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow flex flex-wrap lg:flex-nowrap w-full">
           {categories.map((category) => (
             <li key={category.id} className="w-full">
               <a
@@ -30,45 +30,37 @@ export default function SettingFreight({ states, categories, freight, selectedCa
         </ul>
 
         {states.map((state) => (
-          <div key={state.id} className="flex flex-col w-full md:w-6/12 gap-2 items-center md:px-2 md:-mx-2">
+          <div key={state.id} className="flex flex-col w-full lg:6/12 xl:w-4/12 gap-2 items-center md:px-2 md:-mx-2">
             <div className="w-full pl-2">
               <label htmlFor={`value[${state}][1]`} className="text-gray-500 text-sm">
                 {state.name} - {state.uf}
               </label>
             </div>
-            <div className="w-full flex flex-row">
-              <div className="md:px-2 w-full md:w-3/12">
-                <input
-                  type="text"
-                  placeholder="1 Item"
-                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                  defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].oneItem : 0}
-                />
-              </div>
-              <div className="md:px-2 w-full md:w-3/12">
-                <input
-                  type="text"
-                  placeholder="2 Itens"
-                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                  defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].twoItems : 0}
-                />
-              </div>
-              <div className="md:px-2 w-full md:w-3/12">
-                <input
-                  type="text"
-                  placeholder="3 Itens"
-                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                  defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].threeItems : 0}
-                />
-              </div>
-              <div className="md:px-2 w-full md:w-3/12">
-                <input
-                  type="text"
-                  placeholder="4 Itens"
-                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                  defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].fourItems : 0}
-                />
-              </div>
+            <div className="w-full flex flex-row gap-2 flex-wrap">
+              <input
+                type="text"
+                placeholder="1 Item"
+                className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
+                defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].oneItem : 0}
+              />
+              <input
+                type="text"
+                placeholder="2 Itens"
+                className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
+                defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].twoItems : 0}
+              />
+              <input
+                type="text"
+                placeholder="3 Itens"
+                className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
+                defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].threeItems : 0}
+              />
+              <input
+                type="text"
+                placeholder="4 Itens"
+                className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
+                defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].fourItems : 0}
+              />
             </div>
           </div>
         ))}

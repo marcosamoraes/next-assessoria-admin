@@ -45,11 +45,16 @@ export default function Clients() {
 
   return (
     <>
-      <h1 className="w-full text-4xl text-gray-500 font-light mb-7">Clientes</h1>
+      <div className="flex justify-between mb-7">
+        <h1 className="w-full text-4xl text-gray-500 font-light">
+          Clientes
+        </h1>
+        <OptionsBar storeLink="/dashboard/clientes/editar" exportLink="clients/export" />
+      </div>
       <div className="flex justify-between">
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-col lg:flex-row gap-3 w-full">
           <SearchBar />
-          <select name="status" id="status" className="border border-gray-300 rounded-lg py-2">
+          <select name="status" id="status" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
             <option>Status</option>
             <option value="approved">Aprovado</option>
             <option value="waitingEvaluation">Aguardando Avaliação</option>
@@ -57,7 +62,6 @@ export default function Clients() {
           </select>
         </div>
 
-        <OptionsBar storeLink="/dashboard/clientes/editar" exportLink="clients/export" />
       </div>
       <div>
         <DataTable columns={columns} data={clients} className="mt-7 bg-none" pagination responsive />

@@ -45,11 +45,16 @@ export default function Admins() {
 
   return (
     <>
-      <h1 className="w-full text-4xl text-gray-500 font-light mb-7">Administradores</h1>
+      <div className="flex justify-between mb-7">
+        <h1 className="w-full text-2xl md:text-4xl text-gray-500 font-light">
+          Administradores
+        </h1>
+        <OptionsBar storeLink="/dashboard/admins/editar" exportLink="admins/export" />
+      </div>
       <div className="flex justify-between">
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-col lg:flex-row gap-3 w-full">
           <SearchBar />
-          <select name="role" id="role" className="border border-gray-300 rounded-lg py-2">
+          <select name="role" id="role" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
             <option>Função</option>
             <option value="1">Administrador</option>
             <option value="2">Operacional</option>
@@ -57,7 +62,6 @@ export default function Admins() {
           </select>
         </div>
 
-        <OptionsBar storeLink="/dashboard/admins/editar" exportLink="admins/export" />
       </div>
       <div>
         <DataTable columns={columns} data={admins} className="mt-7 bg-none" pagination responsive />

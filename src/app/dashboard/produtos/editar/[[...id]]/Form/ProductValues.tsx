@@ -49,9 +49,9 @@ export default function ProductValues({ product, states }: ProductValuesProps) {
                 {state.name}
               </label>
             </div>
-            <div className="w-full flex flex-row">
+            <div className="w-full flex flex-row flex-wrap gap-2">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((parcel) => (
-                <div key={parcel} className="md:px-2 w-full md:w-1/12">
+                <div key={parcel} className="w-[70px]">
                   <input
                     type="text"
                     name={`value[${state}][${parcel}]`}

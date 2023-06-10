@@ -19,7 +19,7 @@ export default function ProductImage({ product }: { product: IProduct | null }) 
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Imagem principal</h3>
-      <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
+      <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
         <div className="flex flex-col w-full">
           <div className="border border-dashed border-gray-500 relative hover:border-gray-700 text-gray-500 hover:text-gray-700">
             <input

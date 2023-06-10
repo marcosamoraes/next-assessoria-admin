@@ -51,23 +51,21 @@ export default async function Products() {
         <OptionsBar storeLink="/dashboard/produtos/editar" exportLink="products/export" />
       </div>
       <div className="flex justify-between">
-        <div className="flex flex-col xl:flex-row gap-3">
+        <div className="flex flex-col lg:flex-row gap-3 w-full">
           <SearchBar />
-          <select name="category" id="category" className="border border-gray-300 rounded-lg py-2">
+          <select name="category" id="category" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
             <option>Categoria</option>
             <option value="1">Categoria 1</option>
             <option value="2">Categoria 2</option>
             <option value="3">Categoria 3</option>
           </select>
-          <select name="clientType" id="clientType" className="border border-gray-300 rounded-lg py-2">
+          <select name="clientType" id="clientType" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
             <option>Tipo de cliente</option>
             <option value="1">Física</option>
             <option value="2">Jurídica</option>
             <option value="3">Categoria 3</option>
           </select>
         </div>
-
-        <OptionsBar storeLink="/dashboard/produtos/editar" exportLink="products/export" hidden />
       </div>
       <div>
         <DataTable columns={columns} data={products} className="mt-7 bg-none" pagination responsive />

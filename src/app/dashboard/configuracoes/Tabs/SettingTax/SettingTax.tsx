@@ -11,13 +11,13 @@ export default function SettingTax({ taxes, states }: SettingTaxProps) {
       <div>
         <div className="bg-white px-5 py-7 rounded-xl flex flex-wrap">
           {states.map((state) => (
-            <div key={state.id} className="flex flex-col w-full md:w-3/12 gap-2 items-center">
+            <div key={state.id} className="flex flex-col w-full lg:w-6/12 xl:w-3/12 gap-2 items-center">
               <div className="w-full pl-2">
                 <label htmlFor={`value[${state}][1]`} className="text-gray-500 text-sm">
                   {state.name} - {state.uf}
                 </label>
               </div>
-              <div className="w-full flex flex-row">
+              <div className="w-full flex flex-row gap-2">
                 <div className="md:px-2 w-full md:w-6/12">
                   <input
                     type="text"

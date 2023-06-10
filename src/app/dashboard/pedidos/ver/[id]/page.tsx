@@ -27,7 +27,7 @@ export default async function OrdersShow({ params }: any) {
     <>
       <form className="flex flex-wrap flex-row">
         <div className="w-full px-2 -md-2 flex justify-between">
-          <h1 className="text-4xl text-gray-500 font-light mb-10">Pedido {order?.id ?? ''}</h1>
+          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">Pedido {order?.id ?? ''}</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/pedidos">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
@@ -40,12 +40,12 @@ export default async function OrdersShow({ params }: any) {
           <OrderStatus order={order} />
         </div>
 
-        <div className="w-full md:w-7/12 px-2 -md-2">
+        <div className="w-full xl:w-7/12 px-2 -md-2">
           <OrderInfos order={order} />
           <OrderHistory order={order} />
         </div>
 
-        <div className="w-full md:w-5/12 px-2 -md-2">
+        <div className="w-full xl:w-5/12 px-2 -md-2">
           <OrderProducts order={order} />
           <OrderPaymentInfos order={order} />
         </div>

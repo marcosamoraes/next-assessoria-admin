@@ -26,7 +26,7 @@ export default async function ClientsCreate({ params }: any) {
     <>
       <form className="flex flex-wrap flex-row">
         <div className="w-full px-2 -md-2 flex justify-between">
-          <h1 className="text-4xl text-gray-500 font-light mb-10">{user ? 'Editar' : 'Novo'} Cliente</h1>
+          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{user ? 'Editar' : 'Novo'} Cliente</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/clientes">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
@@ -35,12 +35,12 @@ export default async function ClientsCreate({ params }: any) {
           </div>
         </div>
 
-        <div className="w-full md:w-9/12 px-2 -md-2">
+        <div className="w-full xl:w-9/12 px-2 -md-2">
           <ClientInfos user={user} />
           <ClientAddress user={user} />
         </div>
 
-        <div className="w-full md:w-3/12 px-2 -md-2">
+        <div className="w-full xl:w-3/12 px-2 -md-2">
           <ClientDocumentRg user={user} />
           <ClientDocumentCr user={user} />
         </div>

@@ -25,11 +25,16 @@ export default function Orders() {
 
   return (
     <>
-      <h1 className="w-full text-4xl text-gray-500 font-light mb-7">Pedidos</h1>
+      <div className="flex justify-between mb-7">
+        <h1 className="w-full text-4xl text-gray-500 font-light">
+        Pedidos
+        </h1>
+        <OptionsBar exportLink="orders/export" />
+      </div>
       <div className="flex justify-between">
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-col lg:flex-row gap-3 w-full">
           <SearchBar />
-          <select name="status" id="status" className="border border-gray-300 rounded-lg py-2">
+          <select name="status" id="status" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
             <option>Status</option>
             {orderStatus.map((status: any) => (
               <option key={status} value={status}>
@@ -38,8 +43,6 @@ export default function Orders() {
             ))}
           </select>
         </div>
-
-        <OptionsBar exportLink="orders/export" />
       </div>
       <div>
         <DataTable columns={columns} data={orders} className="mt-7 bg-none" pagination responsive />

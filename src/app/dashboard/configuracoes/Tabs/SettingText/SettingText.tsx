@@ -8,13 +8,15 @@ export default async function SettingText({ children }: { children: any }) {
       <div className="flex justify-between">
         <div className="flex flex-row gap-3">
           <SearchBar />
-          <select name="type" id="type" className="border border-gray-300 rounded-lg py-2">
+          <select name="type" id="type" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
             <option>Tipo</option>
             <option value="email">E-mail</option>
             <option value="site">Site</option>
           </select>
         </div>
-        <OptionsBar exportLink="#" />
+        <div className="hidden">
+          <OptionsBar exportLink="#" />
+        </div>
       </div>
       <div>
         {children}

@@ -44,10 +44,14 @@ export default async function Categories() {
 
   return (
     <>
-      <h1 className="w-full text-4xl text-gray-500 font-light mb-7">Categorias</h1>
+      <div className="flex justify-between mb-7">
+        <h1 className="w-full text-4xl text-gray-500 font-light">
+          Categorias
+        </h1>
+        <OptionsBar storeLink="/dashboard/categorias/editar" />
+      </div>
       <div className="flex justify-between">
         <SearchBar />
-        <OptionsBar storeLink="/dashboard/categorias/editar" />
       </div>
       <div>
         <DataTable columns={columns} data={categories} className="mt-7 bg-none" pagination responsive />

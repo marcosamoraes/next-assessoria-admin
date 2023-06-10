@@ -4,11 +4,11 @@ type SearchBarProps = {
 
 export default function SearchBar({ inputName = 'search' }: SearchBarProps) {
   return (
-    <form className="relative w-max flex items-center">
+    <form className="relative w-full lg:w-fit flex items-center">
       <input
         type="search"
         name={inputName}
-        className="peer cursor-pointer relative z-10 h-10 w-12 rounded-xl border bg-transparent pl-12 outline-none focus:w-[180px] md:focus:w-[200px] xl:focus:w-full focus:cursor-text focus:border-gray-300 focus:pl-16 focus:pr-4"
+        className="peer cursor-pointer relative z-10 h-10 rounded-xl border bg-transparent md:pl-12 outline-none w-full lg:w-12 md:w-[180px] md:focus:w-[200px] focus:cursor-text md:focus:border-gray-300 md:focus:pl-16 md:focus:pr-4"
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"

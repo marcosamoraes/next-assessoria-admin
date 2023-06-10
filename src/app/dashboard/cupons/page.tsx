@@ -44,17 +44,21 @@ export default async function Coupons() {
 
   return (
     <>
-      <h1 className="w-full text-4xl text-gray-500 font-light mb-7">Cupons de desconto</h1>
+      <div className="flex justify-between mb-7">
+        <h1 className="w-full text-4xl text-gray-500 font-light">
+          Cupons de desconto
+        </h1>
+        <OptionsBar storeLink="/dashboard/cupons/editar" />
+      </div>
       <div className="flex justify-between">
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-col lg:flex-row gap-3 w-full">
           <SearchBar />
-          <select name="type" id="type" className="border border-gray-300 rounded-lg py-2">
+          <select name="type" id="type" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
             <option>Tipo</option>
             <option value="percentage">Porcentagem</option>
             <option value="amount">Valor Fixo</option>
           </select>
         </div>
-        <OptionsBar storeLink="/dashboard/cupons/editar" />
       </div>
       <div>
         <DataTable columns={columns} data={coupons} className="mt-7 bg-none" pagination responsive />

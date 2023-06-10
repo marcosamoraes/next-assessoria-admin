@@ -4,7 +4,7 @@ export default function ProductInfos({ product }: { product: IProduct | null }) 
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Informações</h3>
-      <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
+      <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
         <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
           <label htmlFor="name" className="text-gray-500 text-sm mb-2">
             Título

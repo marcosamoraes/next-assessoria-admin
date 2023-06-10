@@ -30,7 +30,7 @@ export default async function CouponsCreate({ params }: any) {
     <>
       <form className="flex flex-wrap flex-row">
         <div className="w-full px-2 -md-2 flex justify-between">
-          <h1 className="text-4xl text-gray-500 font-light mb-10">{coupon ? 'Editar' : 'Novo'} Texto</h1>
+          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{coupon ? 'Editar' : 'Novo'} Texto</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/configuracoes">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
@@ -41,7 +41,7 @@ export default async function CouponsCreate({ params }: any) {
 
         <div className="w-full px-2">
           <div className="mb-4">
-            <div className="bg-white px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
+            <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
               <div className="flex flex-col w-full md:w-6/12 md:px-2 md:-mx-2">
                 <label htmlFor="name" className="text-gray-500 text-sm mb-2">
                   Nome
@@ -59,7 +59,7 @@ export default async function CouponsCreate({ params }: any) {
                   Conteúdo
                 </label>
                 <Editor
-                  wrapperClassName="h-40 mb-20"
+                  wrapperClassName="h-40 mb-48 md:mb-24"
                   editorClassName="border border-gray-300 rounded-lg px-3 py-2 mb-5"
                   placeholder="Escreva o conteúdo do texto aqui..."
                   toolbar={{
