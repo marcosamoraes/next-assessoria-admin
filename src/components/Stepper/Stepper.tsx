@@ -12,7 +12,7 @@ export default function Stepper ({ selectedStep = OrderStatusEnum.CREATED }: { s
     })
 
   return (
-    <ol className="flex flex-col xl:flex-row items-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4">
+    <ol className="flex flex-col xl:flex-row items-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm sm:text-base sm:p-4 sm:space-x-4">
       {steps.map((step, index) => (
         <li key={index} className={`flex mb-3 xl:mb-0 items-center ${step.done ? 'text-primary' : ''}`}>
           <span className={`items-center hidden xl:flex justify-center w-5 h-5 mr-2 text-xs border ${step.done ? 'border-primary' : 'border-gray-500'} rounded-full shrink-0`}>

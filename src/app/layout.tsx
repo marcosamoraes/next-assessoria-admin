@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import './globals.css'
 import Loading from './loading'
 import LoadingProvider from '@/contexts/LoadingProvider'
+import { AuthProvider } from '@/contexts/AuthProvider'
 
 export const metadata = {
   title: 'Next Assessoria',
@@ -14,10 +15,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR">
       <body className="bg-zinc-100">
         <Suspense fallback={<Loading />}>
-          <LoadingProvider>
-            <LoadingComponent />
-            {children}
-          </LoadingProvider>
+          <AuthProvider>
+            <LoadingProvider>
+              <LoadingComponent />
+              {children}
+            </LoadingProvider>
+          </AuthProvider>
         </Suspense>
       </body>
     </html>

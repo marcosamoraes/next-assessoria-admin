@@ -16,8 +16,8 @@ export default function OrderProducts({ order }: { order: IOrder | null }) {
       <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
 
         <div className="relative overflow-x-auto w-full">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-100">
               <tr>
                 <th scope="col" className="px-6 py-3 rounded-l-lg">
                     Produto
@@ -32,8 +32,8 @@ export default function OrderProducts({ order }: { order: IOrder | null }) {
             </thead>
             <tbody>
               {order?.orderProducts?.map((orderProduct) => (
-                <tr key={orderProduct.id} className="bg-white dark:bg-gray-800">
-                  <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <tr key={orderProduct.id} className="bg-white">
+                  <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                     {orderProduct.product?.title}
                   </th>
                   <td className="px-6 py-4 text-center">
