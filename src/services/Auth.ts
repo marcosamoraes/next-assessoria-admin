@@ -10,3 +10,7 @@ export const login = (email: string, password: string): Promise<Response> => axi
   email,
   password,
 })
+
+export const forgotPassword = (email: string): Promise<Response> => axios.post('forgot-password', {
+  email,
+})
