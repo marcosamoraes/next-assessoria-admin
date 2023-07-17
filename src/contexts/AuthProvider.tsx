@@ -1,9 +1,10 @@
 'use client'
 
-import React, { createContext, useCallback, useEffect, useState } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { IUser } from '@/interfaces/IUser'
 import useStickyState from '@/hooks/useStickyState'
+import * as $Sanctum from '@/services/Sanctum'
 import * as $Auth from '@/services/Auth'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
@@ -34,6 +35,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
   const MySwal = withReactContent(Swal)
+
+  useEffect(() => {
+    $Sanctum.csrf()
+  }, [])
 
   useEffect(() => {
     if (token?.length) {
@@ -73,6 +78,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = useCallback(() => {
     setUser(null)
     setToken(null)
+    localStorage.removeItem('token')
     setIsAuthenticated(false)
     router.push('/')
   }, [router, setToken])
@@ -95,5 +101,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     </AuthContext.Provider>
   )
 }
+
+export const useAuth = () => useContext(AuthContext)
 
 export default AuthContext

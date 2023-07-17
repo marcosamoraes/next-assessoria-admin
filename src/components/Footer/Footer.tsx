@@ -1,3 +1,5 @@
+'use client'
+
 import { AiFillHeart } from 'react-icons/ai'
 
 export default function Footer() {

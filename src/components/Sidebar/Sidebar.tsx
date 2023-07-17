@@ -1,5 +1,6 @@
 'use client'
 
+import AuthContext from '@/contexts/AuthProvider'
 import { SidebarContext } from '@/contexts/SidebarProvider'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -64,14 +65,10 @@ export default function Sidebar() {
       name: 'Configurações',
       icon: <FiSettings size={24} />,
       href: '/dashboard/configuracoes'
-    },
-    {
-      id: 'sair',
-      name: 'Sair',
-      icon: <FaSignOutAlt size={24} />,
-      href: '/'
     }
   ]
+
+  const { logout } = useContext(AuthContext)
 
   return (
     <aside className={`h-full z-20 w-full md:w-4/12 xl:w-2/12 ${isOpen ? 'left-0' : '-left-full'} transition-all duration-700 ease-in-out md:left-0 absolute md:relative border-r-2 py-10 px-5 bg-zinc-800 text-white rounded-r-3xl flex flex-col flex-wrap items-start shadow-lg`}>
@@ -90,6 +87,10 @@ export default function Sidebar() {
             {page.name}
           </Link>
         ))}
+        <div className="w-full py-3 px-5 rounded-xl flex gap-3 items-center hover:bg-white/20 hover:shadow-md cursor-pointer" onClick={logout}>
+          <FaSignOutAlt size={24} />
+          Sair
+        </div>
       </nav>
     </aside>
   )

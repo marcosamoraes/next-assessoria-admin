@@ -1,5 +1,6 @@
 'use client'
 import AuthSidebar from '@/components/AuthSidebar/AuthSidebar'
+import GuestRoute from '@/components/GuestRoute/GuestRoute'
 import AuthContext from '@/contexts/AuthProvider'
 import Link from 'next/link'
 import { FormEvent, useContext, useState } from 'react'
@@ -16,30 +17,32 @@ export default function Login() {
   }
 
   return (
-    <div className="h-screen flex bg-cover bg-no-repeat bg-[url('/auth-background.jpg')]">
-      <AuthSidebar>
-        <div>
-          <h1 className="mb-5 font-bold text-center text-lg">Acesso Administrativo</h1>
-          <form onSubmit={(e) => onSubmit(e)}>
-            <div className="mb-5">
-              <input type="text" name="email" placeholder="E-mail" className="py-2 px-5 rounded-lg w-full text-black" onChange={(e) => setEmail(e.target.value)} />
-            </div>
-            <div className="mb-5">
-              <input type="text" name="password" placeholder="Senha" className="py-2 px-5 rounded-lg w-full text-black" onChange={e => setPassword(e.target.value)} />
-            </div>
-            <div className="mb-3">
-              <Link href="/esqueci-minha-senha">
+    <GuestRoute>
+      <div className="h-screen flex bg-cover bg-no-repeat bg-[url('/auth-background.jpg')]">
+        <AuthSidebar>
+          <div>
+            <h1 className="mb-5 font-bold text-center text-lg">Acesso Administrativo</h1>
+            <form onSubmit={(e) => onSubmit(e)}>
+              <div className="mb-5">
+                <input type="text" name="email" placeholder="E-mail" className="py-2 px-5 rounded-lg w-full text-black" onChange={(e) => setEmail(e.target.value)} />
+              </div>
+              <div className="mb-5">
+                <input type="password" name="password" placeholder="Senha" className="py-2 px-5 rounded-lg w-full text-black" onChange={e => setPassword(e.target.value)} />
+              </div>
+              <div className="mb-3">
+                <Link href="/esqueci-minha-senha">
                 Esqueceu sua senha? <span className="text-primary">Clique aqui</span>
-              </Link>
-            </div>
-            <div>
-              <button type="submit" className="bg-primary px-5 py-2 rounded-lg">
+                </Link>
+              </div>
+              <div>
+                <button type="submit" className="bg-primary px-5 py-2 rounded-lg">
                 Entrar
-              </button>
-            </div>
-          </form>
-        </div>
-      </AuthSidebar>
-    </div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </AuthSidebar>
+      </div>
+    </GuestRoute>
   )
 }
