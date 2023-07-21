@@ -1,21 +1,42 @@
 'use client'
-import { getProducts } from '@/api/ProductsApi'
 import OptionsBar from '@/components/UI/OptionsBar/OptionsBar'
 import SearchBar from '@/components/UI/SearchBar/SearchBar'
 import useProductColumns from '@/hooks/data-table/useProductColumns'
 import { IProduct } from '@/interfaces/IProduct'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import * as $Product from '@/services/Product'
+import * as $Category from '@/services/Category'
+import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+import { ICategory } from '@/interfaces/ICategory'
+import { updateSearchParams } from '@/helpers/useQuery'
 
 export default async function Products() {
-  const [products, setProducts] = useState<IProduct[] | any>([])
+  const [products, setProducts] = useState<IProduct[]>({} as IProduct[])
+  const [categories, setCategories] = useState<ICategory[]>({} as ICategory[])
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()!
+
+  const handleQueryChange = useCallback((e: any) => {
+    updateSearchParams(e, router, pathname, searchParams)
+  }, [router, pathname, searchParams])
 
   useEffect(() => {
-    const data = getProducts()
-    setProducts(data)
+    $Category.all().then((res: any) => {
+      const data: ICategory[] = res.data.data
+      setCategories(data)
+    })
   }, [])
+
+  useEffect(() => {
+    $Product.all(searchParams.toString()).then((res: any) => {
+      const data: IProduct[] = res.data
+      setProducts(data)
+    })
+  }, [searchParams])
 
   const MySwal = withReactContent(Swal)
 
@@ -53,22 +74,35 @@ export default async function Products() {
       <div className="flex justify-between">
         <div className="flex flex-col lg:flex-row gap-3 w-full">
           <SearchBar />
-          <select name="category" id="category" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
-            <option>Categoria</option>
-            <option value="1">Categoria 1</option>
-            <option value="2">Categoria 2</option>
-            <option value="3">Categoria 3</option>
+          <select
+            name="category"
+            id="category"
+            className="border border-gray-300 rounded-lg py-2 max-w-[180px]"
+            onChange={handleQueryChange}
+          >
+            <option value={0}>Categoria</option>
+            {categories.length > 0 && categories.map((category: ICategory) => (
+              <option key={category.id} value={category.id}>{category.name}</option>
+            ))}
           </select>
-          <select name="clientType" id="clientType" className="border border-gray-300 rounded-lg py-2 max-w-[180px]">
-            <option>Tipo de cliente</option>
-            <option value="1">Física</option>
-            <option value="2">Jurídica</option>
-            <option value="3">Categoria 3</option>
+          <select
+            name="client_type"
+            id="client_type"
+            className="border border-gray-300 rounded-lg py-2 max-w-[180px]"
+            onChange={handleQueryChange}
+          >
+            <option value={0}>Tipo de cliente</option>
+            <option value="physical">Física</option>
+            <option value="juridical">Jurídica</option>
           </select>
         </div>
       </div>
       <div>
-        <DataTable columns={columns} data={products} className="mt-7 bg-none" pagination responsive />
+        {products?.length > 0 ? (
+          <DataTable columns={columns} data={products} className="mt-7 bg-none" pagination responsive />
+        ) : (
+          <div className="w-full bg-yellow-200 border-2 border-yellow-300 p-5 mt-5">Não há produtos cadastrados</div>
+        )}
       </div>
     </>
   )

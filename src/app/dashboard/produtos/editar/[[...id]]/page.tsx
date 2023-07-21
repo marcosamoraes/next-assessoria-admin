@@ -1,6 +1,5 @@
 'use client'
 
-import { getProduct } from '@/api/ProductsApi'
 import PrimaryButton from '@/components/UI/PrimaryButton/PrimaryButton'
 import { IProduct } from '@/interfaces/IProduct'
 import Link from 'next/link'
@@ -22,8 +21,8 @@ export default async function ProductsCreate({ params }: any) {
   const { id } = params
 
   useEffect(() => {
-    const productData = getProduct(id)
-    setProduct(productData)
+    // const productData = getProduct(id)
+    // setProduct(productData)
     const statesData = getStates()
     setStates(statesData)
   }, [id])
