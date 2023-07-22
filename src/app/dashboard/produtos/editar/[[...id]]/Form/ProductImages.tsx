@@ -4,7 +4,11 @@
 import { IProduct } from '@/interfaces/IProduct'
 import { ChangeEvent, useRef, useState } from 'react'
 
-export default function ProductImages({ product }: { product: IProduct | null }) {
+type ProductImagesProps = {
+  product: IProduct
+  onChange: (e: any) => void
+}
+export default function ProductImages({ product, onChange }: ProductImagesProps) {
   const [tempFiles, setTempFiles] = useState<string[] | null>(null)
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -19,6 +23,7 @@ export default function ProductImages({ product }: { product: IProduct | null })
       const previewUrl = URL.createObjectURL(files[i])
       setTempFiles((prev) => (prev ? [...prev, previewUrl] : [previewUrl]))
     }
+    onChange(event)
   }
 
   return (

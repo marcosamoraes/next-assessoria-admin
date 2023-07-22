@@ -15,6 +15,7 @@ import { IState } from '@/interfaces/IState'
 import * as $State from '@/services/State'
 import * as $Product from '@/services/Product'
 import ClientTypeEnum from '@/enums/ClientTypeEnum'
+import { IProductValue } from '@/interfaces/IProductValue'
 
 export default function ProductsCreate({ params }: any) {
   const [product, setProduct] = useState<IProduct>({
@@ -58,6 +59,33 @@ export default function ProductsCreate({ params }: any) {
     setProduct({ ...product, [name]: value })
   }
 
+  const handleValuesChange = (name: string, value: any, state: number) => {
+
+    let values = {
+      value_transfer: 0,
+      value_card: 0,
+      value_card_installment: 0
+    }
+
+    if (product.prices && product.prices[state]) {
+      values = {
+        ...product.prices[state],
+        [name]: value
+      }
+    }
+
+    setProduct({
+      ...product,
+      prices: {
+        ...product.prices,
+        [state]: {
+          ...values,
+          [name]: value
+        }
+      }
+    } as IProduct)
+  }
+
   return (
     <>
       <form className="flex flex-wrap flex-row" onSubmit={handleSubmit}>
@@ -73,16 +101,16 @@ export default function ProductsCreate({ params }: any) {
 
         <div className="w-full md:w-8/12 px-2 -md-2">
           <ProductInfos product={product} onChange={handleInputChange} />
-          <ProductDescription product={product} />
+          <ProductDescription product={product} onChange={handleInputChange} />
         </div>
 
         <div className="w-full md:w-4/12 px-2 -md-2">
-          <ProductImage product={product} />
-          <ProductImages product={product} />
+          <ProductImage product={product} onChange={handleInputChange} />
+          <ProductImages product={product} onChange={handleInputChange} />
         </div>
 
         <div className="w-full px-2 -md-2">
-          <ProductValues product={product} states={states} />
+          <ProductValues product={product} states={states} onChange={handleValuesChange} />
         </div>
       </form>
     </>

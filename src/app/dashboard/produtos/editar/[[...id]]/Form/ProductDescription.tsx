@@ -1,6 +1,10 @@
 import { IProduct } from '@/interfaces/IProduct'
 
-export default function ProductDescription({ product }: { product: IProduct | null }) {
+type ProductDescriptionProps = {
+  product: IProduct
+  onChange: (e: any) => void
+}
+export default function ProductDescription({ product, onChange }: ProductDescriptionProps) {
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Descrição</h3>
@@ -11,6 +15,8 @@ export default function ProductDescription({ product }: { product: IProduct | nu
             id="description"
             placeholder="Descrição"
             className="border border-gray-300 rounded-lg h-48"
+            defaultValue={product.description}
+            onChange={onChange}
           ></textarea>
         </div>
       </div>

@@ -4,7 +4,11 @@
 import { IProduct } from '@/interfaces/IProduct'
 import { ChangeEvent, useState } from 'react'
 
-export default function ProductImage({ product }: { product: IProduct | null }) {
+type ProductImageProps = {
+  product: IProduct
+  onChange: (e: any) => void
+}
+export default function ProductImage({ product, onChange }: ProductImageProps) {
   const [tempFile, setTempFile] = useState<string | null>(null)
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -14,6 +18,8 @@ export default function ProductImage({ product }: { product: IProduct | null }) 
 
     const previewUrl = URL.createObjectURL(files[0])
     setTempFile(previewUrl)
+
+    onChange(event)
   }
 
   return (

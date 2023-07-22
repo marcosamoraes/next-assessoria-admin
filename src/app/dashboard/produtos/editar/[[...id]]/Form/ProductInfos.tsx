@@ -31,7 +31,13 @@ export default function ProductInfos({ product, onChange }: ProductInfosProps) {
             <option value="3">Categoria 3</option>
           </select>
         </div>
-        <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
+          <label htmlFor="code" className="text-gray-500 text-sm mb-2">
+            Estoque
+          </label>
+          <input type="number" defaultValue={product.stock} name="stock" id="stock" placeholder="Estoque" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required/>
+        </div>
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
           <label htmlFor="clientType" className="text-gray-500 text-sm mb-2">
             Tipo de cliente
           </label>
@@ -40,7 +46,7 @@ export default function ProductInfos({ product, onChange }: ProductInfosProps) {
             <option value="0">Jurídica</option>
           </select>
         </div>
-        <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
           <label htmlFor="preSale" className="text-gray-500 text-sm mb-2">
             Pré Venda
           </label>
@@ -49,7 +55,7 @@ export default function ProductInfos({ product, onChange }: ProductInfosProps) {
             <option value="0">Não</option>
           </select>
         </div>
-        <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
+        <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
           <label htmlFor="featured" className="text-gray-500 text-sm mb-2">
             Destaque
           </label>
