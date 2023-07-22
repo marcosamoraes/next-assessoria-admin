@@ -21,7 +21,8 @@ export default async function Products() {
   const searchParams = useSearchParams()!
 
   const handleQueryChange = useCallback((e: any) => {
-    updateSearchParams(e, router, pathname, searchParams)
+    const { name, value } = e.target
+    updateSearchParams(name, value, router, pathname, searchParams)
   }, [router, pathname, searchParams])
 
   useEffect(() => {

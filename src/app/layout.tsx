@@ -14,14 +14,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body className="bg-zinc-100">
-        <Suspense fallback={<Loading />}>
-          <AuthProvider>
-            <LoadingProvider>
-              <LoadingComponent />
-              {children}
-            </LoadingProvider>
-          </AuthProvider>
-        </Suspense>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )
