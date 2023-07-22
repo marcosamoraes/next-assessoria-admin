@@ -42,7 +42,7 @@ export default function ProductValues({ product, states }: ProductValuesProps) {
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Valores</h3>
       <div className="bg-white px-5 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
-        {states.map((state) => (
+        {states?.length > 0 && states.map((state) => (
           <div key={state.id} className="flex flex-col w-full gap-2 items-center">
             <div className="w-full pl-2">
               <label htmlFor={`value[${state}][1]`} className="text-gray-500 text-sm">

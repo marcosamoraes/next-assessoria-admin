@@ -13,7 +13,7 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 import { ICategory } from '@/interfaces/ICategory'
 import { updateSearchParams } from '@/helpers/useQuery'
 
-export default async function Products() {
+export default function Products() {
   const [products, setProducts] = useState<IProduct[]>({} as IProduct[])
   const [categories, setCategories] = useState<ICategory[]>({} as ICategory[])
   const router = useRouter()

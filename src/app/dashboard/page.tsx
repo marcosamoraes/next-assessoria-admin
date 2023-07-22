@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import * as $Dashboard from '@/services/Dashboard'
 import { IDashboard } from '@/interfaces/IDashboard'
 
-export default async function Dashboard() {
+export default function Dashboard() {
   const [ dashboardData, setDashboardData ] = useState<IDashboard>({} as IDashboard)
   const [ filter, setFilter ] = useState<string>('today')
 
