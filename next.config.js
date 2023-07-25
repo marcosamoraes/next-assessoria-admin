@@ -10,7 +10,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'localhost'
+        hostname: ['localhost', 'nextassessoria.com.br', 'v2.api.nextassessoria.com.br']
       },
     ],
   },
