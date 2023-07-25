@@ -96,7 +96,7 @@ const useProductColumns = (onDelete: (id: number) => void, onStatusToggle: (id: 
         },
       },
     ],
-    [searchParams, onDelete],
+    [searchParams, onDelete, onStatusToggle],
   )
 }
 
