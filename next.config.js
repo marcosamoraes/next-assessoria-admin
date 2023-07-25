@@ -8,11 +8,7 @@ const nextConfig = {
     pagesBufferLength: 2,
   },
   images: {
-    remotePatterns: [
-      {
-        hostnames: ['localhost', 'nextassessoria.com.br', 'v2.api.nextassessoria.com.br']
-      },
-    ],
+    domains: ['localhost', 'nextassessoria.com.br', 'v2.api.nextassessoria.com.br']
   },
 }
 
