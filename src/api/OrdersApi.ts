@@ -265,7 +265,12 @@ export const getOrder = (id: number) => {
             slug: 'product-1',
             code: 'PP-0001',
             stock: 10,
-            category: 'Category 1',
+            category: {
+              id: 1,
+              name: 'Category 1',
+              quantity_installments: 1,
+              active: true,
+            },
             client_type: ClientTypeEnum.PHYSICAL_PERSON,
             pre_sale: false,
             featured: false,
