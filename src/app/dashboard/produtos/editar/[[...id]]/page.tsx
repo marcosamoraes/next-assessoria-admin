@@ -57,7 +57,7 @@ export default function ProductsCreate({ params }: any) {
     e.preventDefault()
 
     if (!product.prices || Object.keys(product.prices as {}).length < 27) {
-      MySwal.fire(
+      return MySwal.fire(
         'Erro',
         'Insira os valores do produto para todos os estados',
         'error'
@@ -66,14 +66,14 @@ export default function ProductsCreate({ params }: any) {
 
     if (id) {
       $Product.update(id, product).then((res: any) => {
-        const message = res.response.data?.message ?? 'Produto atualizado com sucesso'
+        const message = res.response?.data?.message ?? 'Produto atualizado com sucesso'
         MySwal.fire(
           'Sucesso',
           message,
           'success'
         )
       }).catch((err: any) => {
-        const message = err.response.data?.message ?? 'Ocorreu um erro ao atualizar o produto'
+        const message = err.response?.data?.message ?? 'Ocorreu um erro ao atualizar o produto'
         MySwal.fire(
           'Erro',
           message,
@@ -83,14 +83,14 @@ export default function ProductsCreate({ params }: any) {
     }
     else {
       $Product.store(product).then((res: any) => {
-        const message = res.response.data?.message ?? 'Produto criado com sucesso'
+        const message = res.response?.data?.message ?? 'Produto criado com sucesso'
         MySwal.fire(
           'Sucesso',
           message,
           'success'
         )
       }).catch((err: any) => {
-        const message = err.response.data?.message ?? 'Ocorreu um erro ao atualizar o produto'
+        const message = err.response?.data?.message ?? 'Ocorreu um erro ao atualizar o produto'
         MySwal.fire(
           'Erro',
           message,
