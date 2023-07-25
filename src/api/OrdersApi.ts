@@ -262,14 +262,17 @@ export const getOrder = (id: number) => {
           product: {
             id: 1,
             title: 'Product 1',
+            slug: 'product-1',
             code: 'PP-0001',
+            stock: 10,
             category: 'Category 1',
-            clientType: ClientTypeEnum.PHYSICAL_PERSON,
-            preSale: false,
+            client_type: ClientTypeEnum.PHYSICAL_PERSON,
+            pre_sale: false,
             featured: false,
             description: 'Product 1 description',
             price: 100,
             image: 'https://via.placeholder.com/550x350',
+            active: true,
           }
         }
       ]
