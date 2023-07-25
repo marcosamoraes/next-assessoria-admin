@@ -15,7 +15,8 @@ import { IState } from '@/interfaces/IState'
 import * as $State from '@/services/State'
 import * as $Product from '@/services/Product'
 import ClientTypeEnum from '@/enums/ClientTypeEnum'
-import { IProductValue } from '@/interfaces/IProductValue'
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
 
 export default function ProductsCreate({ params }: any) {
   const [product, setProduct] = useState<IProduct>({
@@ -29,9 +30,12 @@ export default function ProductsCreate({ params }: any) {
     image: '',
     description: '',
     active: true,
+    category_id: 1,
   } as IProduct)
 
   const [states, setStates] = useState<IState[]>({} as IState[])
+
+  const MySwal = withReactContent(Swal)
 
   const { id } = params
 
@@ -51,12 +55,66 @@ export default function ProductsCreate({ params }: any) {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    console.log(product)
+
+    // if (!product.prices || Object.keys(product.prices as {}).length < 27) {
+    //   MySwal.fire(
+    //     'Erro',
+    //     'Insira os valores do produto para todos os estados',
+    //     'error'
+    //   )
+    // }
+
+    if (id) {
+      $Product.update(id, product).then((res: any) => {
+        const message = res.response.data.message ?? 'Produto atualizado com sucesso'
+        MySwal.fire(
+          'Sucesso',
+          message,
+          'success'
+        )
+      }).catch((err: any) => {
+        const message = err.response.data.message ?? 'Ocorreu um erro ao atualizar o produto'
+        MySwal.fire(
+          'Erro',
+          message,
+          'error'
+        )
+      })
+    }
+    else {
+      $Product.store(product).then((res: any) => {
+        const message = res.response.data.message ?? 'Produto criado com sucesso'
+        MySwal.fire(
+          'Sucesso',
+          message,
+          'success'
+        )
+      }).catch((err: any) => {
+        const message = err.response.data.message ?? 'Ocorreu um erro ao atualizar o produto'
+        MySwal.fire(
+          'Erro',
+          message,
+          'error'
+        )
+      })
+    }
   }
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target
     setProduct({ ...product, [name]: value })
+  }
+
+  const handleImageChange = (url: string) => {
+    setProduct({ ...product, image: url })
+  }
+
+  const clearImages = () => {
+    setProduct(prev => ({ ...prev, images: [] } as IProduct))
+  }
+
+  const handleImagesChange = (url: string) => {
+    setProduct(prev => ({ ...prev, images: [...prev.images ?? [], {image: url}] } as IProduct))
   }
 
   const handleValuesChange = (name: string, value: any, state: number) => {
@@ -105,8 +163,8 @@ export default function ProductsCreate({ params }: any) {
         </div>
 
         <div className="w-full md:w-4/12 px-2 -md-2">
-          <ProductImage product={product} onChange={handleInputChange} />
-          <ProductImages product={product} onChange={handleInputChange} />
+          <ProductImage product={product} onChange={handleImageChange} />
+          <ProductImages product={product} onChange={handleImagesChange} clearImages={clearImages} />
         </div>
 
         <div className="w-full px-2 -md-2">

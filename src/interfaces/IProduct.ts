@@ -14,6 +14,7 @@ export interface IProduct {
   image: string
   description?: string
   active: boolean
+  category_id?: number
 
   category: ICategory
   images?: IProductImage[]

@@ -1,6 +1,6 @@
 enum ClientTypeEnum {
-  LEGAL_PERSON = 'pessoa jurídica',
-  PHYSICAL_PERSON = 'pessoa física',
+  LEGAL_PERSON = 'juridical',
+  PHYSICAL_PERSON = 'physical',
 }
 
 export default ClientTypeEnum

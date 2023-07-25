@@ -22,10 +22,10 @@ export default function ProductInfos({ product, onChange }: ProductInfosProps) {
           <input type="text" defaultValue={product.code} name="code" id="code" placeholder="Código" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" minLength={10} maxLength={10} onChange={onChange} required/>
         </div>
         <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
-          <label htmlFor="category" className="text-gray-500 text-sm mb-2">
+          <label htmlFor="category_id" className="text-gray-500 text-sm mb-2">
             Categoria
           </label>
-          <select name="category" id="category" defaultValue={product.category?.id} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
+          <select name="category_id" id="category_id" defaultValue={product.category?.id} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
             <option value="1">Categoria 1</option>
             <option value="2">Categoria 2</option>
             <option value="3">Categoria 3</option>
@@ -38,12 +38,12 @@ export default function ProductInfos({ product, onChange }: ProductInfosProps) {
           <input type="number" defaultValue={product.stock} name="stock" id="stock" placeholder="Estoque" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required/>
         </div>
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-          <label htmlFor="clientType" className="text-gray-500 text-sm mb-2">
+          <label htmlFor="client_type" className="text-gray-500 text-sm mb-2">
             Tipo de cliente
           </label>
-          <select name="clientType" id="clientType" defaultValue={product.client_type} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
-            <option value="1">Física</option>
-            <option value="0">Jurídica</option>
+          <select name="client_type" id="client_type" defaultValue={product.client_type} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
+            <option value="physical">Física</option>
+            <option value="juridical">Jurídica</option>
           </select>
         </div>
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">

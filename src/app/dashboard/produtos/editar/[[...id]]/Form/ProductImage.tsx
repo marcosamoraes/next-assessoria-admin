@@ -2,24 +2,33 @@
 'use client'
 
 import { IProduct } from '@/interfaces/IProduct'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
+import * as Upload from '@/services/Upload'
 
 type ProductImageProps = {
   product: IProduct
-  onChange: (e: any) => void
+  onChange: (url: string) => void
 }
 export default function ProductImage({ product, onChange }: ProductImageProps) {
   const [tempFile, setTempFile] = useState<string | null>(null)
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (product.id && product.image) {
+      setTempFile(product.image)
+    }
+  }, [product])
+
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target
 
     if (!files) return
 
-    const previewUrl = URL.createObjectURL(files[0])
-    setTempFile(previewUrl)
+    const preview = URL.createObjectURL(files[0])
+    setTempFile(preview)
 
-    onChange(event)
+    const { data: url }: any = await Upload.post('products', {file: files[0]})
+
+    onChange(url)
   }
 
   return (
@@ -33,6 +42,7 @@ export default function ProductImage({ product, onChange }: ProductImageProps) {
               name="file"
               onChange={handleFileChange}
               className="cursor-pointer relative block opacity-0 w-full h-full p-20 z-50"
+              required
             />
             {tempFile ? (
               <div className="text-center px-2 py-2 h-full absolute top-0 right-0 left-0 m-auto flex justify-center flex-wrap flex-col items-center flex-1">

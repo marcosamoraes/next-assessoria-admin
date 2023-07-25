@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-const useProductColumns = (onDelete: () => void) => {
+const useProductColumns = (onDelete: (id: number) => void, onStatusToggle: (id: number) => void) => {
   const searchParams = useSearchParams()
 
   return useMemo(
@@ -19,30 +19,36 @@ const useProductColumns = (onDelete: () => void) => {
         sortable: false,
         cell: (row: any) => (
           <div className="flex items-center">
-            <Image src={row.image} alt={row.name} width={100} height={100} className="w-20 h-20 rounded-md" />
+            <Image src={row.image} alt={row.title} width={100} height={100} className="w-20 h-20 rounded-md" />
           </div>
         ),
       },
       {
-        id: 'name',
-        name: 'Nome',
-        selector: (row: any) => row.name,
+        id: 'title',
+        name: 'Título',
+        selector: (row: any) => row.title,
         sortable: true,
-        format: (row: any) => <p title={row.name}>{row.name}</p>,
+        format: (row: any) => <p title={row.title}>{row.title}</p>,
       },
       {
-        id: 'clientType',
+        id: 'client_type',
         name: 'Tipo de Cliente',
-        selector: (row: any) => row.clientType,
+        selector: (row: any) => row.client_type,
         sortable: true,
-        format: (row: any) => <p title={row.clientType}>{row.clientType}</p>,
+        format: (row: any) => {
+          if (row.client_type === 'physical') {
+            return <p title="Pessoa Física">Pessoa Física</p>
+          } else {
+            return <p title="Pessoa Jurídica">Pessoa Jurídica</p>
+          }
+        },
       },
       {
         id: 'category',
         name: 'Categoria',
         selector: (row: any) => row.category,
         sortable: true,
-        format: (row: any) => <p title={row.category}>{row.category}</p>,
+        format: (row: any) => <p title={row.category.name}>{row.category.name}</p>,
       },
       {
         id: 'code',
@@ -69,7 +75,7 @@ const useProductColumns = (onDelete: () => void) => {
         selector: (row: any) => row.status,
         sortable: true,
         cell: (row: any) => (
-          <ToggleButton name="active" defaultChecked={row.active ? true : false} />
+          <ToggleButton name="active" defaultChecked={row.active ? true : false} onChange={() => onStatusToggle(row.id)} />
         ),
       },
       {
@@ -82,7 +88,7 @@ const useProductColumns = (onDelete: () => void) => {
             <Link href={`/dashboard/produtos/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/produtos/editar/${row.id}`}>
               <TableEditButton />
             </Link>
-            <TableDeleteButton onClick={onDelete} />
+            <TableDeleteButton onClick={() => onDelete(row.id)} />
           </div>
         ),
         style: {

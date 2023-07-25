@@ -34,14 +34,18 @@ export default function Products() {
 
   useEffect(() => {
     $Product.all(searchParams.toString()).then((res: any) => {
-      const data: IProduct[] = res.data
+      const data: IProduct[] = res.data.data
       setProducts(data)
     })
   }, [searchParams])
 
   const MySwal = withReactContent(Swal)
 
-  const onDelete = () => {
+  const onStatusToggle = async (id: number) => {
+    await $Product.toggleStatus(id)
+  }
+
+  const onDelete = (id: number) => {
     MySwal.fire({
       title: 'Você tem certeza?',
       text: 'Você não poderá reverter isso!',
@@ -53,16 +57,27 @@ export default function Products() {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deletado!',
-          'O produto foi deletado.',
-          'success'
-        )
+        $Product.destroy(id).then((res: any) => {
+          const message = res.data.message ?? 'O produto foi deletado.'
+          MySwal.fire(
+            'Deletado!',
+            message,
+            'success'
+          )
+          setProducts(products.filter((product: IProduct) => product.id !== id))
+        }).catch((err: any) => {
+          const message = err.response.data.message ?? 'Ocorreu um erro ao deletar o produto.'
+          MySwal.fire(
+            'Erro!',
+            message,
+            'error'
+          )
+        })
       }
     })
   }
 
-  const columns = useProductColumns(onDelete)
+  const columns = useProductColumns(onDelete, onStatusToggle)
 
   return (
     <>

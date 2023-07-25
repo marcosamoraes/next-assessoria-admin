@@ -1,4 +1,4 @@
 export interface IProductImage {
-  id: number
+  id?: number
   image: string
 }

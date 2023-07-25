@@ -2,28 +2,43 @@
 'use client'
 
 import { IProduct } from '@/interfaces/IProduct'
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import * as Upload from '@/services/Upload'
 
 type ProductImagesProps = {
   product: IProduct
   onChange: (e: any) => void
+  clearImages: () => void
 }
-export default function ProductImages({ product, onChange }: ProductImagesProps) {
+
+export default function ProductImages({ product, onChange, clearImages }: ProductImagesProps) {
   const [tempFiles, setTempFiles] = useState<string[] | null>(null)
 
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleFilesChange = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (product.id && product.images) {
+      const images = product.images.map((image) => image.image)
+      setTempFiles(images)
+    }
+  }, [product])
+
+  const handleFilesChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target
 
     if (!files) return
 
+    clearImages()
     setTempFiles(null)
+
     for (let i = 0; i < files.length; i++) {
       const previewUrl = URL.createObjectURL(files[i])
       setTempFiles((prev) => (prev ? [...prev, previewUrl] : [previewUrl]))
+
+      const { data: url }: any = await Upload.post('products', {file: files[i]})
+
+      onChange(url)
     }
-    onChange(event)
   }
 
   return (
