@@ -13,18 +13,20 @@ type ProductImagesProps = {
 
 export default function ProductImages({ product, onChange, clearImages }: ProductImagesProps) {
   const [tempFiles, setTempFiles] = useState<string[] | null>(null)
+  const [updated, setUpdated] = useState<boolean>(false)
 
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (product.id && product.images) {
+    if (product.id && product.images && product.images.length > 0 && !updated) {
       const images = product.images.map((image) => image.image)
       setTempFiles(images)
     }
-  }, [product])
+  }, [product, updated])
 
   const handleFilesChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target
+    setUpdated(true)
 
     if (!files) return
 

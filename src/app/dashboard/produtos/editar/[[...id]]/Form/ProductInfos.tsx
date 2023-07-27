@@ -1,10 +1,13 @@
+import { ICategory } from '@/interfaces/ICategory'
 import { IProduct } from '@/interfaces/IProduct'
 
 type ProductInfosProps = {
   product: IProduct
+  categories: ICategory[]
   onChange: (e: any) => void
 }
-export default function ProductInfos({ product, onChange }: ProductInfosProps) {
+export default function ProductInfos({ product, categories, onChange }: ProductInfosProps) {
+  console.log(product)
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Informações</h3>
@@ -25,32 +28,32 @@ export default function ProductInfos({ product, onChange }: ProductInfosProps) {
           <label htmlFor="category_id" className="text-gray-500 text-sm mb-2">
             Categoria
           </label>
-          <select name="category_id" id="category_id" defaultValue={product.category?.id} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
-            <option value="1">Categoria 1</option>
-            <option value="2">Categoria 2</option>
-            <option value="3">Categoria 3</option>
+          <select name="category_id" id="category_id" value={product.category?.id} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
+            {categories?.length > 0 && categories.map((category) => (
+              <option key={category.id} value={category.id}>{category.name}</option>
+            ))}
           </select>
         </div>
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-          <label htmlFor="code" className="text-gray-500 text-sm mb-2">
+          <label htmlFor="stock" className="text-gray-500 text-sm mb-2">
             Estoque
           </label>
-          <input type="number" defaultValue={product.stock} name="stock" id="stock" placeholder="Estoque" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required/>
+          <input type="number" value={product.stock} name="stock" id="stock" placeholder="Estoque" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required/>
         </div>
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
           <label htmlFor="client_type" className="text-gray-500 text-sm mb-2">
             Tipo de cliente
           </label>
-          <select name="client_type" id="client_type" defaultValue={product.client_type} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
+          <select name="client_type" id="client_type" value={product.client_type} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
             <option value="physical">Física</option>
             <option value="juridical">Jurídica</option>
           </select>
         </div>
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">
-          <label htmlFor="preSale" className="text-gray-500 text-sm mb-2">
+          <label htmlFor="pre_sale" className="text-gray-500 text-sm mb-2">
             Pré Venda
           </label>
-          <select name="preSale" id="preSale" defaultValue={product.pre_sale ? 1 : 0} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
+          <select name="pre_sale" id="pre_sale" value={product.pre_sale ? 1 : 0} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
             <option value="1">Sim</option>
             <option value="0">Não</option>
           </select>
@@ -59,7 +62,7 @@ export default function ProductInfos({ product, onChange }: ProductInfosProps) {
           <label htmlFor="featured" className="text-gray-500 text-sm mb-2">
             Destaque
           </label>
-          <select name="featured" id="featured" defaultValue={product.featured ? 1 : 0} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
+          <select name="featured" id="featured" value={product.featured ? 1 : 0} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
             <option value="1">Sim</option>
             <option value="0">Não</option>
           </select>

@@ -17,6 +17,8 @@ import * as $Product from '@/services/Product'
 import ClientTypeEnum from '@/enums/ClientTypeEnum'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
+import { ICategory } from '@/interfaces/ICategory'
+import * as $Category from '@/services/Category'
 
 export default function ProductsCreate({ params }: any) {
   const [product, setProduct] = useState<IProduct>({
@@ -34,6 +36,7 @@ export default function ProductsCreate({ params }: any) {
   } as IProduct)
 
   const [states, setStates] = useState<IState[]>({} as IState[])
+  const [categories, setCategories] = useState<ICategory[]>({} as ICategory[])
 
   const MySwal = withReactContent(Swal)
 
@@ -45,10 +48,26 @@ export default function ProductsCreate({ params }: any) {
       setStates(data)
     })
 
+    $Category.all().then((res: any) => {
+      const data: ICategory[] = res.data.data
+      setCategories(data)
+    })
+
     if (id) {
       $Product.find(id).then((res: any) => {
-        const data: IProduct = res.data
-        setProduct(data)
+        const data: IProduct = res.data.product
+
+        const prices = data.prices?.reduce((acc: any, price: any) => {
+          acc[price.state_id] = price
+          return acc
+        }, {})
+
+        setProduct({
+          ...data,
+          prices: {
+            ...prices,
+          }
+        } as IProduct)
       })
     }
   }, [id])
@@ -148,7 +167,7 @@ export default function ProductsCreate({ params }: any) {
     <>
       <form className="flex flex-wrap flex-row" onSubmit={handleSubmit}>
         <div className="w-full px-2 -md-2 flex justify-between">
-          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{product ? 'Editar' : 'Novo'} Produto</h1>
+          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{product ? 'Editar' : 'Novo'} Produto {id ?? ''}</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/produtos">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
@@ -158,7 +177,7 @@ export default function ProductsCreate({ params }: any) {
         </div>
 
         <div className="w-full md:w-8/12 px-2 -md-2">
-          <ProductInfos product={product} onChange={handleInputChange} />
+          <ProductInfos product={product} categories={categories} onChange={handleInputChange} />
           <ProductDescription product={product} onChange={handleInputChange} />
         </div>
 

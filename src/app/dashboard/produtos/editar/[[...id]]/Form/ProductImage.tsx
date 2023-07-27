@@ -11,15 +11,17 @@ type ProductImageProps = {
 }
 export default function ProductImage({ product, onChange }: ProductImageProps) {
   const [tempFile, setTempFile] = useState<string | null>(null)
+  const [updated, setUpdated] = useState<boolean>(false)
 
   useEffect(() => {
-    if (product.id && product.image) {
+    if (product.id && product.image && !updated) {
       setTempFile(product.image)
     }
-  }, [product])
+  }, [product, updated])
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target
+    setUpdated(true)
 
     if (!files) return
 
@@ -42,7 +44,7 @@ export default function ProductImage({ product, onChange }: ProductImageProps) {
               name="file"
               onChange={handleFileChange}
               className="cursor-pointer relative block opacity-0 w-full h-full p-20 z-50"
-              required
+              required={product.id ? false : true}
             />
             {tempFile ? (
               <div className="text-center px-2 py-2 h-full absolute top-0 right-0 left-0 m-auto flex justify-center flex-wrap flex-col items-center flex-1">
