@@ -111,6 +111,16 @@ export default function Products() {
             <option value="physical">Física</option>
             <option value="juridical">Jurídica</option>
           </select>
+          <select
+            name="check_availability"
+            id="check_availability"
+            className="border border-gray-300 rounded-lg py-2 max-w-[180px]"
+            onChange={handleQueryChange}
+          >
+            <option value={0}>Tem estoque</option>
+            <option value="true">Sim</option>
+            <option value="false">Não</option>
+          </select>
         </div>
       </div>
       <div>
