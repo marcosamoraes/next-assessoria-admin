@@ -35,6 +35,7 @@ export default function CategoriesCreate({ params }: any) {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
+    console.log('category: ', category)
 
     if (id) {
       $Category.update(id, category).then((res: any) => {
