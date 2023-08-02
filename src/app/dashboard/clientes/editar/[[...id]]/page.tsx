@@ -12,7 +12,7 @@ import ClientAddress from './Form/ClientAddress'
 import ClientDocumentRg from './Form/ClientDocumentRg'
 import ClientDocumentCr from './Form/ClientDocumentCr'
 
-export default async function ClientsCreate({ params }: any) {
+export default function ClientsCreate({ params }: any) {
   const [user, setUser] = useState<IUser | null>(null)
 
   const { id } = params

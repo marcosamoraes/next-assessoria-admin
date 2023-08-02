@@ -2,7 +2,7 @@
 import OptionsBar from '@/components/UI/OptionsBar/OptionsBar'
 import SearchBar from '@/components/UI/SearchBar/SearchBar'
 
-export default async function SettingText({ children }: { children: any }) {
+export default function SettingText({ children }: { children: any }) {
   return (
     <>
       <div className="flex justify-between">

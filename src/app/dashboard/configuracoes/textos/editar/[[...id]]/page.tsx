@@ -16,7 +16,7 @@ const Editor = dynamic<EditorProps>(
   { ssr: false, loading: () => <p>Carregando...</p> }
 )
 
-export default async function CouponsCreate({ params }: any) {
+export default function CouponsCreate({ params }: any) {
   const [coupon, setCoupon] = useState<ICoupon | null>(null)
 
   const { id } = params

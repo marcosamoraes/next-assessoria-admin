@@ -8,7 +8,7 @@ import BackButton from '@/components/UI/BackButton/BackButton'
 import { IAdmin } from '@/interfaces/IAdmin'
 import { getAdmin } from '@/api/AdminsApi'
 
-export default async function AdminsCreate({ params }: any) {
+export default function AdminsCreate({ params }: any) {
   const [admin, setAdmin] = useState<IAdmin | null>(null)
 
   const { id } = params

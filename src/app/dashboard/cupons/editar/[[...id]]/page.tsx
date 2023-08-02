@@ -92,7 +92,7 @@ export default function CouponsCreate({ params }: any) {
       })
     }
   }
-  console.log(coupon.category)
+
   return (
     <>
       <form className="flex flex-wrap flex-row" onSubmit={handleSubmit}>

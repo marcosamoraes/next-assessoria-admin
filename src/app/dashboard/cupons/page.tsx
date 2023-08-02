@@ -87,8 +87,9 @@ export default function Coupons() {
             onChange={handleQueryChange}
           >
             <option value={0}>Tipo</option>
-            <option value="percentage">Porcentagem</option>
-            <option value="amount">Valor Fixo</option>
+            <option value="percent">Porcentagem</option>
+            <option value="fixed">Valor Fixo</option>
+            <option value="freeFreight">Frete grátis</option>
           </select>
         </div>
       </div>

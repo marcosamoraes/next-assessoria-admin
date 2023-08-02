@@ -11,7 +11,7 @@ import * as $Category from '@/services/Category'
 import { useSearchParams } from 'next/navigation'
 
 export default function Categories() {
-  const [categories, setCategories] = useState<ICategory[] | any>([])
+  const [categories, setCategories] = useState<ICategory[]>({} as ICategory[])
   const searchParams = useSearchParams()!
 
   useEffect(() => {

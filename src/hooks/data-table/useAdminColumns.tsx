@@ -5,17 +5,17 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-const useAdminColumns = (onDelete: () => void) => {
+const useAdminColumns = (onDelete: (id: number) => void, onStatusToggle: (id: number) => void) => {
   const searchParams = useSearchParams()
 
   return useMemo(
     () => [
       {
-        id: 'firstname',
+        id: 'name',
         name: 'Nome',
-        selector: (row: any) => row.firstname,
+        selector: (row: any) => row.name,
         sortable: true,
-        format: (row: any) => <p title={row.firstname + ' ' + row.lastname}>{row.firstname + ' ' + row.lastname}</p>,
+        format: (row: any) => <p title={row.name + ' ' + row.lastname}>{row.name + ' ' + row.last_name}</p>,
       },
       {
         id: 'email',
@@ -38,7 +38,7 @@ const useAdminColumns = (onDelete: () => void) => {
         selector: (row: any) => row.status,
         sortable: true,
         cell: (row: any) => (
-          <ToggleButton name="active" defaultChecked={row.active ? true : false} />
+          <ToggleButton name="active" defaultChecked={row.active ? true : false} onChange={() => onStatusToggle(row.id)} />
         ),
       },
       {
@@ -51,7 +51,7 @@ const useAdminColumns = (onDelete: () => void) => {
             <Link href={`/dashboard/admins/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/admins/editar/${row.id}`}>
               <TableEditButton />
             </Link>
-            <TableDeleteButton onClick={onDelete} />
+            <TableDeleteButton onClick={() => onDelete(row.id)} />
           </div>
         ),
         style: {
@@ -59,7 +59,7 @@ const useAdminColumns = (onDelete: () => void) => {
         },
       },
     ],
-    [searchParams, onDelete],
+    [searchParams, onDelete, onStatusToggle],
   )
 }
 

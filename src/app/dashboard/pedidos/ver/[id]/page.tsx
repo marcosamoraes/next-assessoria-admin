@@ -13,7 +13,7 @@ import OrderStatus from './Form/OrderStatus'
 import OrderProducts from './Form/OrderProducts'
 import OrderHistory from './Form/OrderHistory'
 
-export default async function OrdersShow({ params }: any) {
+export default function OrdersShow({ params }: any) {
   const [order, setOrder] = useState<IOrder | null>(null)
 
   const { id } = params

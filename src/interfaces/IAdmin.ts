@@ -2,8 +2,8 @@ import UserRoleEnum from '@/enums/UserRoleEnum'
 
 export interface IAdmin {
   id: number
-  firstname: string
-  lastname: string
+  name: string
+  last_name: string
   email: string
   whatsapp?: string
   role: UserRoleEnum
