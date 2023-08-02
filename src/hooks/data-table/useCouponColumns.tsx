@@ -30,10 +30,10 @@ const useCouponColumns = (onDelete: (id: number) => void, onStatusToggle: (id: n
         selector: (row: any) => row.value,
         sortable: true,
         format: (row: any) => {
-          if (row.type === 'percentage') {
-            return <p title={row.value}>{row.value}%</p>
+          if (row.type === 'percent') {
+            return <p title={row.value}>{Number(row.value).toFixed(0)}%</p>
           } else {
-            return <p title={row.value}>R${row.value.toFixed(2).replace('.', ',')}</p>
+            return <p title={row.value}>R${Number(row.value).toFixed(2).replace('.', ',')}</p>
           }
         },
       },
@@ -45,11 +45,11 @@ const useCouponColumns = (onDelete: (id: number) => void, onStatusToggle: (id: n
         format: (row: any) => <p title={row.quantity}>{row.quantity}</p>,
       },
       {
-        id: 'expireAt',
+        id: 'expire_at',
         name: 'Expira em',
-        selector: (row: any) => row.expireAt,
+        selector: (row: any) => row.expire_at,
         sortable: true,
-        format: (row: any) => <p title={row.expireAt}>{row.expireAt}</p>,
+        format: (row: any) => <p title={row.expire_at}>{row.expire_at}</p>,
       },
       {
         id: 'active',

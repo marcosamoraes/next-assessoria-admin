@@ -10,7 +10,7 @@ import withReactContent from 'sweetalert2-react-content'
 import * as $Category from '@/services/Category'
 import { useSearchParams } from 'next/navigation'
 
-export default async function Categories() {
+export default function Categories() {
   const [categories, setCategories] = useState<ICategory[] | any>([])
   const searchParams = useSearchParams()!
 

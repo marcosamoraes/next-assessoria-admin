@@ -6,19 +6,19 @@ import { useEffect, useState } from 'react'
 import { IoMdArrowBack } from 'react-icons/io'
 import BackButton from '@/components/UI/BackButton/BackButton'
 import { ICoupon } from '@/interfaces/ICoupon'
-import CouponTypeEnum from '@/enums/CouponTypeEnum'
 import * as $Coupon from '@/services/Coupon'
 import * as $Category from '@/services/Category'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import { ICategory } from '@/interfaces/ICategory'
 import Mask from '@/helpers/Mask'
+import moment from 'moment'
 
 export default function CouponsCreate({ params }: any) {
   const [coupon, setCoupon] = useState<ICoupon>({
     name: '',
     category_id: 1,
-    type: CouponTypeEnum.PERCENTAGE,
+    type: 'percent',
     value: 0.00,
     quantity: 0,
   } as ICoupon)
@@ -44,8 +44,14 @@ export default function CouponsCreate({ params }: any) {
   }, [id])
 
   const handleInputChange = (e: any) => {
-    const { name, value } = e.target
-    setCoupon({ ...coupon, [name]: value })
+    const name = e.target.name
+    let value = e.target.value
+
+    if (name === 'value' || name === 'min_value') {
+      value = Mask.money(value)
+    }
+
+    setCoupon(prev => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: any) => {
@@ -86,7 +92,7 @@ export default function CouponsCreate({ params }: any) {
       })
     }
   }
-
+  console.log(coupon.category)
   return (
     <>
       <form className="flex flex-wrap flex-row" onSubmit={handleSubmit}>
@@ -121,15 +127,17 @@ export default function CouponsCreate({ params }: any) {
                   Tipo
                 </label>
                 <select value={coupon.type} name="type" id="type" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} required>
-                  <option value="percentage">Porcentagem</option>
-                  <option value="amount">Valor</option>
+                  <option value="percent">Porcentagem</option>
+                  <option value="fixed">Valor</option>
+                  <option value="freeFreight">Frete Fixo</option>
                 </select>
               </div>
               <div className="flex flex-col w-full lg:w-4/12 xl:w-3/12 md:px-2 md:-mx-2">
-                <label htmlFor="category" className="text-gray-500 text-sm mb-2">
+                <label htmlFor="category_id" className="text-gray-500 text-sm mb-2">
                   Categoria
                 </label>
-                <select name="category_id" id="category_id" value={coupon.category?.id} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange}>
+                <select name="category_id" id="category_id" value={coupon.category_id} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange}>
+                  <option value={0}>Selecione...</option>
                   {categories?.length > 0 && categories.map((category) => (
                     <option key={category.id} value={category.id}>{category.name}</option>
                   ))}
@@ -139,25 +147,25 @@ export default function CouponsCreate({ params }: any) {
                 <label htmlFor="value" className="text-gray-500 text-sm mb-2">
                   Valor
                 </label>
-                <input type="text" defaultValue={coupon.value ? Mask.money(String(coupon.value)) : 0.00} name="value" id="value" placeholder="Valor" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} required/>
+                <input type="text" value={coupon.value ? Mask.money(String(coupon.value)) : ''} name="value" id="value" placeholder="Valor" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} required/>
               </div>
               <div className="flex flex-col w-full lg:w-4/12 xl:w-3/12 md:px-2 md:-mx-2">
                 <label htmlFor="min_value" className="text-gray-500 text-sm mb-2">
                   Valor Mínimo
                 </label>
-                <input type="text" defaultValue={coupon.min_value ? Mask.money(String(coupon.min_value)) : 0.00} name="min_value" id="min_value" placeholder="Valor Mínimo" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} />
+                <input type="text" value={coupon.min_value ? Mask.money(String(coupon.min_value)) : ''} name="min_value" id="min_value" placeholder="Valor Mínimo" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} />
               </div>
               <div className="flex flex-col w-full lg:w-4/12 xl:w-3/12 md:px-2 md:-mx-2">
                 <label htmlFor="quantity" className="text-gray-500 text-sm mb-2">
                   Quantidade
                 </label>
-                <input type="text" defaultValue={coupon.quantity} name="quantity" id="quantity" placeholder="Quantidade" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} />
+                <input type="text" value={coupon.quantity} name="quantity" id="quantity" placeholder="Quantidade" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} />
               </div>
               <div className="flex flex-col w-full lg:w-4/12 xl:w-3/12 md:px-2 md:-mx-2">
                 <label htmlFor="expire_at" className="text-gray-500 text-sm mb-2">
                   Expira em
                 </label>
-                <input type="text" defaultValue={coupon.expire_at} name="expire_at" id="expire_at" placeholder="Expira em" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} />
+                <input type="datetime-local" value={moment(coupon.expire_at).format('YYYY-MM-DDTHH:mm')} name="expire_at" id="expire_at" placeholder="Expira em" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} />
               </div>
             </div>
           </div>

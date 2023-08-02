@@ -1,6 +1,7 @@
 enum CouponTypeEnum {
-  PERCENTAGE = 'PERCENTAGE',
-  AMOUNT = 'AMOUNT',
+  PERCENTAGE = 'percent',
+  FIXED = 'fixed',
+  FREE_FREIGHT = 'freeFreight',
 }
 
 export default CouponTypeEnum

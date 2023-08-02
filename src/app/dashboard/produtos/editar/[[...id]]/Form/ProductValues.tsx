@@ -3,7 +3,7 @@
 import Mask from '@/helpers/Mask'
 import { IProduct } from '@/interfaces/IProduct'
 import { IState } from '@/interfaces/IState'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 
 type ProductValuesProps = {
   product: IProduct | null
