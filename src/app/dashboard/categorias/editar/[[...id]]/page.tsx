@@ -35,7 +35,6 @@ export default function CategoriesCreate({ params }: any) {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    console.log('category: ', category)
 
     if (id) {
       $Category.update(id, category).then((res: any) => {
@@ -75,7 +74,7 @@ export default function CategoriesCreate({ params }: any) {
 
   return (
     <>
-      <form className="flex flex-wrap flex-row" onSubmit={handleSubmit}>
+      <form className="flex flex-wrap flex-row" method="POST" onSubmit={handleSubmit}>
         <div className="w-full px-2 -md-2 flex justify-between">
           <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{category ? 'Editar' : 'Nova'} Categoria</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
