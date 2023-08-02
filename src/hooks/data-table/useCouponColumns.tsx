@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-const useCouponColumns = (onDelete: () => void) => {
+const useCouponColumns = (onDelete: (id: number) => void, onStatusToggle: (id: number) => void) => {
   const searchParams = useSearchParams()
 
   return useMemo(
@@ -58,7 +58,7 @@ const useCouponColumns = (onDelete: () => void) => {
         selector: (row: any) => row.active,
         sortable: true,
         cell: (row: any) => (
-          <ToggleButton name="active" defaultChecked={row.active ? true : false} />
+          <ToggleButton name="active" defaultChecked={row.active ? true : false} onChange={() => onStatusToggle(row.id)} />
         ),
       },
       {
@@ -71,7 +71,7 @@ const useCouponColumns = (onDelete: () => void) => {
             <Link href={`/dashboard/cupons/editar/${row.id}?${searchParams.toString()}`} as={`/dashboard/cupons/editar/${row.id}`}>
               <TableEditButton />
             </Link>
-            <TableDeleteButton onClick={onDelete} />
+            <TableDeleteButton onClick={() => onDelete(row.id)} />
           </div>
         ),
         style: {
@@ -79,7 +79,7 @@ const useCouponColumns = (onDelete: () => void) => {
         },
       },
     ],
-    [searchParams, onDelete],
+    [searchParams, onDelete, onStatusToggle],
   )
 }
 
