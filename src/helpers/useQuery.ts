@@ -22,3 +22,13 @@ export const deleteSearchParam = (name: string, router: ReturnType<typeof useRou
   params.delete(name)
   router.push(pathname + '?' + params.toString())
 }
+
+export const deleteAllSearchParam = (router: ReturnType<typeof useRouter>, pathname: ReturnType<typeof usePathname>, searchParams: ReturnType<typeof useSearchParams>) => {
+  const params = new URLSearchParams(searchParams.toString())
+
+  for (const key of params.keys()) {
+    params.delete(key)
+  }
+
+  router.push(pathname + '?' + params.toString())
+}

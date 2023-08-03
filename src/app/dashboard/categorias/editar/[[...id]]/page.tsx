@@ -55,14 +55,14 @@ export default function CategoriesCreate({ params }: any) {
     }
     else {
       $Category.store(category).then((res: any) => {
-        const message = res.response?.data?.message ?? 'Cupom criado com sucesso'
+        const message = res.response?.data?.message ?? 'Categoria criada com sucesso'
         MySwal.fire(
           'Sucesso',
           message,
           'success'
         )
       }).catch((err: any) => {
-        const message = err.response?.data?.message ?? 'Ocorreu um erro ao atualizar o cupom'
+        const message = err.response?.data?.message ?? 'Ocorreu um erro ao atualizar a categoria'
         MySwal.fire(
           'Erro',
           message,

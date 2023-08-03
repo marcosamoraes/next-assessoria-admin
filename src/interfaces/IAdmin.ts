@@ -8,4 +8,6 @@ export interface IAdmin {
   whatsapp?: string
   role: UserRoleEnum
   active: boolean
+  password?: string
+  password_confirmation?: string
 }

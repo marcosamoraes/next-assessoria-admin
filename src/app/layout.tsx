@@ -1,8 +1,4 @@
-import LoadingComponent from '@/components/Loading/Loading'
-import { Suspense } from 'react'
 import './globals.css'
-import Loading from './loading'
-import LoadingProvider from '@/contexts/LoadingProvider'
 import { AuthProvider } from '@/contexts/AuthProvider'
 
 export const metadata = {

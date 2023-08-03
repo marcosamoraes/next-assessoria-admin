@@ -1,26 +1,33 @@
 'use client'
-import { getCategories } from '@/api/CategoriesApi'
-import { getFreight } from '@/api/FreightApi'
-import { getSettingTexts } from '@/api/SettingTextsApi'
-import { getStates } from '@/api/StatesApi'
-import { getTaxes } from '@/api/TaxesApi'
+
 import useSettingTextColumns from '@/hooks/data-table/useSettingTextColumns'
 import { ICategory } from '@/interfaces/ICategory'
-import { IFreight } from '@/interfaces/IFreight'
+import { ISettingFreight } from '@/interfaces/ISettingFreight'
+import { ISettingTax } from '@/interfaces/ISettingTax'
 import { ISettingText } from '@/interfaces/ISettingText'
 import { IState } from '@/interfaces/IState'
-import { ITax } from '@/interfaces/ITax'
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
+import * as $SettingText from '@/services/SettingText'
+import * as $SettingTax from '@/services/SettingTax'
+import * as $SettingFreight from '@/services/SettingFreight'
+import * as $SettingPayment from '@/services/SettingPayment'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import * as $Category from '@/services/Category'
+import * as $State from '@/services/State'
+import { deleteAllSearchParam } from '@/helpers/useQuery'
 
 export default function Settings() {
   const [selectedTab, setSelectedTab] = useState<string>('text')
-  const [settingTexts, setSettingTexts] = useState<ISettingText[] | any>([])
-  const [selectedCategory, setSelectedCategory] = useState<number>(1)
-  const [taxes, setTaxes] = useState<ITax[]>([])
   const [states, setStates] = useState<IState[]>([])
-  const [freight, setFreight] = useState<IFreight[]|null>([])
+  const [selectedCategory, setSelectedCategory] = useState<number>(1)
+  const [settingTexts, setSettingTexts] = useState<ISettingText[] | any>([])
+  const [settingTaxes, setTaxes] = useState<ISettingTax[]>([])
+  const [settingFreight, setFreight] = useState<ISettingFreight[]|null>([])
   const [categories, setCategories] = useState<ICategory[]>([])
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()!
 
   const settingTextColumns = useSettingTextColumns()
 
@@ -39,21 +46,51 @@ export default function Settings() {
       id: 'freight',
       name: 'Frete',
       component: 'SettingFreight'
+    },
+    {
+      id: 'payment',
+      name: 'Pagamento',
+      component: 'SettingPayment'
     }
   ]
 
   useEffect(() => {
-    const textsData = getSettingTexts()
-    setSettingTexts(textsData)
-    const taxesData = getTaxes()
-    setTaxes(taxesData)
-    const statesData = getStates()
-    setStates(statesData)
-    const categoriesData = getCategories()
-    setCategories(categoriesData)
-    const freightData = getFreight()
-    setFreight(freightData)
+    deleteAllSearchParam(router, pathname, searchParams)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTab])
+
+  useEffect(() => {
+    $Category.all().then((res: any) => {
+      const data: ICategory[] = res.data.data
+      setCategories(data)
+    })
+    $State.all().then((res: any) => {
+      const data: IState[] = res.data.data
+      setStates(data)
+    })
   }, [])
+
+  useEffect(() => {
+    $SettingText.all(searchParams.toString()).then((res: any) => {
+      const data: ISettingText[] = res.data.data
+      setSettingTexts(data)
+    })
+
+    $SettingTax.all(searchParams.toString()).then((res: any) => {
+      const data: ISettingTax[] = res.data.data
+      setTaxes(data)
+    })
+
+    $SettingFreight.all(searchParams.toString()).then((res: any) => {
+      const data: ISettingFreight[] = res.data.data
+      setFreight(data)
+    })
+
+    $SettingPayment.all(searchParams.toString()).then((res: any) => {
+      const data: ISettingFreight[] = res.data.data
+      setFreight(data)
+    })
+  }, [searchParams])
 
   return (
     <>
@@ -81,23 +118,28 @@ export default function Settings() {
               if (tab.id === 'text') {
                 return (
                   <Component key={tab.id} settingTexts={settingTexts} settingTextColumns={settingTextColumns}>
-                    <DataTable columns={settingTextColumns} data={settingTexts} className="mt-7 bg-none" pagination responsive />
+                    {settingTexts?.length > 0 ? (
+                      <DataTable columns={settingTextColumns} data={settingTexts} className="mt-7 bg-none" pagination responsive />
+                    ) : (
+                      <div className="w-full bg-yellow-200 border-2 border-yellow-300 p-5 mt-5">Não há textos cadastrados</div>
+                    )}
                   </Component>
                 )
               } else if (tab.id === 'tax') {
-                return <Component key={tab.id} taxes={taxes} states={states} />
-              } else {
-                return (
-                  <Component
-                    key={tab.id}
-                    states={states}
-                    categories={categories}
-                    freight={freight}
-                    selectedCategory={selectedCategory}
-                    setSelectedCategory={setSelectedCategory}
-                  />
-                )
+                return <Component key={tab.id} taxes={settingTaxes} states={states} />
               }
+              // } else {
+              //   return (
+              //     <Component
+              //       key={tab.id}
+              //       states={states}
+              //       categories={categories}
+              //       freight={freight}
+              //       selectedCategory={selectedCategory}
+              //       setSelectedCategory={setSelectedCategory}
+              //     />
+              //   )
+              // }
             }
           })}
         </div>

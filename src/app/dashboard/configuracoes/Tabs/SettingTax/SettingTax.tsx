@@ -1,8 +1,8 @@
 import { IState } from '@/interfaces/IState'
-import { ITax } from '@/interfaces/ITax'
+import { ISettingTax } from '@/interfaces/ISettingTax'
 
 type SettingTaxProps = {
-  taxes: ITax[]
+  taxes: ISettingTax[]
   states: IState[]
 }
 export default function SettingTax({ taxes, states }: SettingTaxProps) {
@@ -10,7 +10,7 @@ export default function SettingTax({ taxes, states }: SettingTaxProps) {
     <>
       <div>
         <div className="bg-white px-5 py-7 rounded-xl flex flex-wrap">
-          {states.map((state) => (
+          {states?.length > 0 && states.map((state) => (
             <div key={state.id} className="flex flex-col w-full lg:w-6/12 xl:w-3/12 gap-2 items-center">
               <div className="w-full pl-2">
                 <label htmlFor={`value[${state}][1]`} className="text-gray-500 text-sm">
@@ -23,7 +23,7 @@ export default function SettingTax({ taxes, states }: SettingTaxProps) {
                     type="text"
                     placeholder="Impostos"
                     className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                    defaultValue={taxes.filter(tax => tax.state === state.uf)[0].tax}
+                    defaultValue={taxes.filter(tax => tax.state.uf === state.uf)[0]?.tax ?? ''}
                   />
                 </div>
                 <div className="md:px-2 w-full md:w-6/12">
@@ -31,7 +31,7 @@ export default function SettingTax({ taxes, states }: SettingTaxProps) {
                     type="text"
                     placeholder="Valor (%)"
                     className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                    defaultValue={taxes.filter(tax => tax.state === state.uf)[0].value}
+                    defaultValue={taxes.filter(tax => tax.state.uf === state.uf)[0]?.value ?? ''}
                   />
                 </div>
               </div>

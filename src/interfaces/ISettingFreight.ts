@@ -1,6 +1,6 @@
 import { ICategory } from './ICategory'
 
-export interface IFreight {
+export interface ISettingFreight {
   id: number
   state: string
   category: ICategory
