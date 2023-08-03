@@ -6,7 +6,7 @@ import { ISettingFreight } from '@/interfaces/ISettingFreight'
 import { ISettingTax } from '@/interfaces/ISettingTax'
 import { ISettingText } from '@/interfaces/ISettingText'
 import { IState } from '@/interfaces/IState'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import * as $SettingText from '@/services/SettingText'
 import * as $SettingTax from '@/services/SettingTax'
@@ -15,15 +15,17 @@ import * as $SettingPayment from '@/services/SettingPayment'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import * as $Category from '@/services/Category'
 import * as $State from '@/services/State'
-import { deleteAllSearchParam } from '@/helpers/useQuery'
+import { deleteAllSearchParam, updateSearchParams } from '@/helpers/useQuery'
+import { ISettingPayment } from '@/interfaces/ISettingPayment'
 
 export default function Settings() {
   const [selectedTab, setSelectedTab] = useState<string>('text')
   const [states, setStates] = useState<IState[]>([])
   const [selectedCategory, setSelectedCategory] = useState<number>(1)
-  const [settingTexts, setSettingTexts] = useState<ISettingText[] | any>([])
-  const [settingTaxes, setTaxes] = useState<ISettingTax[]>([])
-  const [settingFreight, setFreight] = useState<ISettingFreight[]|null>([])
+  const [settingTexts, setSettingTexts] = useState<ISettingText[]>({} as ISettingText[])
+  const [settingTaxes, setSettingTaxes] = useState<ISettingTax[]>({} as ISettingTax[])
+  const [settingFreights, setSettingFreights] = useState<ISettingFreight[]>({} as ISettingFreight[])
+  const [settingPayments, setSettingPayments] = useState<ISettingPayment[]>({} as ISettingPayment[])
   const [categories, setCategories] = useState<ICategory[]>([])
   const router = useRouter()
   const pathname = usePathname()
@@ -54,6 +56,11 @@ export default function Settings() {
     }
   ]
 
+  const handleQueryChange = useCallback((e: any) => {
+    const { name, value } = e.target
+    updateSearchParams(name, value, router, pathname, searchParams)
+  }, [router, pathname, searchParams])
+
   useEffect(() => {
     deleteAllSearchParam(router, pathname, searchParams)
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -78,17 +85,17 @@ export default function Settings() {
 
     $SettingTax.all(searchParams.toString()).then((res: any) => {
       const data: ISettingTax[] = res.data.data
-      setTaxes(data)
+      setSettingTaxes(data)
     })
 
     $SettingFreight.all(searchParams.toString()).then((res: any) => {
       const data: ISettingFreight[] = res.data.data
-      setFreight(data)
+      setSettingFreights(data)
     })
 
     $SettingPayment.all(searchParams.toString()).then((res: any) => {
-      const data: ISettingFreight[] = res.data.data
-      setFreight(data)
+      const data: ISettingPayment[] = res.data.data
+      setSettingPayments(data)
     })
   }, [searchParams])
 
@@ -117,7 +124,7 @@ export default function Settings() {
               const Component = require(`./Tabs/${tab.component}/${tab.component}`).default
               if (tab.id === 'text') {
                 return (
-                  <Component key={tab.id} settingTexts={settingTexts} settingTextColumns={settingTextColumns}>
+                  <Component key={tab.id} handleQueryChange={handleQueryChange}>
                     {settingTexts?.length > 0 ? (
                       <DataTable columns={settingTextColumns} data={settingTexts} className="mt-7 bg-none" pagination responsive />
                     ) : (
@@ -127,19 +134,20 @@ export default function Settings() {
                 )
               } else if (tab.id === 'tax') {
                 return <Component key={tab.id} taxes={settingTaxes} states={states} />
+              } else if (tab.id === 'freight') {
+                return (
+                  <Component
+                    key={tab.id}
+                    states={states}
+                    categories={categories}
+                    freights={settingFreights}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                  />
+                )
+              } else if (tab.id === 'payment') {
+                return <Component key={tab.id} payments={settingPayments} />
               }
-              // } else {
-              //   return (
-              //     <Component
-              //       key={tab.id}
-              //       states={states}
-              //       categories={categories}
-              //       freight={freight}
-              //       selectedCategory={selectedCategory}
-              //       setSelectedCategory={setSelectedCategory}
-              //     />
-              //   )
-              // }
             }
           })}
         </div>

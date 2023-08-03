@@ -1,17 +1,16 @@
 import { ICategory } from '@/interfaces/ICategory'
-import { IFreight } from '@/interfaces/IFreight'
+import { ISettingFreight } from '@/interfaces/ISettingFreight'
 import { IState } from '@/interfaces/IState'
 
 type SettingFreightProps = {
   states: IState[]
   categories: ICategory[]
-  freight: IFreight[]
+  freights: ISettingFreight[]
   selectedCategory: number
   setSelectedCategory: (tab: number) => void
 }
 
-export default function SettingFreight({ states, categories, freight, selectedCategory, setSelectedCategory }: SettingFreightProps) {
-
+export default function SettingFreight({ states, categories, freights, selectedCategory, setSelectedCategory }: SettingFreightProps) {
   return (
     <>
       <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
@@ -41,25 +40,25 @@ export default function SettingFreight({ states, categories, freight, selectedCa
                 type="text"
                 placeholder="1 Item"
                 className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
-                defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].oneItem : 0}
+                defaultValue={freights ? freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_one_item : 0}
               />
               <input
                 type="text"
                 placeholder="2 Itens"
                 className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
-                defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].twoItems : 0}
+                defaultValue={freights ? freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_two_item : 0}
               />
               <input
                 type="text"
                 placeholder="3 Itens"
                 className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
-                defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].threeItems : 0}
+                defaultValue={freights ? freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_three_item : 0}
               />
               <input
                 type="text"
                 placeholder="4 Itens"
                 className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
-                defaultValue={freight ? freight.filter(data => data.state === state.uf && data.category.id === selectedCategory)[0].fourItems : 0}
+                defaultValue={freights ? freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_four_item : 0}
               />
             </div>
           </div>

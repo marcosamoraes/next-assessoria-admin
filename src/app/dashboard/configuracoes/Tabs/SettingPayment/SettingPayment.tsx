@@ -1,15 +1,17 @@
+import { ISettingPayment } from '@/interfaces/ISettingPayment'
+
 type SettingPaymentProps = {
-  states: any
+  payments: ISettingPayment[]
 }
-export default function SettingPayment({ states }: SettingPaymentProps) {
+export default function SettingPayment({ payments }: SettingPaymentProps) {
   return (
     <>
       <div>
         <div className="bg-white px-5 py-7 rounded-xl flex flex-wrap">
           <div className="flex flex-col w-full lg:w-6/12 xl:w-3/12 gap-2 items-center">
             <div className="w-full pl-2">
-              <label htmlFor="name" className="text-gray-500 text-sm">
-                name
+              <label htmlFor="installments_fee" className="text-gray-500 text-sm">
+                Juros de parcelamento
               </label>
             </div>
             <div className="w-full flex flex-row gap-2">
@@ -18,13 +20,8 @@ export default function SettingPayment({ states }: SettingPaymentProps) {
                   type="text"
                   placeholder="Impostos"
                   className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                />
-              </div>
-              <div className="md:px-2 w-full md:w-6/12">
-                <input
-                  type="text"
-                  placeholder="Valor (%)"
-                  className="border border-gray-300 w-full rounded-lg box px-3 py-2"
+                  name="installments_fee"
+                  defaultValue={payments[0].installments_fee}
                 />
               </div>
             </div>
