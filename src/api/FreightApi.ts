@@ -1,4 +1,4 @@
-import { IFreight } from '@/interfaces/IFreight'
+import { ISettingFreight } from '@/interfaces/ISettingFreight'
 import { getCategories } from './CategoriesApi'
 import { getStates } from './StatesApi'
 
@@ -9,18 +9,20 @@ export const getFreight = (id?: number) => {
 
   const states = getStates()
   const categories = getCategories()
-  const data: IFreight[] = []
+  const data: ISettingFreight[] = []
   let index = 1
   categories.map((category) => {
     states.map((state) => {
       data.push({
         id: index,
-        state: state.uf,
+        state_id: state.id,
+        category_id: category.id,
         category: category,
-        oneItem: index * 20,
-        twoItems: index * 15,
-        threeItems: index * 10,
-        fourItems: index * 5,
+        state: state,
+        value_one_item: index * 20,
+        value_two_item: index * 15,
+        value_three_item: index * 15,
+        value_four_item: index * 15,
       })
       index++
     })
