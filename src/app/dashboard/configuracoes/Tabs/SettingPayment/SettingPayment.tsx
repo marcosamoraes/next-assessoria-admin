@@ -2,10 +2,11 @@ import { ISettingPayment } from '@/interfaces/ISettingPayment'
 
 type SettingPaymentProps = {
   payments: ISettingPayment[]
+  handleSubmit: (e: any) => void
 }
-export default function SettingPayment({ payments }: SettingPaymentProps) {
+export default function SettingPayment({ payments, handleSubmit }: SettingPaymentProps) {
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div>
         <div className="bg-white px-5 py-7 rounded-xl flex flex-wrap">
           <div className="flex flex-col w-full lg:w-6/12 xl:w-3/12 gap-2 items-center">
@@ -37,6 +38,6 @@ export default function SettingPayment({ payments }: SettingPaymentProps) {
           <span className="hidden md:block">Salvar</span>
         </button>
       </div>
-    </>
+    </form>
   )
 }

@@ -17,6 +17,8 @@ import * as $Category from '@/services/Category'
 import * as $State from '@/services/State'
 import { deleteAllSearchParam, updateSearchParams } from '@/helpers/useQuery'
 import { ISettingPayment } from '@/interfaces/ISettingPayment'
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
 
 export default function Settings() {
   const [selectedTab, setSelectedTab] = useState<string>('text')
@@ -30,6 +32,8 @@ export default function Settings() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()!
+
+  const MySwal = withReactContent(Swal)
 
   const settingTextColumns = useSettingTextColumns()
 
@@ -99,6 +103,66 @@ export default function Settings() {
     })
   }, [searchParams])
 
+  const handleSubmitTaxes = (e: any) => {
+    e.preventDefault()
+
+    $SettingTax.update(settingTaxes).then((res: any) => {
+      const message = res.response?.data?.message ?? 'Impostos atualizados com sucesso'
+      MySwal.fire(
+        'Sucesso',
+        message,
+        'success'
+      )
+    }).catch((err: any) => {
+      const message = err.response?.data?.message ?? 'Ocorreu um erro ao atualizar os impostos'
+      MySwal.fire(
+        'Erro',
+        message,
+        'error'
+      )
+    })
+  }
+
+  const handleSubmitFreight = (e: any) => {
+    e.preventDefault()
+
+    $SettingFreight.update(settingFreights).then((res: any) => {
+      const message = res.response?.data?.message ?? 'Configurações de frete atualizadas com sucesso'
+      MySwal.fire(
+        'Sucesso',
+        message,
+        'success'
+      )
+    }).catch((err: any) => {
+      const message = err.response?.data?.message ?? 'Ocorreu um erro ao atualizar as configurações de frete'
+      MySwal.fire(
+        'Erro',
+        message,
+        'error'
+      )
+    })
+  }
+
+  const handleSubmitPayment = (e: any) => {
+    e.preventDefault()
+
+    $SettingPayment.update(settingPayments[0]).then((res: any) => {
+      const message = res.response?.data?.message ?? 'Configurações de pagamento atualizadas com sucesso'
+      MySwal.fire(
+        'Sucesso',
+        message,
+        'success'
+      )
+    }).catch((err: any) => {
+      const message = err.response?.data?.message ?? 'Ocorreu um erro ao atualizar as configurações de pagamento'
+      MySwal.fire(
+        'Erro',
+        message,
+        'error'
+      )
+    })
+  }
+
   return (
     <>
       <h1 className="w-full text-4xl text-gray-500 font-light mb-10">Configurações</h1>
@@ -133,7 +197,7 @@ export default function Settings() {
                   </Component>
                 )
               } else if (tab.id === 'tax') {
-                return <Component key={tab.id} taxes={settingTaxes} states={states} />
+                return <Component key={tab.id} taxes={settingTaxes} states={states} handleSubmit={handleSubmitTaxes} />
               } else if (tab.id === 'freight') {
                 return (
                   <Component
@@ -143,10 +207,11 @@ export default function Settings() {
                     freights={settingFreights}
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
+                    handleSubmit={handleSubmitFreight}
                   />
                 )
               } else if (tab.id === 'payment') {
-                return <Component key={tab.id} payments={settingPayments} />
+                return <Component key={tab.id} payments={settingPayments} handleSubmit={handleSubmitPayment} />
               }
             }
           })}

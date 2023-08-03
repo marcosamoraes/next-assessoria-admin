@@ -4,10 +4,11 @@ import { ISettingTax } from '@/interfaces/ISettingTax'
 type SettingTaxProps = {
   taxes: ISettingTax[]
   states: IState[]
+  handleSubmit: (e: any) => void
 }
-export default function SettingTax({ taxes, states }: SettingTaxProps) {
+export default function SettingTax({ taxes, states, handleSubmit }: SettingTaxProps) {
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div>
         <div className="bg-white px-5 py-7 rounded-xl flex flex-wrap">
           {states?.length > 0 && states.map((state) => (
@@ -48,6 +49,6 @@ export default function SettingTax({ taxes, states }: SettingTaxProps) {
           <span className="hidden md:block">Salvar</span>
         </button>
       </div>
-    </>
+    </form>
   )
 }

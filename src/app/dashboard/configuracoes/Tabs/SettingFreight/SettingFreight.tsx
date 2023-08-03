@@ -8,11 +8,12 @@ type SettingFreightProps = {
   freights: ISettingFreight[]
   selectedCategory: number
   setSelectedCategory: (tab: number) => void
+  handleSubmit: (e: any) => void
 }
 
-export default function SettingFreight({ states, categories, freights, selectedCategory, setSelectedCategory }: SettingFreightProps) {
+export default function SettingFreight({ states, categories, freights, selectedCategory, setSelectedCategory, handleSubmit }: SettingFreightProps) {
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
         <ul className="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow flex flex-wrap lg:flex-nowrap w-full">
           {categories.map((category) => (
@@ -73,6 +74,6 @@ export default function SettingFreight({ states, categories, freights, selectedC
           <span className="hidden md:block">Salvar</span>
         </button>
       </div>
-    </>
+    </form>
   )
 }

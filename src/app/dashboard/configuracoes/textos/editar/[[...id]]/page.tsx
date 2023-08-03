@@ -5,32 +5,61 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { IoMdArrowBack } from 'react-icons/io'
 import BackButton from '@/components/UI/BackButton/BackButton'
-import { ICoupon } from '@/interfaces/ICoupon'
-import { getCoupon } from '@/api/CouponsApi'
-import { EditorProps } from 'react-draft-wysiwyg'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import dynamic from 'next/dynamic'
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
+import { ISettingText } from '@/interfaces/ISettingText'
+import * as $SettingText from '@/services/SettingText'
 
-const Editor = dynamic<EditorProps>(
-  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
-  { ssr: false, loading: () => <p>Carregando...</p> }
-)
-
-export default function CouponsCreate({ params }: any) {
-  const [coupon, setCoupon] = useState<ICoupon | null>(null)
+export default function SettingTextsCreate({ params }: any) {
+  const [settingText, setSettingText] = useState<ISettingText>({
+    name: '',
+    description: '',
+    content: '',
+  } as ISettingText)
 
   const { id } = params
 
+  const MySwal = withReactContent(Swal)
+
   useEffect(() => {
-    const data = getCoupon(id)
-    setCoupon(data)
+    if (id) {
+      $SettingText.find(id).then((res: any) => {
+        const data: ISettingText = res.data.setting_freight
+        setSettingText(data)
+      })
+    }
   }, [id])
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target
+    setSettingText({ ...settingText, [name]: value })
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    $SettingText.update(id, settingText).then((res: any) => {
+      const message = res.response?.data?.message ?? 'Texto atualizado com sucesso'
+      MySwal.fire(
+        'Sucesso',
+        message,
+        'success'
+      )
+    }).catch((err: any) => {
+      const message = err.response?.data?.message ?? 'Ocorreu um erro ao atualizar o texto'
+      MySwal.fire(
+        'Erro',
+        message,
+        'error'
+      )
+    })
+  }
 
   return (
     <>
-      <form className="flex flex-wrap flex-row">
+      <form className="flex flex-wrap flex-row" onSubmit={handleSubmit}>
         <div className="w-full px-2 -md-2 flex justify-between">
-          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{coupon ? 'Editar' : 'Novo'} Texto</h1>
+          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">Editar Texto</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/configuracoes">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
@@ -46,29 +75,42 @@ export default function CouponsCreate({ params }: any) {
                 <label htmlFor="name" className="text-gray-500 text-sm mb-2">
                   Nome
                 </label>
-                <input type="text" name="name" id="name" placeholder="Nome" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Nome"
+                  className="border border-gray-300 rounded-lg px-3 py-2 mb-5"
+                  defaultValue={settingText.name}
+                  onChange={handleInputChange}
+                />
               </div>
               <div className="flex flex-col w-full md:w-6/12 md:px-2 md:-mx-2">
                 <label htmlFor="description" className="text-gray-500 text-sm mb-2">
                   Descrição
                 </label>
-                <input type="text" name="description" id="description" placeholder="Descrição" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" />
+                <input
+                  type="text"
+                  name="description"
+                  id="description"
+                  placeholder="Descrição"
+                  className="border border-gray-300 rounded-lg px-3 py-2 mb-5"
+                  defaultValue={settingText.description}
+                  onChange={handleInputChange}
+                />
               </div>
               <div className="flex flex-col w-full md:px-2 md:-mx-2">
                 <label htmlFor="content" className="text-gray-500 text-sm mb-2">
                   Conteúdo
                 </label>
-                <Editor
-                  wrapperClassName="h-40 mb-48 md:mb-24"
-                  editorClassName="border border-gray-300 rounded-lg px-3 py-2 mb-5"
-                  placeholder="Escreva o conteúdo do texto aqui..."
-                  toolbar={{
-                    options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link'],
-                    inline: {
-                      options: ['bold', 'italic', 'underline', 'strikethrough'],
-                    },
-                  }}
-                />
+                <textarea
+                  name="description"
+                  id="description"
+                  placeholder="Descrição"
+                  className="border border-gray-300 rounded-lg h-48"
+                  defaultValue={settingText.content}
+                  onChange={handleInputChange}
+                ></textarea>
               </div>
             </div>
           </div>
