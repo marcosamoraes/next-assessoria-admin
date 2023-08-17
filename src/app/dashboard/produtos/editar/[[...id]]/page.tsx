@@ -167,7 +167,7 @@ export default function ProductsCreate({ params }: any) {
     <>
       <form className="flex flex-wrap flex-row" onSubmit={handleSubmit}>
         <div className="w-full px-2 -md-2 flex justify-between">
-          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{product ? 'Editar' : 'Novo'} Produto {id ?? ''}</h1>
+          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{product.id ? 'Editar' : 'Novo'} Produto {id ?? ''}</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/produtos">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>

@@ -21,6 +21,7 @@ export default function CouponsCreate({ params }: any) {
     type: 'percent',
     value: 0.00,
     quantity: 0,
+    expire_at: '',
   } as ICoupon)
 
   const [categories, setCategories] = useState<ICategory[]>({} as ICategory[])
@@ -97,7 +98,7 @@ export default function CouponsCreate({ params }: any) {
     <>
       <form className="flex flex-wrap flex-row" onSubmit={handleSubmit}>
         <div className="w-full px-2 -md-2 flex justify-between">
-          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{coupon ? 'Editar' : 'Novo'} Cupom</h1>
+          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">{coupon.id ? 'Editar' : 'Novo'} Cupom</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/cupons">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
@@ -165,7 +166,7 @@ export default function CouponsCreate({ params }: any) {
                 <label htmlFor="expire_at" className="text-gray-500 text-sm mb-2">
                   Expira em
                 </label>
-                <input type="datetime-local" value={moment(coupon.expire_at).format('YYYY-MM-DDTHH:mm')} name="expire_at" id="expire_at" placeholder="Expira em" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} />
+                <input type="datetime-local" value={coupon.expire_at ? moment(coupon.expire_at).format('YYYY-MM-DDTHH:mm') : ''} name="expire_at" id="expire_at" placeholder="Expira em" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={handleInputChange} />
               </div>
             </div>
           </div>
