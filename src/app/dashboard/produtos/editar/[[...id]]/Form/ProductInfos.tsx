@@ -22,7 +22,7 @@ export default function ProductInfos({ product, categories, onChange }: ProductI
           <label htmlFor="code" className="text-gray-500 text-sm mb-2">
             Código
           </label>
-          <input type="text" defaultValue={product.code} name="code" id="code" placeholder="Código" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" minLength={10} maxLength={10} onChange={onChange} required/>
+          <input type="text" defaultValue={product.code} name="code" id="code" placeholder="Código" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" maxLength={10} onChange={onChange} required/>
         </div>
         <div className="flex flex-col w-full md:w-4/12 md:px-2 md:-mx-2">
           <label htmlFor="category_id" className="text-gray-500 text-sm mb-2">
