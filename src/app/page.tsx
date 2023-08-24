@@ -18,7 +18,9 @@ export default function Login() {
 
   return (
     <GuestRoute>
-      <div className="h-screen flex bg-cover bg-no-repeat bg-[url('/auth-background.jpg')]">
+      <div className="h-screen relative">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/auth-background.jpg')]"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <AuthSidebar>
           <div>
             <h1 className="mb-5 font-bold text-center text-lg">Acesso Administrativo</h1>
