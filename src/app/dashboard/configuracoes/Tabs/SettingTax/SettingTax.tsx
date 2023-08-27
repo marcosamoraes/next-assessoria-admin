@@ -5,8 +5,9 @@ type SettingTaxProps = {
   taxes: ISettingTax[]
   states: IState[]
   handleSubmit: (e: any) => void
+  handleChanges: (e: any, id: number) => void
 }
-export default function SettingTax({ taxes, states, handleSubmit }: SettingTaxProps) {
+export default function SettingTax({ taxes, states, handleSubmit, handleChanges }: SettingTaxProps) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -24,7 +25,9 @@ export default function SettingTax({ taxes, states, handleSubmit }: SettingTaxPr
                     type="text"
                     placeholder="Impostos"
                     className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                    defaultValue={taxes.filter(tax => tax.state.uf === state.uf)[0]?.tax ?? ''}
+                    value={taxes.filter(tax => tax.state.uf === state.uf)[0]?.tax ?? ''}
+                    name="tax"
+                    onChange={(e) => handleChanges(e, taxes.filter(tax => tax.state.uf === state.uf)[0]?.id)}
                   />
                 </div>
                 <div className="md:px-2 w-full md:w-6/12">
@@ -32,7 +35,9 @@ export default function SettingTax({ taxes, states, handleSubmit }: SettingTaxPr
                     type="text"
                     placeholder="Valor (%)"
                     className="border border-gray-300 w-full rounded-lg box px-3 py-2"
-                    defaultValue={taxes.filter(tax => tax.state.uf === state.uf)[0]?.value ?? ''}
+                    value={taxes.filter(tax => tax.state.uf === state.uf)[0]?.value ?? ''}
+                    name="value"
+                    onChange={(e) => handleChanges(e, taxes.filter(tax => tax.state.uf === state.uf)[0]?.id)}
                   />
                 </div>
               </div>

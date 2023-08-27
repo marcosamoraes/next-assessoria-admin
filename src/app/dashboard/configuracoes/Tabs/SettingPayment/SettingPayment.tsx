@@ -3,8 +3,9 @@ import { ISettingPayment } from '@/interfaces/ISettingPayment'
 type SettingPaymentProps = {
   payments: ISettingPayment[]
   handleSubmit: (e: any) => void
+  handleChanges: (e: any) => void
 }
-export default function SettingPayment({ payments, handleSubmit }: SettingPaymentProps) {
+export default function SettingPayment({ payments, handleSubmit, handleChanges }: SettingPaymentProps) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -23,6 +24,7 @@ export default function SettingPayment({ payments, handleSubmit }: SettingPaymen
                   className="border border-gray-300 w-full rounded-lg box px-3 py-2"
                   name="installments_fee"
                   defaultValue={payments[0].installments_fee}
+                  onChange={handleChanges}
                 />
               </div>
             </div>

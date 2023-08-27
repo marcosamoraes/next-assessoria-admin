@@ -85,7 +85,7 @@ export default function Products() {
         <h1 className="w-full text-4xl text-gray-500 font-light">
           Produtos
         </h1>
-        <OptionsBar storeLink="/dashboard/produtos/editar" exportLink="products/export" />
+        <OptionsBar storeLink="/dashboard/produtos/editar" importLink="products/import" exportLink="products/export" />
       </div>
       <div className="flex justify-between">
         <div className="flex flex-col lg:flex-row gap-3 w-full">

@@ -163,6 +163,33 @@ export default function Settings() {
     })
   }
 
+  const handleChangesPayment = (e: any) => {
+    const { name, value } = e.target
+    setSettingPayments([{ ...settingPayments[0], [name]: value }])
+  }
+
+  const handleChangesFreight = (e: any, id: number) => {
+    const { name, value } = e.target
+    const freightUpdated = settingFreights.map((freight) => {
+      if (freight.id === id) {
+        return { ...freight, [name]: value }
+      }
+      return freight
+    })
+    setSettingFreights(freightUpdated)
+  }
+
+  const handleChangesTaxes = (e: any, id: number) => {
+    const { name, value } = e.target
+    const taxesUpdated = settingTaxes.map((tax) => {
+      if (tax.id === id) {
+        return { ...tax, [name]: value }
+      }
+      return tax
+    })
+    setSettingTaxes(taxesUpdated)
+  }
+
   return (
     <>
       <h1 className="w-full text-4xl text-gray-500 font-light mb-10">Configurações</h1>
@@ -197,7 +224,7 @@ export default function Settings() {
                   </Component>
                 )
               } else if (tab.id === 'tax') {
-                return <Component key={tab.id} taxes={settingTaxes} states={states} handleSubmit={handleSubmitTaxes} />
+                return <Component key={tab.id} taxes={settingTaxes} states={states} handleSubmit={handleSubmitTaxes} handleChanges={handleChangesTaxes} />
               } else if (tab.id === 'freight') {
                 return (
                   <Component
@@ -208,10 +235,11 @@ export default function Settings() {
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                     handleSubmit={handleSubmitFreight}
+                    handleChanges={handleChangesFreight}
                   />
                 )
               } else if (tab.id === 'payment') {
-                return <Component key={tab.id} payments={settingPayments} handleSubmit={handleSubmitPayment} />
+                return <Component key={tab.id} payments={settingPayments} handleSubmit={handleSubmitPayment} handleChanges={handleChangesPayment} />
               }
             }
           })}
