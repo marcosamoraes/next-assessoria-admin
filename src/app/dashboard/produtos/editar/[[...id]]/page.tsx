@@ -75,7 +75,7 @@ export default function ProductsCreate({ params }: any) {
   const handleSubmit = (e: any) => {
     e.preventDefault()
 
-    if (!product.prices || Object.keys(product.prices as {}).length < 27) {
+    if (product.client_type === ClientTypeEnum.PHYSICAL_PERSON && (!product.prices || Object.keys(product.prices as {}).length < 27)) {
       return MySwal.fire(
         'Erro',
         'Insira os valores do produto para todos os estados',
@@ -186,9 +186,11 @@ export default function ProductsCreate({ params }: any) {
           <ProductImages product={product} onChange={handleImagesChange} clearImages={clearImages} />
         </div>
 
-        <div className="w-full px-2 -md-2">
-          <ProductValues product={product} states={states} onChange={handleValuesChange} />
-        </div>
+        {product.client_type === ClientTypeEnum.PHYSICAL_PERSON && (
+          <div className="w-full px-2 -md-2">
+            <ProductValues product={product} states={states} onChange={handleValuesChange} />
+          </div>
+        )}
       </form>
     </>
   )
