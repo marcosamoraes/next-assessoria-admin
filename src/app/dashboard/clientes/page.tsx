@@ -49,7 +49,7 @@ export default function Clients() {
         <h1 className="w-full text-4xl text-gray-500 font-light">
           Clientes
         </h1>
-        <OptionsBar storeLink="/dashboard/clientes/editar" exportLink="clients/export" />
+        <OptionsBar exportLink="clients/export" />
       </div>
       <div className="flex justify-between">
         <div className="flex flex-col lg:flex-row gap-3 w-full">
