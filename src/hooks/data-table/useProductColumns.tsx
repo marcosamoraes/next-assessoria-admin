@@ -38,8 +38,12 @@ const useProductColumns = (onDelete: (id: number) => void, onStatusToggle: (id: 
         format: (row: any) => {
           if (row.client_type === 'physical') {
             return <p title="Pessoa Física">Pessoa Física</p>
-          } else {
+          } else if (row.client_type === 'juridical') {
             return <p title="Pessoa Jurídica">Pessoa Jurídica</p>
+          } else if (row.client_type === 'public_security') {
+            return <p title="Segurança Pública">Segurança Pública</p>
+          } else if (row.client_type === 'private_security') {
+            return <p title="Segurança Privada">Segurança Privada</p>
           }
         },
       },

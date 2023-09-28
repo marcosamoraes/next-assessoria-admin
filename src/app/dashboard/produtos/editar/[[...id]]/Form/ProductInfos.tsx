@@ -47,6 +47,8 @@ export default function ProductInfos({ product, categories, onChange }: ProductI
           <select name="client_type" id="client_type" value={product.client_type} className="border border-gray-300 rounded-lg px-3 py-2 mb-5" onChange={onChange} required>
             <option value="physical">Física</option>
             <option value="juridical">Jurídica</option>
+            <option value="public_security">Segurança Pública</option>
+            <option value="private_security">Segurança Privada</option>
           </select>
         </div>
         <div className="flex flex-col w-full md:w-3/12 md:px-2 md:-mx-2">

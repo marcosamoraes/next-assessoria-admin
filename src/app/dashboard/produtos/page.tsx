@@ -109,7 +109,9 @@ export default function Products() {
           >
             <option value={0}>Tipo de cliente</option>
             <option value="physical">Física</option>
-            <option value="juridical">Jurídica</option>
+            <option value="juridical">Lojista</option>
+            <option value="public_security">Segurança Pública</option>
+            <option value="private_security">Segurança Privada</option>
           </select>
           <select
             name="check_availability"
