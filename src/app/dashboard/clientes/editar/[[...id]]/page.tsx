@@ -6,12 +6,18 @@ import { useEffect, useState } from 'react'
 import { IoMdArrowBack } from 'react-icons/io'
 import BackButton from '@/components/UI/BackButton/BackButton'
 import { IUser } from '@/interfaces/IUser'
-import { getUser } from '@/api/UsersApi'
 import ClientInfos from './Form/ClientInfos'
 import ClientAddress from './Form/ClientAddress'
 import ClientDocumentRg from './Form/ClientDocumentRg'
 import ClientDocumentCr from './Form/ClientDocumentCr'
 import * as $User from '@/services/User'
+
+const IUserKeys = {
+  details: 'details',
+  address: 'address',
+} as const
+
+type IUserKeys = keyof typeof IUserKeys
 
 export default function ClientsCreate({ params }: any) {
   const [user, setUser] = useState<IUser>({} as IUser)
@@ -27,11 +33,17 @@ export default function ClientsCreate({ params }: any) {
     }
   }, [id])
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    // TODO: split "." and correctly save it
-    setUser({ ...user, [name]: value }) 
+    if (name.includes('.')) {
+      const key: IUserKeys = name.split('.')[0] as IUserKeys
+      const subKey = name.split('.')[1]
+      setUser((prevUser) => ({ ...prevUser, [key]: { ...prevUser[key], [subKey]: value } }))
+      return
+    }
+
+    setUser((prevUser) => ({ ...prevUser, [name]: value }))
   }
 
   return (
