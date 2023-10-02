@@ -7,7 +7,7 @@ type ProductInfosProps = {
   onChange: (e: any) => void
 }
 export default function ProductInfos({ product, categories, onChange }: ProductInfosProps) {
-  console.log(product)
+
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Informações</h3>

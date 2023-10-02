@@ -11,16 +11,28 @@ import ClientInfos from './Form/ClientInfos'
 import ClientAddress from './Form/ClientAddress'
 import ClientDocumentRg from './Form/ClientDocumentRg'
 import ClientDocumentCr from './Form/ClientDocumentCr'
+import * as $User from '@/services/User'
 
 export default function ClientsCreate({ params }: any) {
-  const [user, setUser] = useState<IUser | null>(null)
+  const [user, setUser] = useState<IUser>({} as IUser)
 
   const { id } = params
 
   useEffect(() => {
-    const data = getUser(id)
-    setUser(data)
+    if (id) {
+      $User.find(id).then((res: any) => {
+        const data: IUser = res.data.user
+        setUser(data)
+      })
+    }
   }, [id])
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target
+
+    // TODO: split "." and correctly save it
+    setUser({ ...user, [name]: value }) 
+  }
 
   return (
     <>
@@ -36,13 +48,13 @@ export default function ClientsCreate({ params }: any) {
         </div>
 
         <div className="w-full xl:w-9/12 px-2 -md-2">
-          <ClientInfos user={user} />
-          <ClientAddress user={user} />
+          <ClientInfos user={user} onChange={handleInputChange} />
+          <ClientAddress user={user} onChange={handleInputChange} />
         </div>
 
         <div className="w-full xl:w-3/12 px-2 -md-2">
-          <ClientDocumentRg user={user} />
-          <ClientDocumentCr user={user} />
+          <ClientDocumentRg user={user} onChange={handleInputChange} />
+          <ClientDocumentCr user={user} onChange={handleInputChange} />
         </div>
       </form>
     </>

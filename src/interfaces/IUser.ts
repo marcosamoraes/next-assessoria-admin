@@ -1,21 +1,19 @@
 import UserRoleEnum from '@/enums/UserRoleEnum'
 import { IUserAddress } from './IUserAddress'
-import { IUserDocument } from './IUserDocument'
-import { IUserInformation } from './IUserInformation'
+import { IUserDetail } from './IUserDetail'
 
 export interface IUser {
   id: number
-  firstname: string
-  lastname: string
+  name: string
+  last_name: string
   email: string
   whatsapp?: string
   document?: string
   role?: UserRoleEnum
   active: boolean
-  createdAt?: string
-  updatedAt?: string
+  created_at?: string
+  updated_at?: string
 
-  userInformation?: IUserInformation
-  userAddress?: IUserAddress
-  userDocuments?: IUserDocument[]
+  details?: IUserDetail
+  address?: IUserAddress
 }

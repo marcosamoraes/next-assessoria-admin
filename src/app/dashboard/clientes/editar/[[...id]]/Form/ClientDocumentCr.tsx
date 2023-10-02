@@ -2,7 +2,11 @@
 import { IUser } from '@/interfaces/IUser'
 import { ChangeEvent, useState } from 'react'
 
-export default function ClientDocumentCr({ user }: { user: IUser | null }) {
+type ClientDocumentCrProps = {
+  user: IUser
+  onChange: (e: any) => void
+}
+export default function ClientDocumentCr({ user, onChange }: ClientDocumentCrProps) {
   const [tempFile, setTempFile] = useState<string | null>(null)
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {

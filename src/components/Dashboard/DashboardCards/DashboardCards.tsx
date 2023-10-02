@@ -7,13 +7,14 @@ import { formatter } from '@/helpers/Utils'
 
 type DashboardCardsProps = {
   data: IDashboard
+  filter: string
   setFilter: (value: string) => void
 }
 
-const DashboardCards: React.FC<any> = ({ data, setFilter }: DashboardCardsProps) => {
+const DashboardCards: React.FC<any> = ({ data, filter, setFilter }: DashboardCardsProps) => {
   return (
     <>
-      <select name="filter-dashboard-cards" id="" defaultValue="today" className="mb-5 bg-zinc-100 border-0 py-0" onChange={(e) => setFilter(e.target.value)}>
+      <select name="filter-dashboard-cards" id="" value={filter} className="mb-5 bg-zinc-100 border-0 py-0" onChange={(e) => setFilter(e.target.value)}>
         <option value="today">Hoje</option>
         <option value="weekly">Essa semana</option>
         <option value="monthly">Esse mês</option>

@@ -1,6 +1,5 @@
 'use client'
 
-import { getUsers } from '@/api/UsersApi'
 import OptionsBar from '@/components/UI/OptionsBar/OptionsBar'
 import SearchBar from '@/components/UI/SearchBar/SearchBar'
 import useClientColumns from '@/hooks/data-table/useClientColumns'
@@ -9,11 +8,16 @@ import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import * as $User from '@/services/User'
 
 export default function Clients() {
-  const [clients, setClients] = useState<IUser[] | any>([])
+  const [clients, setClients] = useState<IUser[]>({} as IUser[])
 
   const MySwal = withReactContent(Swal)
+
+  const onStatusToggle = async (id: number) => {
+    await $User.toggleStatus(id)
+  }
 
   const onDelete = () => {
     MySwal.fire({
@@ -36,11 +40,13 @@ export default function Clients() {
     })
   }
 
-  const columns = useClientColumns(onDelete)
+  const columns = useClientColumns(onDelete, onStatusToggle)
 
   useEffect(() => {
-    const clients = getUsers()
-    setClients(clients)
+    $User.all().then((res: any) => {
+      const data: IUser[] = res.data.data
+      setClients(data)
+    })
   }, [])
 
   return (
@@ -64,7 +70,11 @@ export default function Clients() {
 
       </div>
       <div>
-        <DataTable columns={columns} data={clients} className="mt-7 bg-none" pagination responsive />
+        {clients?.length > 0 ? (
+          <DataTable columns={columns} data={clients} className="mt-7 bg-none" pagination responsive />
+        ) : (
+          <div className="w-full bg-yellow-200 border-2 border-yellow-300 p-5 mt-5">Não há clientes cadastrados</div>
+        )}
       </div>
     </>
   )

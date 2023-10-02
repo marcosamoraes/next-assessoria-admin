@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-const useClientColumns = (onDelete: () => void) => {
+const useClientColumns = (onDelete: () => void, onStatusToggle: (id: number) => void) => {
   const searchParams = useSearchParams()
 
   return useMemo(
@@ -14,9 +14,9 @@ const useClientColumns = (onDelete: () => void) => {
       {
         id: 'firstname',
         name: 'Nome',
-        selector: (row: any) => row.firstname,
+        selector: (row: any) => row.name,
         sortable: true,
-        format: (row: any) => <p title={row.firstname + ' ' + row.lastname}>{row.firstname + ' ' + row.lastname}</p>,
+        format: (row: any) => <p title={row.name + ' ' + row.last_name}>{row.name + ' ' + row.last_name}</p>,
       },
       {
         id: 'email',
@@ -28,23 +28,23 @@ const useClientColumns = (onDelete: () => void) => {
       {
         id: 'document',
         name: 'Documento',
-        selector: (row: any) => row.userInformations.document,
+        selector: (row: any) => row.details.document,
         sortable: true,
-        format: (row: any) => <p title={row.userInformations.document}>{row.userInformations.document}</p>,
+        format: (row: any) => <p title={row.details.document}>{row.details.document}</p>,
       },
       {
         id: 'state',
         name: 'Estado',
-        selector: (row: any) => row.userAddress.state,
+        selector: (row: any) => row.address.state,
         sortable: true,
-        format: (row: any) => <p title={row.userAddress.state}>{row.userAddress.state}</p>,
+        format: (row: any) => <p title={row.address.state}>{row.address.state}</p>,
       },
       {
         id: 'status',
         name: 'Status',
-        selector: (row: any) => row.userInformations.status,
+        selector: (row: any) => row.details.status,
         sortable: true,
-        format: (row: any) => <p title={row.userInformations.status}>{t(row.userInformations.status)}</p>,
+        format: (row: any) => <p title={row.details.status}>{t(row.details.status)}</p>,
       },
       {
         id: 'active',
@@ -53,7 +53,7 @@ const useClientColumns = (onDelete: () => void) => {
         selector: (row: any) => row.active,
         sortable: true,
         cell: (row: any) => (
-          <ToggleButton name="active" defaultChecked={row.active ? true : false} />
+          <ToggleButton name="active" defaultChecked={row.active ? true : false} onChange={() => onStatusToggle(row.id)} />
         ),
       },
       {
@@ -74,7 +74,7 @@ const useClientColumns = (onDelete: () => void) => {
         },
       },
     ],
-    [searchParams, onDelete],
+    [searchParams, onDelete, onStatusToggle],
   )
 }
 

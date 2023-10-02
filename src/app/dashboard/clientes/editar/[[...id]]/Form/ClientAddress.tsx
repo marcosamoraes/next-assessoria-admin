@@ -1,6 +1,10 @@
 import { IUser } from '@/interfaces/IUser'
 
-export default function ClientAddress({ user }: { user: IUser | null }) {
+type ClientAddressProps = {
+  user: IUser
+  onChange: (e: any) => void
+}
+export default function ClientAddress({ user, onChange }: ClientAddressProps) {
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Endereço</h3>

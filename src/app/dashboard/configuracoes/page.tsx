@@ -29,6 +29,9 @@ export default function Settings() {
   const [settingFreights, setSettingFreights] = useState<ISettingFreight[]>({} as ISettingFreight[])
   const [settingPayments, setSettingPayments] = useState<ISettingPayment[]>({} as ISettingPayment[])
   const [categories, setCategories] = useState<ICategory[]>([])
+
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()!
@@ -82,24 +85,23 @@ export default function Settings() {
   }, [])
 
   useEffect(() => {
-    $SettingText.all(searchParams.toString()).then((res: any) => {
-      const data: ISettingText[] = res.data.data
-      setSettingTexts(data)
-    })
+    Promise.all([
+      $SettingText.all(searchParams.toString()),
+      $SettingTax.all(searchParams.toString()),
+      $SettingFreight.all(searchParams.toString()),
+      $SettingPayment.all(searchParams.toString())
+    ]).then(([textRes, taxRes, freightRes, paymentRes]: any) => {
+      const textData: ISettingText[] = textRes.data.data
+      const taxData: ISettingTax[] = taxRes.data.data
+      const freightData: ISettingFreight[] = freightRes.data.data
+      const paymentData: ISettingPayment[] = paymentRes.data.data
 
-    $SettingTax.all(searchParams.toString()).then((res: any) => {
-      const data: ISettingTax[] = res.data.data
-      setSettingTaxes(data)
-    })
+      setSettingTexts(textData)
+      setSettingTaxes(taxData)
+      setSettingFreights(freightData)
+      setSettingPayments(paymentData)
 
-    $SettingFreight.all(searchParams.toString()).then((res: any) => {
-      const data: ISettingFreight[] = res.data.data
-      setSettingFreights(data)
-    })
-
-    $SettingPayment.all(searchParams.toString()).then((res: any) => {
-      const data: ISettingPayment[] = res.data.data
-      setSettingPayments(data)
+      setIsLoading(false)
     })
   }, [searchParams])
 
@@ -193,58 +195,66 @@ export default function Settings() {
   return (
     <>
       <h1 className="w-full text-4xl text-gray-500 font-light mb-10">Configurações</h1>
-      <div className="flex justify-between">
-        <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500">
-          {tabs.map((tab) => (
-            <li className="mr-2" key={tab.id}>
-              <a
-                href="#"
-                className={`inline-block px-4 py-3 rounded-lg ${selectedTab === tab.id ? 'bg-primary text-white' : 'hover:text-gray-900 hover:bg-gray-100'}`}
-                onClick={() => setSelectedTab(tab.id)}
-              >
-                {tab.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <div className="mt-7">
-          {tabs.map((tab) => {
-            if (tab.id === selectedTab) {
-              const Component = require(`./Tabs/${tab.component}/${tab.component}`).default
-              if (tab.id === 'text') {
-                return (
-                  <Component key={tab.id} handleQueryChange={handleQueryChange}>
-                    {settingTexts?.length > 0 ? (
-                      <DataTable columns={settingTextColumns} data={settingTexts} className="mt-7 bg-none" pagination responsive />
-                    ) : (
-                      <div className="w-full bg-yellow-200 border-2 border-yellow-300 p-5 mt-5">Não há textos cadastrados</div>
-                    )}
-                  </Component>
-                )
-              } else if (tab.id === 'tax') {
-                return <Component key={tab.id} taxes={settingTaxes} states={states} handleSubmit={handleSubmitTaxes} handleChanges={handleChangesTaxes} />
-              } else if (tab.id === 'freight') {
-                return (
-                  <Component
-                    key={tab.id}
-                    states={states}
-                    categories={categories}
-                    freights={settingFreights}
-                    selectedCategory={selectedCategory}
-                    setSelectedCategory={setSelectedCategory}
-                    handleSubmit={handleSubmitFreight}
-                    handleChanges={handleChangesFreight}
-                  />
-                )
-              } else if (tab.id === 'payment') {
-                return <Component key={tab.id} payments={settingPayments} handleSubmit={handleSubmitPayment} handleChanges={handleChangesPayment} />
-              }
-            }
-          })}
+      {isLoading ? (
+        <div className="w-full flex justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="flex justify-between">
+            <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500">
+              {tabs.map((tab) => (
+                <li className="mr-2" key={tab.id}>
+                  <a
+                    href="#"
+                    className={`inline-block px-4 py-3 rounded-lg ${selectedTab === tab.id ? 'bg-primary text-white' : 'hover:text-gray-900 hover:bg-gray-100'}`}
+                    onClick={() => setSelectedTab(tab.id)}
+                  >
+                    {tab.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div className="mt-7">
+              {tabs.map((tab) => {
+                if (tab.id === selectedTab) {
+                  const Component = require(`./Tabs/${tab.component}/${tab.component}`).default
+                  if (tab.id === 'text') {
+                    return (
+                      <Component key={tab.id} handleQueryChange={handleQueryChange}>
+                        {settingTexts?.length > 0 ? (
+                          <DataTable columns={settingTextColumns} data={settingTexts} className="mt-7 bg-none" pagination responsive />
+                        ) : (
+                          <div className="w-full bg-yellow-200 border-2 border-yellow-300 p-5 mt-5">Não há textos cadastrados</div>
+                        )}
+                      </Component>
+                    )
+                  } else if (tab.id === 'tax') {
+                    return <Component key={tab.id} taxes={settingTaxes} states={states} handleSubmit={handleSubmitTaxes} handleChanges={handleChangesTaxes} />
+                  } else if (tab.id === 'freight') {
+                    return (
+                      <Component
+                        key={tab.id}
+                        states={states}
+                        categories={categories}
+                        freights={settingFreights}
+                        selectedCategory={selectedCategory}
+                        setSelectedCategory={setSelectedCategory}
+                        handleSubmit={handleSubmitFreight}
+                        handleChanges={handleChangesFreight}
+                      />
+                    )
+                  } else if (tab.id === 'payment') {
+                    return <Component key={tab.id} payments={settingPayments} handleSubmit={handleSubmitPayment} handleChanges={handleChangesPayment} />
+                  }
+                }
+              })}
+            </div>
+          </div>
+        </>
+      )}
     </>
   )
 }

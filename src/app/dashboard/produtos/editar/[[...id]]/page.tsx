@@ -99,8 +99,7 @@ export default function ProductsCreate({ params }: any) {
           'error'
         )
       })
-    }
-    else {
+    } else {
       $Product.store(product).then((res: any) => {
         const message = res.response?.data?.message ?? 'Produto criado com sucesso'
         MySwal.fire(

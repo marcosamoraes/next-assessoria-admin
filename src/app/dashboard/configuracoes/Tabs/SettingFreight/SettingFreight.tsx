@@ -13,7 +13,7 @@ type SettingFreightProps = {
 }
 
 export default function SettingFreight({ states, categories, freights, selectedCategory, setSelectedCategory, handleSubmit, handleChanges }: SettingFreightProps) {
-  console.log((freights))
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="bg-white px-5 lg:px-10 py-7 rounded-xl flex flex-wrap flex-row flex-1 gap-3">
@@ -43,7 +43,7 @@ export default function SettingFreight({ states, categories, freights, selectedC
                 type="text"
                 placeholder="1 Item"
                 className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
-                value={freights ? freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_one_item : 0}
+                value={freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_one_item ?? '0.00'}
                 name="value_one_item"
                 onChange={(e) => handleChanges(e, freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.id)}
               />
@@ -51,7 +51,7 @@ export default function SettingFreight({ states, categories, freights, selectedC
                 type="text"
                 placeholder="2 Itens"
                 className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
-                value={freights ? freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_two_item : 0}
+                value={freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_two_item ?? '0.00'}
                 name="value_two_item"
                 onChange={(e) => handleChanges(e, freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.id)}
               />
@@ -59,7 +59,7 @@ export default function SettingFreight({ states, categories, freights, selectedC
                 type="text"
                 placeholder="3 Itens"
                 className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
-                value={freights ? freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_three_item : 0}
+                value={freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_three_item ?? '0.00'}
                 name="value_three_item"
                 onChange={(e) => handleChanges(e, freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.id)}
               />
@@ -67,7 +67,7 @@ export default function SettingFreight({ states, categories, freights, selectedC
                 type="text"
                 placeholder="4 Itens"
                 className="border border-gray-300 w-[70px] rounded-lg box px-3 py-2"
-                value={freights ? freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_four_item : 0}
+                value={freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.value_four_item ?? '0.00'}
                 name="value_four_item"
                 onChange={(e) => handleChanges(e, freights.filter(data => data.state.uf === state.uf && data.category.id === selectedCategory)[0]?.id)}
               />

@@ -12,16 +12,26 @@ export default function Dashboard() {
   const [ filter, setFilter ] = useState<string>('today')
 
   useEffect(() => {
+    const filter = localStorage.getItem('filter')
+    if (filter) setFilter(filter)
+  }, [])
+
+  useEffect(() => {
     $Dashboard.get(filter).then((res: any) => {
       const data: IDashboard = res.data
       setDashboardData(data)
-    })
+    }).catch((err: any) => console.log(err))
   }, [filter])
+
+  const handleFilter = (filter: string) => {
+    setFilter(filter)
+    localStorage.setItem('filter', filter)
+  }
 
   return (
     <>
       <h1 className="w-full text-4xl text-gray-500 font-light mb-10">Bem vindo!</h1>
-      <DashboardCards data={dashboardData} setFilter={setFilter} />
+      <DashboardCards data={dashboardData} filter={filter} setFilter={handleFilter} />
       <div className="w-full flex flex-col xl:flex-row gap-5">
         <LastOrders orders={dashboardData.lastOrders} />
         <Activities activities={dashboardData.lastActivities} />
