@@ -1,5 +1,3 @@
-import UserInformationStatusEnum from '@/enums/UserInformationStatusEnum'
-
 export interface IUserDetail {
   document: string
   birth_date: string
@@ -13,5 +11,4 @@ export interface IUserDetail {
   rg_issue_date: string
   rg_image: string
   cr_image?: string
-  status: UserInformationStatusEnum
 }

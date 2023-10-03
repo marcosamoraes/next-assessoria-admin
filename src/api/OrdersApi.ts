@@ -1,7 +1,6 @@
 import ClientTypeEnum from '@/enums/ClientTypeEnum'
 import CouponTypeEnum from '@/enums/CouponTypeEnum'
 import OrderStatusEnum from '@/enums/OrderStatusEnum'
-import UserInformationStatusEnum from '@/enums/UserInformationStatusEnum'
 import moment from 'moment'
 import 'moment/locale/pt-br'
 
@@ -233,7 +232,6 @@ export const getOrder = (id: number) => {
           rg_state: 'SP',
           rg_issue_date: '07/09/2010',
           rg_image: 'https://via.placeholder.com/550x350',
-          status: UserInformationStatusEnum.APPROVED
         }
       },
       orderStatus: [

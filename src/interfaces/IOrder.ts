@@ -16,8 +16,8 @@ export interface IOrder {
   total: number
   date: string
   canceledReason: string
-  createdAt: string
-  updatedAt: string
+  created_at: string
+  updated_at: string
 
   coupon?: ICoupon
   user?: IUser

@@ -1,10 +1,5 @@
 export default function t(value: string) {
   const config: any = {
-    // UserInformationStatusEnum
-    approved: 'Aprovado',
-    waitingEvaluation: 'Aguardando Avaliação',
-    incomplete: 'Incompleto',
-
     // OrderStatusEnum
     created: 'Criado',
     pendingPayment: 'Aguardando Pagamento',

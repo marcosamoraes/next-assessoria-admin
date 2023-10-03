@@ -1,4 +1,3 @@
-import UserInformationStatusEnum from '@/enums/UserInformationStatusEnum'
 import UserRoleEnum from '@/enums/UserRoleEnum'
 
 export const getUsers = () => {
@@ -23,7 +22,6 @@ export const getUsers = () => {
         rgIssuer: 'SSP',
         rgState: 'SP',
         rgIssueDate: '2015-09-07',
-        status: UserInformationStatusEnum.APPROVED,
       },
       userAddress: {
         id: 1,
@@ -72,7 +70,6 @@ export const getUsers = () => {
         rgIssuer: 'SSP',
         rgState: 'SP',
         rgIssueDate: '2015-09-07',
-        status: UserInformationStatusEnum.WAITING_EVALUATION,
       },
       userAddress: {
         id: 1,

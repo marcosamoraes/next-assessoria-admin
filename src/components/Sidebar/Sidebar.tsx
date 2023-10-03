@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
 import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai'
-import { BiCategory } from 'react-icons/bi'
+import { BiCategory, BiMessageDetail } from 'react-icons/bi'
 import { BsBoxSeam } from 'react-icons/bs'
 import { FaSignOutAlt, FaTicketAlt } from 'react-icons/fa'
 import { FiSettings } from 'react-icons/fi'
@@ -59,6 +59,12 @@ export default function Sidebar() {
       name: 'Administradores',
       icon: <RiAdminFill size={24} />,
       href: '/dashboard/admins'
+    },
+    {
+      id: 'contatos',
+      name: 'Contatos',
+      icon: <BiMessageDetail size={24} />,
+      href: '/dashboard/contatos'
     },
     {
       id: 'configuracoes',

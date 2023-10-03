@@ -1,7 +1,6 @@
 import TableDeleteButton from '@/components/UI/TableDeleteButton/TableDeleteButton'
 import TableEditButton from '@/components/UI/TableEditButton/TableEditButton'
 import ToggleButton from '@/components/UI/ToggleButton/ToggleButton'
-import t from '@/translations'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
@@ -38,13 +37,6 @@ const useClientColumns = (onDelete: () => void, onStatusToggle: (id: number) => 
         selector: (row: any) => row.address?.state,
         sortable: true,
         format: (row: any) => <p title={row.address?.state}>{row.address?.state}</p>,
-      },
-      {
-        id: 'status',
-        name: 'Status',
-        selector: (row: any) => row.details?.status,
-        sortable: true,
-        format: (row: any) => <p title={row.details?.status}>{t(row.details?.status)}</p>,
       },
       {
         id: 'active',
