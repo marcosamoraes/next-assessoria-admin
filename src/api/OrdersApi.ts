@@ -223,7 +223,7 @@ export const getOrder = (id: number) => {
         details: {
           id: 1,
           document: '000.000.000-00',
-          birthdate: '07/09/1997',
+          birth_date: '07/09/1997',
           naturalness: 'São Paulo',
           gender: 'Masculino',
           civil_status: 'Solteiro',
@@ -232,6 +232,7 @@ export const getOrder = (id: number) => {
           rg_issuer: 'SSP-SP',
           rg_state: 'SP',
           rg_issue_date: '07/09/2010',
+          rg_image: 'https://via.placeholder.com/550x350',
           status: UserInformationStatusEnum.APPROVED
         }
       },
