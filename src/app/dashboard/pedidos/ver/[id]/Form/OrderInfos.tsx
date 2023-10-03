@@ -15,7 +15,7 @@ export default function OrderInfos({ order }: { order: IOrder | null }) {
           <label className="text-gray-500 text-sm mb-2">
             Cliente
           </label>
-          <Link href={`/dashboard/clientes/editar/${order?.user?.id}`}><p className="text-blue-500">{order?.user?.firstname + ' ' + order?.user?.lastname}</p></Link>
+          <Link href={`/dashboard/clientes/editar/${order?.user?.id}`}><p className="text-blue-500">{order?.user?.name + ' ' + order?.user?.last_name}</p></Link>
         </div>
         <div className="flex flex-col w-full lg:w-4/12 xl:w-3/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">
@@ -39,7 +39,7 @@ export default function OrderInfos({ order }: { order: IOrder | null }) {
           <label className="text-gray-500 text-sm mb-2">
             Estado
           </label>
-          <p>{order?.user?.userAddress?.state}</p>
+          <p>{order?.user?.address?.state}</p>
         </div>
         <div className="flex flex-col w-full lg:w-4/12 xl:w-3/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">
