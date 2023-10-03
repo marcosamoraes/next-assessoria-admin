@@ -19,9 +19,9 @@ const useOrderColumns = () => {
       {
         id: 'client',
         name: 'Cliente',
-        selector: (row: any) => row.user.firstname,
+        selector: (row: any) => row.user.name,
         sortable: true,
-        format: (row: any) => <p title={row.user.firstname + ' ' + row.user.lastname}>{row.user.firstname + ' ' + row.user.lastname}</p>,
+        format: (row: any) => <p title={row.user.name + ' ' + row.user.last_name}>{row.user.name + ' ' + row.user.last_name}</p>,
       },
       {
         id: 'email',
@@ -40,9 +40,9 @@ const useOrderColumns = () => {
       {
         id: 'state',
         name: 'Estado',
-        selector: (row: any) => row.user.userAddress.state,
+        selector: (row: any) => row.user.address?.state,
         sortable: true,
-        format: (row: any) => <p title={row.user.userAddress.state}>{row.user.userAddress.state}</p>,
+        format: (row: any) => <p title={row.user.address?.state}>{row.user.address?.state}</p>,
       },
       {
         id: 'status',
