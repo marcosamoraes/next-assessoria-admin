@@ -44,7 +44,7 @@ export default function ProductValues({ product, states, onChange }: ProductValu
         {states?.length > 0 && states.map((state) => (
           <div key={state.id} className="flex flex-col w-full lg:w-1/3 lg:-mx-2 gap-2 items-center">
             <div className="w-full pl-2">
-              <label htmlFor={`value_transfer[${state}]`} className="text-gray-500 text-sm">
+              <label className="text-gray-500 text-sm">
                 {state.name}
               </label>
             </div>

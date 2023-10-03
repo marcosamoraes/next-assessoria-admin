@@ -123,6 +123,11 @@ export default function ProductsCreate({ params }: any) {
     setProduct({ ...product, [name]: value })
   }
 
+  const handleDescriptionChange = (value: string) => {
+    console.log(value)
+    setProduct({ ...product, description: value })
+  }
+
   const handleImageChange = (url: string) => {
     setProduct({ ...product, image: url })
   }
@@ -177,7 +182,7 @@ export default function ProductsCreate({ params }: any) {
 
         <div className="w-full md:w-8/12 px-2 -md-2">
           <ProductInfos product={product} categories={categories} onChange={handleInputChange} />
-          <ProductDescription product={product} onChange={handleInputChange} />
+          <ProductDescription product={product} onChange={handleDescriptionChange} />
         </div>
 
         <div className="w-full md:w-4/12 px-2 -md-2">
