@@ -33,14 +33,14 @@ export const getOrders = () => {
       },
       user: {
         id: 1,
-        firstname: 'John',
-        lastname: 'Doe',
+        name: 'John',
+        last_name: 'Doe',
         email: 'john@teste.com',
         document: '000.000.000-00',
         phone: '(00) 00000-0000',
         createdAt: moment().format('L'),
         updatedAt: moment().format('L'),
-        userAddress: {
+        address: {
           id: 1,
           zipcode: '00000-000',
           street: 'Rua Teste',
@@ -105,14 +105,14 @@ export const getOrders = () => {
       },
       user: {
         id: 1,
-        firstname: 'Bruno',
-        lastname: 'Almeida',
+        name: 'Bruno',
+        last_name: 'Almeida',
         email: 'bruno@teste.com',
         document: '000.000.000-00',
         phone: '(00) 00000-0000',
         createdAt: moment().format('L'),
         updatedAt: moment().format('L'),
-        userAddress: {
+        address: {
           id: 2,
           zipcode: '00000-000',
           street: 'Rua Teste',
@@ -202,15 +202,15 @@ export const getOrder = (id: number) => {
       },
       user: {
         id: 1,
-        firstname: 'John',
-        lastname: 'Doe',
+        name: 'John',
+        last_name: 'Doe',
         email: 'john@teste.com',
         whatsapp: '(00) 00000-0000',
         document: '000.000.000-00',
         createdAt: moment().format('L'),
         updatedAt: moment().format('L'),
         active: true,
-        userAddress: {
+        address: {
           id: 1,
           zipcode: '00000-000',
           street: 'Rua Teste',
@@ -220,18 +220,18 @@ export const getOrder = (id: number) => {
           city: 'São Paulo',
           state: 'SP',
         },
-        userInformation: {
+        details: {
           id: 1,
           document: '000.000.000-00',
           birthdate: '07/09/1997',
           naturalness: 'São Paulo',
           gender: 'Masculino',
-          civilStatus: 'Solteiro',
+          civil_status: 'Solteiro',
           occupation: 'Desenvolvedor',
           rg: '00.000.000-0',
-          rgIssuer: 'SSP-SP',
-          rgState: 'SP',
-          rgIssueDate: '07/09/2010',
+          rg_issuer: 'SSP-SP',
+          rg_state: 'SP',
+          rg_issue_date: '07/09/2010',
           status: UserInformationStatusEnum.APPROVED
         }
       },
