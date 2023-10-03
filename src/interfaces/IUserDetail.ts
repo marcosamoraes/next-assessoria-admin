@@ -1,7 +1,6 @@
 import UserInformationStatusEnum from '@/enums/UserInformationStatusEnum'
 
 export interface IUserDetail {
-  id: number
   document: string
   birth_date: string
   naturalness: string
@@ -12,5 +11,7 @@ export interface IUserDetail {
   rg_issuer: string
   rg_state: string
   rg_issue_date: string
+  rg_image: string
+  cr_image?: string
   status: UserInformationStatusEnum
 }

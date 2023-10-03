@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { IUser } from '@/interfaces/IUser'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
+import * as Upload from '@/services/Upload'
 
 type ClientDocumentCrProps = {
   user: IUser
@@ -8,14 +9,26 @@ type ClientDocumentCrProps = {
 }
 export default function ClientDocumentCr({ user, onChange }: ClientDocumentCrProps) {
   const [tempFile, setTempFile] = useState<string | null>(null)
+  const [updated, setUpdated] = useState<boolean>(false)
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (user.id && user.details?.rg_image && !updated) {
+      setTempFile(user.details.rg_image)
+    }
+  }, [user, user.details, updated])
+
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target
+    setUpdated(true)
 
     if (!files) return
 
-    const previewUrl = URL.createObjectURL(files[0])
-    setTempFile(previewUrl)
+    const preview = URL.createObjectURL(files[0])
+    setTempFile(preview)
+
+    const { data: url }: any = await Upload.post('clients', {file: files[0]})
+
+    onChange(url)
   }
 
   return (
