@@ -6,8 +6,8 @@ export interface IOrderProduct {
   price: number
   quantity: number
   total: number
-  createdAt: string
-  updatedAt: string
+  created_at: string
+  updated_at: string
 
   product?: IProduct
   order?: IOrder
