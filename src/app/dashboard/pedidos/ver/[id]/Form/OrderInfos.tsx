@@ -51,13 +51,13 @@ export default function OrderInfos({ order }: { order: IOrder | null }) {
           <label className="text-gray-500 text-sm mb-2">
             Data de criação
           </label>
-          <p>{order?.createdAt}</p>
+          <p>{order?.created_at}</p>
         </div>
         <div className="flex flex-col w-full lg:w-4/12 xl:w-3/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">
             Última atualização
           </label>
-          <p>{order?.updatedAt}</p>
+          <p>{order?.updated_at}</p>
         </div>
       </div>
     </div>
