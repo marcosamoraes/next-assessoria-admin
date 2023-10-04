@@ -19,16 +19,16 @@ export const getOrders = () => {
       total: 100,
       date: moment().format('L'),
       canceledReason: '',
-      createdAt: moment().format('L'),
-      updatedAt: moment().format('L'),
+      created_at: moment().format('L'),
+      updated_at: moment().format('L'),
       coupon: {
         id: 1,
         code: '10OFF',
         type: 'percent',
         amount: 10,
         expireDate: moment().format('L'),
-        createdAt: moment().format('L'),
-        updatedAt: moment().format('L')
+        created_at: moment().format('L'),
+        updated_at: moment().format('L')
       },
       user: {
         id: 1,
@@ -37,8 +37,8 @@ export const getOrders = () => {
         email: 'john@teste.com',
         document: '000.000.000-00',
         phone: '(00) 00000-0000',
-        createdAt: moment().format('L'),
-        updatedAt: moment().format('L'),
+        created_at: moment().format('L'),
+        updated_at: moment().format('L'),
         address: {
           id: 1,
           zipcode: '00000-000',
@@ -56,8 +56,8 @@ export const getOrders = () => {
           status: OrderStatusEnum.CREATED,
           description: 'Pedido criado',
           date: moment().format('L'),
-          createdAt: moment().format('L'),
-          updatedAt: moment().format('L')
+          created_at: moment().format('L'),
+          updated_at: moment().format('L')
         }
       ],
       orderProducts: [
@@ -66,16 +66,16 @@ export const getOrders = () => {
           price: 100,
           quantity: 1,
           total: 100,
-          createdAt: moment().format('L'),
-          updatedAt: moment().format('L'),
+          created_at: moment().format('L'),
+          updated_at: moment().format('L'),
           product: {
             id: 1,
             name: 'Product 1',
             description: 'Product 1 description',
             price: 100,
             image: 'https://via.placeholder.com/550x350',
-            createdAt: moment().format('L'),
-            updatedAt: moment().format('L')
+            created_at: moment().format('L'),
+            updated_at: moment().format('L')
           }
         }
       ]
@@ -91,16 +91,16 @@ export const getOrders = () => {
       total: 450,
       date: moment().format('L'),
       canceledReason: '',
-      createdAt: moment().format('L'),
-      updatedAt: moment().format('L'),
+      created_at: moment().format('L'),
+      updated_at: moment().format('L'),
       coupon: {
         id: 1,
         code: '30OFF',
         type: 'percent',
         amount: 30,
         expireDate: moment().format('L'),
-        createdAt: moment().format('L'),
-        updatedAt: moment().format('L')
+        created_at: moment().format('L'),
+        updated_at: moment().format('L')
       },
       user: {
         id: 1,
@@ -109,8 +109,8 @@ export const getOrders = () => {
         email: 'bruno@teste.com',
         document: '000.000.000-00',
         phone: '(00) 00000-0000',
-        createdAt: moment().format('L'),
-        updatedAt: moment().format('L'),
+        created_at: moment().format('L'),
+        updated_at: moment().format('L'),
         address: {
           id: 2,
           zipcode: '00000-000',
@@ -128,24 +128,24 @@ export const getOrders = () => {
           status: OrderStatusEnum.CREATED,
           description: 'Pedido criado',
           date: moment().format('L'),
-          createdAt: moment().format('L'),
-          updatedAt: moment().format('L')
+          created_at: moment().format('L'),
+          updated_at: moment().format('L')
         },
         {
           id: 3,
           status: OrderStatusEnum.PENDING_PAYMENT,
           description: 'Aguardando pagamento',
           date: moment().format('L'),
-          createdAt: moment().format('L'),
-          updatedAt: moment().format('L')
+          created_at: moment().format('L'),
+          updated_at: moment().format('L')
         },
         {
           id: 4,
           status: OrderStatusEnum.PAID,
           description: 'Pedido pago',
           date: moment().format('L'),
-          createdAt: moment().format('L'),
-          updatedAt: moment().format('L')
+          created_at: moment().format('L'),
+          updated_at: moment().format('L')
         }
       ],
       orderProducts: [
@@ -154,16 +154,16 @@ export const getOrders = () => {
           price: 250,
           quantity: 2,
           total: 500,
-          createdAt: moment().format('L'),
-          updatedAt: moment().format('L'),
+          created_at: moment().format('L'),
+          updated_at: moment().format('L'),
           product: {
             id: 2,
             name: 'Product 2',
             description: 'Product 2 description',
             price: 250,
             image: 'https://via.placeholder.com/550x350',
-            createdAt: moment().format('L'),
-            updatedAt: moment().format('L')
+            created_at: moment().format('L'),
+            updated_at: moment().format('L')
           }
         }
       ]
@@ -187,8 +187,8 @@ export const getOrder = (id: number) => {
       total: 100,
       date: moment().format('L'),
       canceledReason: '',
-      createdAt: moment().format('L'),
-      updatedAt: moment().format('L'),
+      created_at: moment().format('L'),
+      updated_at: moment().format('L'),
       coupon: {
         id: 1,
         name: 'Cupom de 10%',
@@ -206,8 +206,8 @@ export const getOrder = (id: number) => {
         email: 'john@teste.com',
         whatsapp: '(00) 00000-0000',
         document: '000.000.000-00',
-        createdAt: moment().format('L'),
-        updatedAt: moment().format('L'),
+        created_at: moment().format('L'),
+        updated_at: moment().format('L'),
         active: true,
         address: {
           id: 1,
@@ -240,14 +240,14 @@ export const getOrder = (id: number) => {
           status: OrderStatusEnum.CREATED,
           description: 'Pedido criado',
           date: moment().format('L'),
-          createdAt: moment().format('L')
+          created_at: moment().format('L')
         },
         {
           id: 2,
           status: OrderStatusEnum.PENDING_PAYMENT,
           description: 'Aguardando pagamento',
           date: moment().format('L'),
-          createdAt: moment().format('L')
+          created_at: moment().format('L')
         }
       ],
       orderProducts: [
@@ -256,8 +256,8 @@ export const getOrder = (id: number) => {
           price: 100,
           quantity: 1,
           total: 100,
-          createdAt: moment().format('L'),
-          updatedAt: moment().format('L'),
+          created_at: moment().format('L'),
+          updated_at: moment().format('L'),
           product: {
             id: 1,
             title: 'Product 1',
