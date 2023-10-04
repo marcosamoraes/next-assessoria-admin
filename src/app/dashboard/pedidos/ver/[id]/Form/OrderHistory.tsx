@@ -1,7 +1,5 @@
-import { formatter } from '@/helpers/Utils'
 import { IOrder } from '@/interfaces/IOrder'
 import t from '@/translations'
-import Link from 'next/link'
 
 export default function OrderHistory({ order }: { order: IOrder | null }) {
   if (!order) {
@@ -25,7 +23,7 @@ export default function OrderHistory({ order }: { order: IOrder | null }) {
               <div className="flex flex-row justify-between">
                 <p className="text-xs text-gray-500 text-start w-[65px]">{t(history.status)}</p>
                 <p className="text-xs text-gray-500 flex-grow text-center min-w-[200px]">{history.description}</p>
-                <p className="text-xs text-gray-500 text-end w-[65px]">{history.createdAt}</p>
+                <p className="text-xs text-gray-500 text-end w-[65px]">{history.created_at}</p>
               </div>
             </div>
           ))}
