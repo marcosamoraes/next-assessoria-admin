@@ -1,10 +1,9 @@
-import SettingTextTypeEnum from '@/enums/SettingTextTypeEnum'
-
 export interface ISettingText {
   id: number
-  type?: SettingTextTypeEnum
   code?: string
   name: string
   description: string
+  is_html: boolean
+  required: boolean
   content: string
 }

@@ -104,8 +104,8 @@ export default function SettingTextsCreate({ params }: any) {
                   Conteúdo
                 </label>
                 <textarea
-                  name="description"
-                  id="description"
+                  name="content"
+                  id="content"
                   placeholder="Descrição"
                   className="border border-gray-300 rounded-lg h-48"
                   defaultValue={settingText.content}

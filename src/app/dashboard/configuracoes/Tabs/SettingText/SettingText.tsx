@@ -8,22 +8,14 @@ type SettingTextProps = {
   handleQueryChange: (e: any) => void
 }
 
-export default function SettingText({ children, handleQueryChange }: SettingTextProps) {
+export default function SettingText({ children }: SettingTextProps) {
   return (
     <>
       <div className="flex justify-between">
+        <OptionsBar storeLink="/dashboard/configuracoes/textos/editar" />
+
         <div className="flex flex-row gap-3">
           <SearchBar />
-          <select
-            name="type"
-            id="type"
-            className="border border-gray-300 rounded-lg py-2 max-w-[180px]"
-            onChange={handleQueryChange}
-          >
-            <option>Tipo</option>
-            <option value="email">E-mail</option>
-            <option value="site">Site</option>
-          </select>
         </div>
         <div className="hidden">
           <OptionsBar exportLink="#" />

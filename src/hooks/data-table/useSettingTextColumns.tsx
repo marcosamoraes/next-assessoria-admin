@@ -1,28 +1,14 @@
 import TableEditButton from '@/components/UI/TableEditButton/TableEditButton'
+import ToggleButton from '@/components/UI/ToggleButton/ToggleButton'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-const useSettingTextColumns = () => {
+const useSettingTextColumns = (onStatusToggle: (id: number) => void) => {
   const searchParams = useSearchParams()
 
   return useMemo(
     () => [
-      {
-        id: 'type',
-        name: 'Tipo',
-        width: '100px',
-        selector: (row: any) => row.type,
-        sortable: true,
-        format: (row: any) => <p title={row.type}>{row.type}</p>,
-      },
-      {
-        id: 'code',
-        name: 'Código',
-        selector: (row: any) => row.code,
-        sortable: true,
-        format: (row: any) => <p title={row.code}>{row.code}</p>,
-      },
       {
         id: 'name',
         name: 'Nome',
@@ -36,6 +22,16 @@ const useSettingTextColumns = () => {
         selector: (row: any) => row.description,
         sortable: true,
         format: (row: any) => <p title={row.description}>{row.description}</p>,
+      },
+      {
+        id: 'active',
+        name: 'Ativo',
+        width: '100px',
+        selector: (row: any) => row.active,
+        sortable: true,
+        cell: (row: any) => (
+          <ToggleButton name="active" defaultChecked={row.active ? true : false} onChange={() => onStatusToggle(row.id)} />
+        ),
       },
       {
         name: 'Ações',
@@ -54,7 +50,7 @@ const useSettingTextColumns = () => {
         },
       },
     ],
-    [searchParams],
+    [searchParams, onStatusToggle],
   )
 }
 

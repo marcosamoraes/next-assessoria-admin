@@ -6,7 +6,7 @@ import { ISettingFreight } from '@/interfaces/ISettingFreight'
 import { ISettingTax } from '@/interfaces/ISettingTax'
 import { ISettingText } from '@/interfaces/ISettingText'
 import { IState } from '@/interfaces/IState'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import * as $SettingText from '@/services/SettingText'
 import * as $SettingTax from '@/services/SettingTax'
@@ -15,7 +15,7 @@ import * as $SettingPayment from '@/services/SettingPayment'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import * as $Category from '@/services/Category'
 import * as $State from '@/services/State'
-import { deleteAllSearchParam, updateSearchParams } from '@/helpers/useQuery'
+import { deleteAllSearchParam } from '@/helpers/useQuery'
 import { ISettingPayment } from '@/interfaces/ISettingPayment'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
@@ -38,7 +38,11 @@ export default function Settings() {
 
   const MySwal = withReactContent(Swal)
 
-  const settingTextColumns = useSettingTextColumns()
+  const onStatusToggle = async (id: number) => {
+    await $SettingText.toggleStatus(id)
+  }
+
+  const settingTextColumns = useSettingTextColumns(onStatusToggle)
 
   const tabs = [
     {
@@ -62,11 +66,6 @@ export default function Settings() {
       component: 'SettingPayment'
     }
   ]
-
-  const handleQueryChange = useCallback((e: any) => {
-    const { name, value } = e.target
-    updateSearchParams(name, value, router, pathname, searchParams)
-  }, [router, pathname, searchParams])
 
   useEffect(() => {
     deleteAllSearchParam(router, pathname, searchParams)
@@ -223,7 +222,7 @@ export default function Settings() {
                   const Component = require(`./Tabs/${tab.component}/${tab.component}`).default
                   if (tab.id === 'text') {
                     return (
-                      <Component key={tab.id} handleQueryChange={handleQueryChange}>
+                      <Component key={tab.id}>
                         {settingTexts?.length > 0 ? (
                           <DataTable columns={settingTextColumns} data={settingTexts} className="mt-7 bg-none" pagination responsive />
                         ) : (

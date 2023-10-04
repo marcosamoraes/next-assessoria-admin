@@ -1,10 +1,7 @@
-import SettingTextTypeEnum from '@/enums/SettingTextTypeEnum'
-
 export const getSettingTexts = () => {
   const data = [
     {
       id: 1,
-      type: SettingTextTypeEnum.EMAIL,
       code: 'email-glock-aprovacao-declaracao',
       name: 'E-mail de aprovação de declaração',
       description: 'E-mail enviado quando a declaração é aprovada',
@@ -12,7 +9,6 @@ export const getSettingTexts = () => {
     },
     {
       id: 2,
-      type: SettingTextTypeEnum.EMAIL,
       code: 'email-glock-reprovacao-declaracao',
       name: 'E-mail de reprovação de declaração',
       description: 'E-mail enviado quando a declaração é reprovada',
@@ -20,7 +16,6 @@ export const getSettingTexts = () => {
     },
     {
       id: 3,
-      type: SettingTextTypeEnum.SITE,
       code: 'site-glock-aviso-declaracao',
       name: 'Aviso de declaração',
       description: 'Aviso exibido quando o usuário não possui declaração',
@@ -28,7 +23,6 @@ export const getSettingTexts = () => {
     },
     {
       id: 4,
-      type: SettingTextTypeEnum.SITE,
       code: 'site-glock-aviso-declaracao-aprovada',
       name: 'Aviso de declaração aprovada',
       description: 'Aviso exibido quando o usuário possui declaração aprovada',
