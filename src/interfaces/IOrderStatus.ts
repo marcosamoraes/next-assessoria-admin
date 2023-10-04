@@ -6,7 +6,7 @@ export interface IOrderStatus {
   status: OrderStatusEnum
   description: string
   date: string
-  createdAt: string
+  created_at: string
 
   order?: IOrder
 }
