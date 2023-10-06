@@ -6,10 +6,6 @@ export default function OrderProducts({ order }: { order: IOrder | null }) {
     return <>Loading</>
   }
 
-  const sumQuantityProducts = order?.orderProducts?.reduce((acc, orderProduct) => {
-    return acc + orderProduct.quantity
-  }, 0)
-
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Produtos</h3>
@@ -31,7 +27,7 @@ export default function OrderProducts({ order }: { order: IOrder | null }) {
               </tr>
             </thead>
             <tbody>
-              {order?.orderProducts?.map((orderProduct) => (
+              {order?.order_products?.map((orderProduct) => (
                 <tr key={orderProduct.id} className="bg-white">
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                     {orderProduct.product?.title}
@@ -46,10 +42,29 @@ export default function OrderProducts({ order }: { order: IOrder | null }) {
               ))}
             </tbody>
             <tfoot>
+
               <tr className="font-semibold text-gray-900 dark:text-white">
-                <th scope="row" className="px-6 py-3 text-base">Total</th>
-                <td className="px-6 py-3 text-center">{sumQuantityProducts}</td>
-                <td className="px-6 py-3 text-end">{formatter.format(order.total)}</td>
+                <th scope="row" className="px-6 text-base text-gray-900">Subtotal</th>
+                <td className="px-6 text-center text-gray-900"></td>
+                <td className="px-6 text-end text-gray-900">{formatter.format(order.subtotal)}</td>
+              </tr>
+
+              <tr className="font-semibold text-gray-900 dark:text-white">
+                <th scope="row" className="px-6 text-base text-gray-900">Desconto</th>
+                <td className="px-6 text-center text-gray-900"></td>
+                <td className="px-6 text-end text-gray-900">{formatter.format(order.discount)}</td>
+              </tr>
+
+              <tr className="font-semibold text-gray-900 dark:text-white">
+                <th scope="row" className="px-6 text-base text-gray-900">Frete</th>
+                <td className="px-6 text-center text-gray-900"></td>
+                <td className="px-6 text-end text-gray-900">{formatter.format(order.delivery_fee)}</td>
+              </tr>
+
+              <tr className="font-semibold text-gray-900 dark:text-white">
+                <th scope="row" className="px-6 text-base text-gray-900">Total</th>
+                <td className="px-6 text-center text-gray-900"></td>
+                <td className="px-6 text-end text-gray-900">{formatter.format(order.total)}</td>
               </tr>
             </tfoot>
           </table>

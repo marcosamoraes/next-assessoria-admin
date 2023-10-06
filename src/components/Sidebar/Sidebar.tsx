@@ -1,7 +1,8 @@
 'use client'
 
-import AuthContext from '@/contexts/AuthProvider'
+import AuthContext, { useAuth } from '@/contexts/AuthProvider'
 import { SidebarContext } from '@/contexts/SidebarProvider'
+import UserRoleEnum from '@/enums/UserRoleEnum'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -13,66 +14,126 @@ import { FaSignOutAlt, FaTicketAlt } from 'react-icons/fa'
 import { FiSettings } from 'react-icons/fi'
 import { RiAdminFill } from 'react-icons/ri'
 
+type Page = {
+  id: string
+  name: string
+  icon: any
+  href: string
+}
+
 export default function Sidebar() {
+  const { user } = useAuth()
+
   const { isOpen, setIsOpen } = useContext(SidebarContext)
   const pathname = usePathname()
 
-  const pages = [
-    {
-      id: 'dashboard',
-      name: 'Dashboard',
-      icon: <AiOutlineHome size={24} />,
-      href: '/dashboard'
-    },
-    {
-      id: 'produtos',
-      name: 'Produtos',
-      icon: <BsBoxSeam size={24} />,
-      href: '/dashboard/produtos'
-    },
-    {
-      id: 'pedidos',
-      name: 'Pedidos',
-      icon: <AiOutlineShoppingCart size={24} />,
-      href: '/dashboard/pedidos'
-    },
-    {
-      id: 'clientes',
-      name: 'Clientes',
-      icon: <AiOutlineUser size={24} />,
-      href: '/dashboard/clientes'
-    },
-    {
-      id: 'categorias',
-      name: 'Categorias',
-      icon: <BiCategory size={24} />,
-      href: '/dashboard/categorias'
-    },
-    {
-      id: 'cupons',
-      name: 'Cupons',
-      icon: <FaTicketAlt size={24} />,
-      href: '/dashboard/cupons'
-    },
-    {
-      id: 'admins',
-      name: 'Administradores',
-      icon: <RiAdminFill size={24} />,
-      href: '/dashboard/admins'
-    },
-    {
-      id: 'contatos',
-      name: 'Contatos',
-      icon: <BiMessageDetail size={24} />,
-      href: '/dashboard/contatos'
-    },
-    {
-      id: 'configuracoes',
-      name: 'Configurações',
-      icon: <FiSettings size={24} />,
-      href: '/dashboard/configuracoes'
-    }
-  ]
+  let pages: Page[] = []
+
+  if (user?.role === UserRoleEnum.ADMIN) {
+    pages = [
+      {
+        id: 'dashboard',
+        name: 'Dashboard',
+        icon: <AiOutlineHome size={24} />,
+        href: '/dashboard'
+      },
+      {
+        id: 'produtos',
+        name: 'Produtos',
+        icon: <BsBoxSeam size={24} />,
+        href: '/dashboard/produtos'
+      },
+      {
+        id: 'pedidos',
+        name: 'Pedidos',
+        icon: <AiOutlineShoppingCart size={24} />,
+        href: '/dashboard/pedidos'
+      },
+      {
+        id: 'clientes',
+        name: 'Clientes',
+        icon: <AiOutlineUser size={24} />,
+        href: '/dashboard/clientes'
+      },
+      {
+        id: 'categorias',
+        name: 'Categorias',
+        icon: <BiCategory size={24} />,
+        href: '/dashboard/categorias'
+      },
+      {
+        id: 'cupons',
+        name: 'Cupons',
+        icon: <FaTicketAlt size={24} />,
+        href: '/dashboard/cupons'
+      },
+      {
+        id: 'admins',
+        name: 'Administradores',
+        icon: <RiAdminFill size={24} />,
+        href: '/dashboard/admins'
+      },
+      {
+        id: 'contatos',
+        name: 'Contatos',
+        icon: <BiMessageDetail size={24} />,
+        href: '/dashboard/contatos'
+      },
+      {
+        id: 'configuracoes',
+        name: 'Configurações',
+        icon: <FiSettings size={24} />,
+        href: '/dashboard/configuracoes'
+      }
+    ]
+  }
+
+  if (user?.role === UserRoleEnum.OPERATIONAL || user?.role === UserRoleEnum.CONSULTANT) {
+    pages = [
+      {
+        id: 'dashboard',
+        name: 'Dashboard',
+        icon: <AiOutlineHome size={24} />,
+        href: '/dashboard'
+      },
+      {
+        id: 'produtos',
+        name: 'Produtos',
+        icon: <BsBoxSeam size={24} />,
+        href: '/dashboard/produtos'
+      },
+      {
+        id: 'pedidos',
+        name: 'Pedidos',
+        icon: <AiOutlineShoppingCart size={24} />,
+        href: '/dashboard/pedidos'
+      },
+      {
+        id: 'clientes',
+        name: 'Clientes',
+        icon: <AiOutlineUser size={24} />,
+        href: '/dashboard/clientes'
+      },
+      {
+        id: 'categorias',
+        name: 'Categorias',
+        icon: <BiCategory size={24} />,
+        href: '/dashboard/categorias'
+      },
+      {
+        id: 'cupons',
+        name: 'Cupons',
+        icon: <FaTicketAlt size={24} />,
+        href: '/dashboard/cupons'
+      },
+      {
+        id: 'contatos',
+        name: 'Contatos',
+        icon: <BiMessageDetail size={24} />,
+        href: '/dashboard/contatos'
+      },
+    ]
+  }
 
   const { logout } = useContext(AuthContext)
 

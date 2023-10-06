@@ -1,7 +1,6 @@
 import { formatter } from '@/helpers/Utils'
 import { IOrder } from '@/interfaces/IOrder'
 import t from '@/translations'
-import Link from 'next/link'
 
 export default function OrderPaymentInfos({ order }: { order: IOrder | null }) {
   if (!order) {
@@ -16,7 +15,7 @@ export default function OrderPaymentInfos({ order }: { order: IOrder | null }) {
           <label className="text-gray-500 text-sm mb-2">
             Método de pagamento
           </label>
-          <p>{order?.paymentMethod ? t(order?.paymentMethod) : ''}</p>
+          <p>{order?.payment_method ? t(order?.payment_method) : ''}</p>
         </div>
         <div className="flex flex-col w-full md:w-6/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">

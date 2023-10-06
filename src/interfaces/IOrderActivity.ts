@@ -1,12 +1,11 @@
 import OrderStatusEnum from '@/enums/OrderStatusEnum'
-import { IOrder } from './IOrder'
+import { IAdmin } from './IAdmin'
 
-export interface IOrderStatus {
+export interface IOrderActivity {
   id: number
   status: OrderStatusEnum
   description: string
-  date: string
   created_at: string
 
-  order?: IOrder
+  user?: IAdmin
 }

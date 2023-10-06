@@ -6,17 +6,45 @@ import './../globals.css'
 import NavbarMobile from '@/components/NavbarMobile/NavbarMobile'
 import SidebarProvider from '@/contexts/SidebarProvider'
 import { useAuth } from '@/contexts/AuthProvider'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useCallback, useEffect } from 'react'
+import UserRoleEnum from '@/enums/UserRoleEnum'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth()
 
   const router = useRouter()
+  const pathname = usePathname()
+
+  const checkIfRoleAllowAccess = useCallback(() => {
+    if (!user) return
+
+    if (user.role !== UserRoleEnum.ADMIN) {
+      if (pathname.includes('/admins') || pathname.includes('/configuracoes')) {
+        router.push('/dashboard')
+      }
+    }
+
+    if (user.role === UserRoleEnum.OPERATIONAL) {
+      if (pathname.endsWith('/editar')) {
+        router.push('/dashboard')
+      }
+    }
+
+    if (user.role === UserRoleEnum.CONSULTANT) {
+      if (pathname.includes('/editar')) {
+        router.push('/dashboard')
+      }
+    }
+  }, [user, pathname, router])
 
   useEffect(() => {
     if (!isLoading && !user) return router.push('/')
-  }, [isLoading, router, user])
+
+    if (user) {
+      checkIfRoleAllowAccess()
+    }
+  }, [isLoading, router, user, checkIfRoleAllowAccess])
 
   return (
     <SidebarProvider>

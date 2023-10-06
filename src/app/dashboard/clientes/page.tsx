@@ -19,7 +19,7 @@ export default function Clients() {
     await $User.toggleStatus(id)
   }
 
-  const onDelete = () => {
+  const onDelete = (id: number) => {
     MySwal.fire({
       title: 'Você tem certeza?',
       text: 'Você não poderá reverter isso!',
@@ -31,11 +31,22 @@ export default function Clients() {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deletado!',
-          'O cliente foi deletado.',
-          'success'
-        )
+        $User.destroy(id).then((res: any) => {
+          const message = res.data.message ?? 'O cliente foi deletado.'
+          MySwal.fire(
+            'Deletado!',
+            message,
+            'success'
+          )
+          setClients(clients.filter((contact: IUser) => contact.id !== id))
+        }).catch((err: any) => {
+          const message = err.response.data.message ?? 'Ocorreu um erro ao deletar o cliente.'
+          MySwal.fire(
+            'Erro!',
+            message,
+            'error'
+          )
+        })
       }
     })
   }

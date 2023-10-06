@@ -2,12 +2,10 @@ export default function t(value: string) {
   const config: any = {
     // OrderStatusEnum
     created: 'Criado',
-    pendingPayment: 'Aguardando Pagamento',
+    pending_payment: 'Aguardando Pagamento',
     paid: 'Pago',
-    authorizationSend: 'Autorização Enviada',
-    evaluationDocuments: 'Avaliação de Documentos',
-    nfIssued: 'NF Emitida',
-    crafSend: 'CRAF Enviado',
+    documents_evaluated: 'Documentos Avaliados',
+    nf_issued: 'NF Emitida',
     delivered: 'Entregue',
     finished: 'Finalizado',
     canceled: 'Cancelado',
