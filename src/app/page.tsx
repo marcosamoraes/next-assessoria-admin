@@ -29,7 +29,7 @@ export default function Login() {
       <AuthSidebar>
         <div>
           <h1 className="mb-5 font-bold text-center text-lg">Acesso Administrativo</h1>
-          <form onSubmit={(e) => onSubmit(e)}>
+          <form method="POST" onSubmit={(e) => onSubmit(e)}>
             <div className="mb-5">
               <input type="text" name="email" placeholder="E-mail" className="py-2 px-5 rounded-lg w-full text-black" onChange={(e) => setEmail(e.target.value)} />
             </div>

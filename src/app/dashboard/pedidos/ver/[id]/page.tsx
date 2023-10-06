@@ -1,6 +1,5 @@
 'use client'
 
-import PrimaryButton from '@/components/UI/PrimaryButton/PrimaryButton'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { IoMdArrowBack } from 'react-icons/io'
