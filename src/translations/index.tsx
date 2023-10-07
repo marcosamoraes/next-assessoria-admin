@@ -3,6 +3,7 @@ export default function t(value: string) {
     // OrderStatusEnum
     created: 'Criado',
     pending_payment: 'Aguardando Pagamento',
+    payment_receipt_sended: 'Conferir Comprovante',
     paid: 'Pago',
     documents_evaluated: 'Documentos Avaliados',
     nf_issued: 'NF Emitida',

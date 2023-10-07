@@ -82,6 +82,18 @@ export default function OrderInfos({ order }: { order: IOrder | null }) {
               </button>
             </a>
           )}
+          {order?.payment_receipt && (
+            <a target="_blank" href={order?.payment_receipt} rel="noreferrer">
+              <button
+                className={`w-full lg:w-auto rounded-xl h-8 mt-3 px-2 border-2 border-primary font-bold text-primary relative overflow-hidden inline-flex items-center 
+                justify-center gap-3 lg:gap-0 duration-300 hover:bg-primary hover:text-white transition-all`}
+                type="button"
+              >
+                <AiOutlineCloudDownload className="lg:mr-2" />
+                <span className="lg:block">Ver Comprovante</span>
+              </button>
+            </a>
+          )}
         </div>
       </div>
     </div>

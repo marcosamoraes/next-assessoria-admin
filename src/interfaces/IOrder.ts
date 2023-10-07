@@ -23,6 +23,7 @@ export interface IOrder {
   city: string
   state: string
   craf_image?: string,
+  payment_receipt?: string,
   full_address?: string
   created_at: string
   updated_at: string

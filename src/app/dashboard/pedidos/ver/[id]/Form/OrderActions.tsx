@@ -7,7 +7,7 @@ export default function OrderActions({ order }: { order: IOrder | null }) {
 
   const actions = {
     created: 'Aprovar pagamento',
-    // pending_payment: 'Aprovar pagamento',
+    payment_receipt_sended: 'Aprovar pagamento',
     paid: 'Aprovar documentos',
     documents_evaluated: 'Emitir NF',
   } as any
