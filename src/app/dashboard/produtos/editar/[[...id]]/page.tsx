@@ -120,16 +120,15 @@ export default function ProductsCreate({ params }: any) {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target
-    setProduct({ ...product, [name]: value })
+    setProduct(prev => ({ ...prev, [name]: value }))
   }
 
   const handleDescriptionChange = (value: string) => {
-    console.log(value)
-    setProduct({ ...product, description: value })
+    setProduct(prev => ({ ...prev, description: value }))
   }
 
   const handleImageChange = (url: string) => {
-    setProduct({ ...product, image: url })
+    setProduct(prev => ({ ...prev, image: url }))
   }
 
   const clearImages = () => {

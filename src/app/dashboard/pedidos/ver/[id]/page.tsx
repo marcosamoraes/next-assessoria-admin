@@ -38,7 +38,7 @@ export default function OrdersShow({ params }: any) {
             <Link href="/dashboard/pedidos">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
             </Link>
-            <OrderActions order={order} />
+            <OrderActions order={order} setOrder={setOrder} />
           </div>
         </div>
 
