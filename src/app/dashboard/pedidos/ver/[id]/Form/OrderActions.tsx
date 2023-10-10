@@ -18,10 +18,11 @@ export default function OrderActions({ order, setOrder }: Props) {
   }
 
   const actions = {
-    created: 'Aprovar pagamento',
-    payment_receipt_sended: 'Aprovar pagamento',
+    pending_payment: 'Aprovar pagamento',
+    payment_receipt_sended: 'Aprovar recibo',
     paid: 'Aprovar documentos',
     documents_evaluated: 'Emitir NF',
+    canceled: 'Reativar pedido'
   } as any
 
   const action = actions[order.status]
