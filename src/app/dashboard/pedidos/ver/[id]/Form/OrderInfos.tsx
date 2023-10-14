@@ -47,6 +47,14 @@ export default function OrderInfos({ order }: { order: IOrder | null }) {
           </label>
           <p>{order?.updated_at}</p>
         </div>
+        {order?.tracking_code && (
+          <div className="flex flex-col w-full lg:w-6/12 xl:w-4/12 md:px-2 md:-mx-2">
+            <label className="text-gray-500 text-sm mb-2">
+              Código de rastreio
+            </label>
+            <p>{order?.tracking_code}</p>
+          </div>
+        )}
         <div className="flex flex-wrap w-full gap-1 lg:gap-4">
           <a target="_blank" href={order?.user?.details?.rg_image} rel="noreferrer">
             <button
@@ -91,6 +99,18 @@ export default function OrderInfos({ order }: { order: IOrder | null }) {
               >
                 <AiOutlineCloudDownload className="lg:mr-2" />
                 <span className="lg:block">Ver Comprovante</span>
+              </button>
+            </a>
+          )}
+          {order?.nf_image && (
+            <a target="_blank" href={order?.nf_image} rel="noreferrer">
+              <button
+                className={`w-full lg:w-auto rounded-xl h-8 mt-3 px-2 border-2 border-primary font-bold text-primary relative overflow-hidden inline-flex items-center 
+                justify-center gap-3 lg:gap-0 duration-300 hover:bg-primary hover:text-white transition-all`}
+                type="button"
+              >
+                <AiOutlineCloudDownload className="lg:mr-2" />
+                <span className="lg:block">Ver Nota Fiscal</span>
               </button>
             </a>
           )}

@@ -7,6 +7,7 @@ export default function t(value: string) {
     paid: 'Pago',
     documents_evaluated: 'Documentos Avaliados',
     nf_issued: 'NF Emitida',
+    delivering: 'Pedido em Trânsito',
     delivered: 'Entregue',
     finished: 'Finalizado',
     canceled: 'Cancelado',

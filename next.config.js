@@ -8,7 +8,7 @@ const nextConfig = {
     pagesBufferLength: 2,
   },
   images: {
-    domains: ['localhost', 'nextassessoria.com.br', 'v2.api.nextassessoria.com.br']
+    domains: ['127.0.0.1', 'localhost', 'nextassessoria.com.br', 'v2.api.nextassessoria.com.br']
   },
 }
 
