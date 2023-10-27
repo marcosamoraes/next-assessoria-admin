@@ -25,6 +25,7 @@ export default function OrderActions({ order, setOrder }: Props) {
     paid: 'Aprovar documentos',
     documents_evaluated: 'Enviar NF',
     nf_issued: 'Enviar pedido',
+    craf_sended: 'Enviar pedido',
     delivering: 'Pedido entregue',
     canceled: 'Reativar pedido'
   } as any
@@ -105,6 +106,20 @@ export default function OrderActions({ order, setOrder }: Props) {
     })
   }
 
+  order.status === OrderStatusEnum.NF_ISSUED ? handleDelivering : order.status === OrderStatusEnum.DOCUMENTS_EVALUATED ? handleNfIssued : handleAction
+
+  const getAction = () => {
+    switch (order.status) {
+    case OrderStatusEnum.NF_ISSUED:
+    case OrderStatusEnum.CRAF_SENDED:
+      return handleDelivering
+    case OrderStatusEnum.DOCUMENTS_EVALUATED:
+      return handleNfIssued
+    default:
+      return handleAction
+    }
+  }
+
   return (
     <div className="mb-4 flex gap-4 flex-wrap">
       {action && (
@@ -113,7 +128,7 @@ export default function OrderActions({ order, setOrder }: Props) {
           className={`w-full lg:w-auto rounded-xl h-10 px-3 border-2 border-success font-bold 
         text-success relative overflow-hidden inline-flex items-center 
           justify-evenly duration-300 hover:bg-success hover:text-white transition-all`}
-          onClick={order.status === OrderStatusEnum.NF_ISSUED ? handleDelivering : order.status === OrderStatusEnum.DOCUMENTS_EVALUATED ? handleNfIssued : handleAction}
+          onClick={getAction()}
         >
           <span>{action}</span>
         </button>

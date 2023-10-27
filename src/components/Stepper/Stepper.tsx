@@ -5,10 +5,10 @@ export default function Stepper ({ selectedStep = OrderStatusEnum.CREATED }: { s
   let steps: Array<any> = Object.values(OrderStatusEnum)
   const selectedIndex = steps.indexOf(selectedStep)
 
-  steps = steps.filter((step) => step !== OrderStatusEnum.CANCELED)
+  steps = steps.filter((step) => step !== OrderStatusEnum.CANCELED && step !== OrderStatusEnum.CREATED && step !== OrderStatusEnum.FINISHED)
     .map((step, index) => step = {
       name: step,
-      done: index <= selectedIndex,
+      done: index <= (selectedIndex - 1),
     })
 
   return (
@@ -20,8 +20,8 @@ export default function Stepper ({ selectedStep = OrderStatusEnum.CREATED }: { s
               {index+1}
             </span>
             <p className="text-xs">{t(step.name)}</p>
-            {step.name !== OrderStatusEnum.FINISHED && (
-              <svg aria-hidden="true" className="w-4 h-4 ml-2 hidden xl:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+            {step.name !== OrderStatusEnum.DELIVERED && (
+              <svg aria-hidden="true" className="w-4 h-4 ml-1 hidden xl:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
             )}
           </li>
         ))

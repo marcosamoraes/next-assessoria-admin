@@ -7,6 +7,8 @@ export default function t(value: string) {
     paid: 'Pago',
     documents_evaluated: 'Documentos Avaliados',
     nf_issued: 'NF Emitida',
+    waiting_craf: 'Aguardando CRAF',
+    craf_sended: 'Conferir CRAF',
     delivering: 'Pedido em Trânsito',
     delivered: 'Entregue',
     finished: 'Finalizado',
