@@ -102,6 +102,30 @@ export default function OrderInfos({ order }: { order: IOrder | null }) {
               </button>
             </a>
           )}
+          {order?.purchase_authorization && (
+            <a target="_blank" href={order?.purchase_authorization} rel="noreferrer">
+              <button
+                className={`w-full lg:w-auto rounded-xl h-8 mt-3 px-2 border-2 border-primary font-bold text-primary relative overflow-hidden inline-flex items-center 
+                justify-center gap-3 lg:gap-0 duration-300 hover:bg-primary hover:text-white transition-all`}
+                type="button"
+              >
+                <AiOutlineCloudDownload className="lg:mr-2" />
+                <span className="lg:block">Ver Autorização de Compra</span>
+              </button>
+            </a>
+          )}
+          {(!order?.nf_image && order?.future_nf_image) && (
+            <a target="_blank" href={order?.future_nf_image} rel="noreferrer">
+              <button
+                className={`w-full lg:w-auto rounded-xl h-8 mt-3 px-2 border-2 border-primary font-bold text-primary relative overflow-hidden inline-flex items-center 
+                justify-center gap-3 lg:gap-0 duration-300 hover:bg-primary hover:text-white transition-all`}
+                type="button"
+              >
+                <AiOutlineCloudDownload className="lg:mr-2" />
+                <span className="lg:block">Ver nota de compra futura</span>
+              </button>
+            </a>
+          )}
           {order?.nf_image && (
             <a target="_blank" href={order?.nf_image} rel="noreferrer">
               <button

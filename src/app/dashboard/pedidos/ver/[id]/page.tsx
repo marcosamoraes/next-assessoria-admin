@@ -29,11 +29,15 @@ export default function OrdersShow({ params }: any) {
     }
   }, [id])
 
+  const hasPistol = order.order_products?.find((orderProduct) => orderProduct.product?.category.name === 'Pistolas') ? true : false
+
+  const waitingPurchaseAuthorization = order.status === OrderStatusEnum.PAID && hasPistol && !order.purchase_authorization
+
   return (
     <>
       <form className="flex flex-wrap flex-row">
         <div className="w-full px-2 -md-2 flex flex-wrap justify-between">
-          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">Pedido {order?.id ?? ''}</h1>
+          <h1 className="text-2xl lg:text-4xl text-gray-500 font-light mb-10">Pedido {order?.code ?? ''}</h1>
           <div className="flex justify-end px-2 -md-2 gap-4">
             <Link href="/dashboard/pedidos">
               <BackButton icon={IoMdArrowBack}>Voltar</BackButton>
@@ -47,6 +51,11 @@ export default function OrdersShow({ params }: any) {
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3" role="alert">
               <strong className="font-bold">Motivo do cancelamento: </strong>
               <span className="block sm:inline">{order.canceled_reason}</span>
+            </div>
+          )}
+          {waitingPurchaseAuthorization && (
+            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative mb-3" role="alert">
+              <span className="block sm:inline">Aguardando autorização de compra</span>
             </div>
           )}
           <OrderStatus order={order} />

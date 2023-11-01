@@ -25,6 +25,8 @@ export interface IOrder {
   craf_image?: string,
   payment_receipt?: string,
   tracking_code?: string,
+  future_nf_image?: string,
+  purchase_authorization?: string,
   nf_image?: string,
   full_address?: string
   created_at: string

@@ -32,9 +32,9 @@ export default function OrderActions({ order, setOrder }: Props) {
 
   const action = actions[order.status]
 
-  const handleAction = (e: any, message?: string, trackingCode?: string, nfImage?: string) => {
+  const handleAction = (e: any, message?: string, trackingCode?: string, nfImage?: string, futureNfImage?: string) => {
     e.preventDefault()
-    $Order.updateStatus(order.id, message, trackingCode, nfImage).then((res: any) => {
+    $Order.updateStatus(order.id, message, trackingCode, nfImage, futureNfImage).then((res: any) => {
       const message = res.response?.data?.message ?? 'Status atualizado com sucesso'
       const data: IOrder = res.data.order
       setOrder(data)
@@ -90,6 +90,27 @@ export default function OrderActions({ order, setOrder }: Props) {
     })
   }
 
+  const handleFutureNfIssued = (e: any) => {
+    MySwal.fire({
+      title: 'Anexe a nota de compra futura',
+      input: 'file',
+      showCancelButton: true,
+      confirmButtonText: 'Enviar Pedido',
+      confirmButtonColor: 'green',
+      cancelButtonText: 'Voltar',
+      showLoaderOnConfirm: true,
+      preConfirm: async (file) => {
+        const { data: url }: any = await Upload.post('future_nfs', {file})
+        return url
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then(({ isConfirmed, value }) => {
+      if (isConfirmed) {
+        handleAction(e, undefined, undefined, undefined, value)
+      }
+    })
+  }
+
   const handleDelivering = (e: any) => {
     MySwal.fire({
       title: 'Qual o código de rastreio?',
@@ -99,36 +120,61 @@ export default function OrderActions({ order, setOrder }: Props) {
       confirmButtonColor: 'green',
       cancelButtonText: 'Voltar',
       allowOutsideClick: () => !Swal.isLoading()
-    }).then(({ isConfirmed, value }) => {
+    }).then(({ isConfirmed, value: trackingCode }) => {
       if (isConfirmed) {
-        handleAction(e, undefined, value)
+        if (!order.nf_image) {
+          MySwal.fire({
+            title: 'Anexe a nota fiscal',
+            input: 'file',
+            showCancelButton: true,
+            confirmButtonText: 'Enviar Pedido',
+            confirmButtonColor: 'green',
+            cancelButtonText: 'Voltar',
+            showLoaderOnConfirm: true,
+            preConfirm: async (file) => {
+              const { data: url }: any = await Upload.post('nfs', {file})
+              return url
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then(({ isConfirmed, value: nfImage }) => {
+            if (isConfirmed) {
+              handleAction(e, undefined, trackingCode, nfImage)
+            }
+          })
+        } else {
+          handleAction(e, undefined, trackingCode)
+        }
       }
     })
   }
 
-  order.status === OrderStatusEnum.NF_ISSUED ? handleDelivering : order.status === OrderStatusEnum.DOCUMENTS_EVALUATED ? handleNfIssued : handleAction
-
   const getAction = () => {
+    const needCraf = !order.craf_image && order.order_products?.some(orderProduct => orderProduct.product?.category.name === 'Pistolas')
+
     switch (order.status) {
     case OrderStatusEnum.NF_ISSUED:
     case OrderStatusEnum.CRAF_SENDED:
       return handleDelivering
     case OrderStatusEnum.DOCUMENTS_EVALUATED:
-      return handleNfIssued
+      return needCraf ? handleFutureNfIssued : handleNfIssued
     default:
       return handleAction
     }
   }
+
+  const hasPistol = order.order_products?.some((orderProduct) => orderProduct.product?.category.name === 'Pistolas')
+
+  const buttonDisabled = order.status === OrderStatusEnum.PAID && hasPistol && !order.purchase_authorization
 
   return (
     <div className="mb-4 flex gap-4 flex-wrap">
       {action && (
         <button
           type="button"
-          className={`w-full lg:w-auto rounded-xl h-10 px-3 border-2 border-success font-bold 
-        text-success relative overflow-hidden inline-flex items-center 
-          justify-evenly duration-300 hover:bg-success hover:text-white transition-all`}
+          className={`w-full lg:w-auto rounded-xl h-10 px-3 border-2 ${!buttonDisabled ? 'border-success text-success hover:bg-success' : 'bg-green-400 text-white cursor-not-allowed'} 
+          font-bold relative overflow-hidden inline-flex items-center justify-evenly duration-300 hover:text-white transition-all`}
           onClick={getAction()}
+          disabled={buttonDisabled}
         >
           <span>{action}</span>
         </button>
