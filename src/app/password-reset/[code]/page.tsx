@@ -6,20 +6,41 @@ import { FormEvent, useState } from 'react'
 import * as $Auth from '@/services/Auth'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function PasswordReset({ params: { code } }: { params: any }) {
   const MySwal = withReactContent(Swal)
+  const [password, setPassword] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
+
+  const searchParams = useSearchParams()
+
+  const router = useRouter()
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const email = searchParams.get('email')
+
+    if (!email) {
+      MySwal.fire({
+        title: 'Falha ao resetar senha',
+        text: 'Email não encontrado',
+        icon: 'error',
+      })
+      return
+    }
+
     try {
-      // TODO: implement password reset
+      await $Auth.resetPassword(code, email, password, confirmPassword)
 
       MySwal.fire({
         title: 'Sucesso',
         text: 'Senha alterada com sucesso',
         icon: 'success',
       })
+
+      router.push('/')
     } catch (e: any) {
       MySwal.fire({
         title: 'Falha ao resetar senha',
@@ -38,10 +59,10 @@ export default function PasswordReset({ params: { code } }: { params: any }) {
           <h1 className="mb-5 font-bold text-center text-lg">Redefinir Senha</h1>
           <form onSubmit={onSubmit}>
             <div className="mb-5">
-              <input type="password" name="password" placeholder="Senha" className="py-2 px-5 rounded-lg w-full text-black" />
+              <input type="password" name="password" placeholder="Senha" className="py-2 px-5 rounded-lg w-full text-black" onChange={e => setPassword(e.target.value)} />
             </div>
             <div className="mb-5">
-              <input type="password" name="password" placeholder="Confirmar Senha" className="py-2 px-5 rounded-lg w-full text-black" />
+              <input type="password" name="password" placeholder="Confirmar Senha" className="py-2 px-5 rounded-lg w-full text-black" onChange={e => setConfirmPassword(e.target.value)} />
             </div>
             <div className="mb-3">
               <Link href="/">
