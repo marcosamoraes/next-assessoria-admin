@@ -51,6 +51,7 @@ export default function Orders() {
             id="status"
             className="border border-gray-300 rounded-lg py-2 max-w-[180px]"
             onChange={handleQueryChange}
+            value={searchParams.get('status')?.toString()}
           >
             <option value={0}>Status</option>
             {orderStatus.map((status: any) => (
@@ -58,6 +59,17 @@ export default function Orders() {
                 {t(status)}
               </option>
             ))}
+          </select>
+          <select
+            name="delivery_method"
+            id="delivery_method"
+            className="border border-gray-300 rounded-lg py-2 max-w-[200px]"
+            onChange={handleQueryChange}
+            value={searchParams.get('delivery_method')?.toString()}
+          >
+            <option value={0}>Método de Entrega</option>
+            <option value="delivery">Entrega</option>
+            <option value="pickup">Retirada</option>
           </select>
         </div>
       </div>

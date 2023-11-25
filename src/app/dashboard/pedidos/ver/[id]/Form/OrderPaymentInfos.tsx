@@ -19,15 +19,15 @@ export default function OrderPaymentInfos({ order }: { order: IOrder | null }) {
         </div>
         <div className="flex flex-col w-full md:w-6/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">
-            Parcelas
+            Método de Entrega
           </label>
-          <p>{order?.installments}</p>
+          <p>{t(order?.delivery_method)}</p>
         </div>
         <div className="flex flex-col w-full md:w-6/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">
             Valor Parcela
           </label>
-          <p>{formatter.format(order?.total / order?.installments)}</p>
+          <p>{order?.installments}x {formatter.format(order?.total / order?.installments)}</p>
         </div>
         <div className="flex flex-col w-full md:w-6/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">

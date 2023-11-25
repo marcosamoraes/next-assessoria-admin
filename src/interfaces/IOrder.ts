@@ -9,6 +9,7 @@ export interface IOrder {
   code: string
   status: OrderStatusEnum
   payment_method: string
+  delivery_method: string
   subtotal: number
   discount: number
   delivery_fee: number

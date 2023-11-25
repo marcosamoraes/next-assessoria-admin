@@ -1,13 +1,14 @@
 import OrderStatusEnum from '@/enums/OrderStatusEnum'
+import { IOrder } from '@/interfaces/IOrder'
 import t from '@/translations'
 
-export default function Stepper ({ selectedStep = OrderStatusEnum.CREATED }: { selectedStep?: OrderStatusEnum }) {
+export default function Stepper ({ selectedStep = OrderStatusEnum.CREATED, order }: { selectedStep?: OrderStatusEnum, order?: IOrder }) {
   let steps: Array<any> = Object.values(OrderStatusEnum)
   const selectedIndex = steps.indexOf(selectedStep)
 
   steps = steps.filter((step) => step !== OrderStatusEnum.CANCELED && step !== OrderStatusEnum.CREATED && step !== OrderStatusEnum.FINISHED)
     .map((step, index) => step = {
-      name: step,
+      name: step === OrderStatusEnum.DELIVERING && order?.delivery_method === 'pickup' ? 'readyForPickup' : step,
       done: index <= (selectedIndex - 1),
     })
 

@@ -9,7 +9,7 @@ export default function OrderStatus({ order }: { order: IOrder | null }) {
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Status</h3>
-      <Stepper selectedStep={order?.status} />
+      <Stepper order={order} selectedStep={order?.status} />
     </div>
   )
 }

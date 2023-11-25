@@ -25,8 +25,8 @@ export default function OrderActions({ order, setOrder }: Props) {
     paid: 'Aprovar documentos',
     documents_evaluated: 'Enviar NF',
     nf_issued: 'Enviar pedido',
-    craf_sended: 'Enviar pedido',
-    delivering: 'Pedido entregue',
+    craf_sended: order.delivery_method === 'delivery' ? 'Enviar pedido' : 'Pronto para retirada',
+    delivering: order.delivery_method === 'delivery' ? 'Pedido entregue' : 'Pedido retirado',
     canceled: 'Reativar pedido'
   } as any
 
@@ -111,6 +111,27 @@ export default function OrderActions({ order, setOrder }: Props) {
     })
   }
 
+  const handlePickup = (e: any) => {
+    MySwal.fire({
+      title: 'Anexe a nota fiscal',
+      input: 'file',
+      showCancelButton: true,
+      confirmButtonText: 'Enviar Pedido',
+      confirmButtonColor: 'green',
+      cancelButtonText: 'Voltar',
+      showLoaderOnConfirm: true,
+      preConfirm: async (file) => {
+        const { data: url }: any = await Upload.post('nfs', {file})
+        return url
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then(({ isConfirmed, value: nfImage }) => {
+      if (isConfirmed) {
+        handleAction(e, undefined, undefined, nfImage)
+      }
+    })
+  }
+
   const handleDelivering = (e: any) => {
     MySwal.fire({
       title: 'Qual o código de rastreio?',
@@ -154,7 +175,7 @@ export default function OrderActions({ order, setOrder }: Props) {
     switch (order.status) {
     case OrderStatusEnum.NF_ISSUED:
     case OrderStatusEnum.CRAF_SENDED:
-      return handleDelivering
+      return order.delivery_method === 'delivery' ? handleDelivering : handlePickup
     case OrderStatusEnum.DOCUMENTS_EVALUATED:
       return needCraf ? handleFutureNfIssued : handleNfIssued
     default:

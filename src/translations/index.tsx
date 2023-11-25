@@ -9,6 +9,7 @@ export default function t(value: string) {
     nf_issued: 'NF Emitida',
     waiting_craf: 'Aguardando CRAF',
     craf_sended: 'Conferir CRAF',
+    readyForPickup: 'Pronto para Retirada',
     delivering: 'Pedido em Trânsito',
     delivered: 'Entregue',
     finished: 'Finalizado',
@@ -16,6 +17,9 @@ export default function t(value: string) {
 
     'card': 'Cartão de Crédito',
     'transfer': 'Transferência',
+
+    delivery: 'Entrega',
+    pickup: 'Retirada',
   }
 
   return config[value]

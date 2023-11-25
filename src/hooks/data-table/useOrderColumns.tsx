@@ -45,6 +45,13 @@ const useOrderColumns = () => {
         format: (row: any) => <p title={row.user.address?.state}>{row.user.address?.state}</p>,
       },
       {
+        id: 'delivery_method',
+        name: 'Método de Entrega',
+        selector: (row: any) => row.delivery_method,
+        sortable: true,
+        format: (row: any) => <p title={row.delivery_method}>{t(row.delivery_method)}</p>,
+      },
+      {
         id: 'status',
         name: 'Status',
         selector: (row: any) => row.status,
