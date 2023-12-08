@@ -1,5 +1,6 @@
 export interface IUserDetail {
   document: string
+  cnpj: string
   birth_date: string
   naturalness: string
   gender: string

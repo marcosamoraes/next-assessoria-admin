@@ -23,10 +23,18 @@ export default function ClientInfos({ user, onChange }: ClientInfosProps) {
         </div>
         <div className="flex flex-col w-full md:w-6/12 xl:w-3/12 md:px-2 md:-mx-2">
           <label htmlFor="details.document" className="text-gray-500 text-sm mb-2">
-            Documento (CPF/CNPJ)
+            CPF
           </label>
-          <input type="text" name="details.document" id="details.document" placeholder="Documento (CPF/CNPJ)" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" value={user.details?.document ?? ''} onChange={onChange} />
+          <input type="text" name="details.document" id="details.document" placeholder="CPF" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" value={user.details?.document ?? ''} onChange={onChange} />
         </div>
+        {user.details?.cnpj && (
+          <div className="flex flex-col w-full md:w-6/12 xl:w-3/12 md:px-2 md:-mx-2">
+            <label htmlFor="details.cnpj" className="text-gray-500 text-sm mb-2">
+            CNPJ
+            </label>
+            <input type="text" name="details.cnpj" id="details.cnpj" placeholder="CNPJ" className="border border-gray-300 rounded-lg px-3 py-2 mb-5" value={user.details?.cnpj ?? ''} onChange={onChange} />
+          </div>
+        )}
         <div className="flex flex-col w-full md:w-6/12 xl:w-3/12 md:px-2 md:-mx-2">
           <label htmlFor="whatsapp" className="text-gray-500 text-sm mb-2">
             Whatsapp

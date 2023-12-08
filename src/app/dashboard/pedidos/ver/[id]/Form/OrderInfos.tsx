@@ -17,18 +17,26 @@ export default function OrderInfos({ order }: { order: IOrder | null }) {
           </label>
           <Link href={`/dashboard/clientes/editar/${order?.user?.id}`}><p className="text-blue-500">{order?.user?.name + ' ' + order?.user?.last_name}</p></Link>
         </div>
-        <div className="flex flex-col w-full lg:w-6/12 xl:w-4/12 md:px-2 md:-mx-2">
-          <label className="text-gray-500 text-sm mb-2">
-            Documento (CPF/CNPJ)
-          </label>
-          <p>{order?.user?.details?.document}</p>
-        </div>
-        <div className="flex flex-col w-full lg:w-6/12 xl:w-4/12 md:px-2 md:-mx-2">
+        <div className="flex flex-col w-full lg:w-6/12 xl:w-8/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">
             E-mail
           </label>
           <p>{order?.user?.email}</p>
         </div>
+        <div className="flex flex-col w-full lg:w-6/12 xl:w-4/12 md:px-2 md:-mx-2">
+          <label className="text-gray-500 text-sm mb-2">
+            CPF
+          </label>
+          <p>{order?.user?.details?.document}</p>
+        </div>
+        {order?.user?.details?.cnpj && (
+          <div className="flex flex-col w-full lg:w-6/12 xl:w-4/12 md:px-2 md:-mx-2">
+            <label className="text-gray-500 text-sm mb-2">
+              CNPJ
+            </label>
+            <p>{order?.user?.details?.cnpj}</p>
+          </div>
+        )}
         <div className="flex flex-col w-full lg:w-6/12 xl:w-4/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">
             Whatsapp
