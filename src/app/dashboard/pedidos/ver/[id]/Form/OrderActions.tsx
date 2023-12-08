@@ -262,16 +262,16 @@ export default function OrderActions({ order, setOrder }: Props) {
     const needCraf = !order.craf_image && order.order_products?.some(orderProduct => orderProduct.product?.category.name === 'Pistolas')
 
     switch (true) {
-    case order.status === OrderStatusEnum.PENDING_PAYMENT:
+    case order?.status === OrderStatusEnum.PENDING_PAYMENT:
       return handlePaymentApprove
-    case order.status === OrderStatusEnum.PAID && hasPistol:
+    case order?.status === OrderStatusEnum.PAID && hasPistol:
       return handlePurchaseAuthorization
-    case order.status === OrderStatusEnum.WAITING_CRAF:
+    case order?.status === OrderStatusEnum.WAITING_CRAF:
       return handleWaitingCraf
-    case order.status === OrderStatusEnum.NF_ISSUED:
-    case order.status === OrderStatusEnum.CRAF_SENDED:
-      return order.delivery_method === 'delivery' ? handleDelivering : handlePickup
-    case order.status === OrderStatusEnum.DOCUMENTS_EVALUATED:
+    case order?.status === OrderStatusEnum.NF_ISSUED:
+    case order?.status === OrderStatusEnum.CRAF_SENDED:
+      return order?.delivery_method === 'delivery' ? handleDelivering : handlePickup
+    case order?.status === OrderStatusEnum.DOCUMENTS_EVALUATED:
       return needCraf ? handleFutureNfIssued : handleNfIssued
     default:
       return handleAction
