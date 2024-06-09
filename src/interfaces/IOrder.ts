@@ -15,6 +15,8 @@ export interface IOrder {
   delivery_fee: number
   installments: number
   total: number
+  total_card: number
+  total_card_installments: number
   canceled_reason: string
   zipcode: string
   street: string

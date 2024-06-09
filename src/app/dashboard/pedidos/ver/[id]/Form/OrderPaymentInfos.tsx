@@ -7,6 +7,8 @@ export default function OrderPaymentInfos({ order }: { order: IOrder | null }) {
     return <>Loading</>
   }
 
+  const total = order?.installments > 1 ? order?.total_card_installments : (order?.payment_method === 'card' ? order?.total_card : order?.total)
+
   return (
     <div className="mb-4">
       <h3 className="w-full text-md font-light text-primary mb-2">Informações do pagamento</h3>
@@ -27,13 +29,13 @@ export default function OrderPaymentInfos({ order }: { order: IOrder | null }) {
           <label className="text-gray-500 text-sm mb-2">
             Valor Parcela
           </label>
-          <p>{order?.installments}x {formatter.format(order?.total / order?.installments)}</p>
+          <p>{order?.installments}x {formatter.format(total / order?.installments)}</p>
         </div>
         <div className="flex flex-col w-full md:w-6/12 md:px-2 md:-mx-2">
           <label className="text-gray-500 text-sm mb-2">
             Valor Total
           </label>
-          <p>{formatter.format(order?.total)}</p>
+          <p>{formatter.format(total)}</p>
         </div>
       </div>
     </div>
