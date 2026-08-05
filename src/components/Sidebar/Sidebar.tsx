@@ -10,7 +10,7 @@ import { useContext } from 'react'
 import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai'
 import { BiCategory, BiMessageDetail } from 'react-icons/bi'
 import { BsBoxSeam } from 'react-icons/bs'
-import { FaSignOutAlt, FaTicketAlt } from 'react-icons/fa'
+import { FaSignOutAlt, FaStore, FaTicketAlt } from 'react-icons/fa'
 import { FiSettings } from 'react-icons/fi'
 import { RiAdminFill } from 'react-icons/ri'
 
@@ -66,6 +66,12 @@ export default function Sidebar() {
         name: 'Cupons',
         icon: <FaTicketAlt size={24} />,
         href: '/dashboard/cupons'
+      },
+      {
+        id: 'lojas-parceiras',
+        name: 'Lojas Parceiras',
+        icon: <FaStore size={24} />,
+        href: '/dashboard/lojas-parceiras'
       },
       {
         id: 'admins',
@@ -125,6 +131,12 @@ export default function Sidebar() {
         name: 'Cupons',
         icon: <FaTicketAlt size={24} />,
         href: '/dashboard/cupons'
+      },
+      {
+        id: 'lojas-parceiras',
+        name: 'Lojas Parceiras',
+        icon: <FaStore size={24} />,
+        href: '/dashboard/lojas-parceiras'
       },
       {
         id: 'contatos',
